@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Pet Company Pilar · Propuesta visual</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap">
+<style>
+/* Concepto: "pet shop de barrio, ordenado". Blanco amplio, rosa sólo para comprar y ofertas,
+   verde para servicio y beneficios. Tarjetas limpias, una sola familia tipográfica. */
+:root{
+  /* Marca */
+  --pink:#FF1E8C;          /* rosa de marca: decorativo, superficies grandes */
+  --pink-fill:#E0107A;     /* rosa acción: botones, badges (4,6:1 con blanco) */
+  --pink-hover:#C80A6C;
+  --pink-text:#E0107A;     /* precios en oferta y links */
+  --pink-50:#FFF0F7;
+  --pink-100:#FFD9EB;
+  --green:#5A9E4B;         /* verde de marca: íconos, detalles */
+  --green-fill:#3F7A33;    /* verde accesible: barra de envíos, WhatsApp, "Nuevo" (5,2:1) */
+  --green-text:#3F7A33;
+  --green-50:#EFF6EC;
+  --green-100:#D8EBD2;
+  /* Neutros con leve tinte rosado */
+  --bg:#FFFFFF;
+  --bg-soft:#F7F5F6;
+  --surface:#FFFFFF;
+  --img-bg:#F5F2F4;
+  --line:#ECE6E9;
+  --line-strong:#D9D1D5;
+  --ink:#1F1A1D;
+  --ink-2:#4A4247;
+  --muted:#6E6570;
+  --warn:#8A5300;
+  --tbd-bg:#FFF3C4;
+  --tbd-ink:#5C4300;
+  --foot-bg:#1F1A1D;
+  --foot-ink:#F3EEF1;
+  --foot-muted:#B9AEB4;
+  --frame:#2A2428;
+  /* Tipografía */
+  --font:"Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Forma */
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-pill:999px;
+  --shadow-1:0 1px 2px rgb(31 26 29 / .06), 0 2px 6px rgb(31 26 29 / .05);
+  --shadow-2:0 12px 32px -12px rgb(31 26 29 / .22), 0 2px 6px rgb(31 26 29 / .05);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --pink-hover:#F0308A; --pink-text:#FF6FB1; --pink-50:#33141F; --pink-100:#4D1D33;
+    --green-text:#8FCB80; --green-50:#1A2617; --green-100:#26391F;
+    --bg:#151214; --bg-soft:#1C181B; --surface:#211C1F; --img-bg:#2A2428;
+    --line:#342D31; --line-strong:#4A4146; --ink:#F6F1F4; --ink-2:#D6CDD2; --muted:#A99EA5;
+    --warn:#F2B661; --tbd-bg:#3D3214; --tbd-ink:#F3DE9A;
+    --foot-bg:#0E0C0D; --foot-ink:#F3EEF1; --foot-muted:#A99EA5; --frame:#0B0A0B;
+    --shadow-1:0 1px 2px rgb(0 0 0 / .4); --shadow-2:0 12px 32px -12px rgb(0 0 0 / .7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --pink-hover:#F0308A; --pink-text:#FF6FB1; --pink-50:#33141F; --pink-100:#4D1D33;
+  --green-text:#8FCB80; --green-50:#1A2617; --green-100:#26391F;
+  --bg:#151214; --bg-soft:#1C181B; --surface:#211C1F; --img-bg:#2A2428;
+  --line:#342D31; --line-strong:#4A4146; --ink:#F6F1F4; --ink-2:#D6CDD2; --muted:#A99EA5;
+  --warn:#F2B661; --tbd-bg:#3D3214; --tbd-ink:#F3DE9A;
+  --foot-bg:#0E0C0D; --foot-ink:#F3EEF1; --foot-muted:#A99EA5; --frame:#0B0A0B;
+  --shadow-1:0 1px 2px rgb(0 0 0 / .4); --shadow-2:0 12px 32px -12px rgb(0 0 0 / .7);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg-soft); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--surface)}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+button{font:inherit; color:inherit}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:3px solid var(--pink); outline-offset:2px; border-radius:6px}
+.tnum{font-variant-numeric:tabular-nums}
+.tbd{background:var(--tbd-bg); color:var(--tbd-ink); border-radius:4px; padding:0 4px; font-weight:700; box-decoration-break:clone; -webkit-box-decoration-break:clone}
+.ico{width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+
+/* ---------- Shell de la propuesta ---------- */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--surface); border-bottom:1px solid var(--line);
+  padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); padding-block:10px}
+.bar-in{max-width:1320px; margin-inline:auto; display:flex; align-items:center; gap:12px 24px; flex-wrap:wrap; justify-content:space-between}
+.bar-title{display:flex; flex-direction:column; line-height:1.2; min-width:0}
+.bar-title b{font-weight:900; font-size:15px}
+.bar-title span{font-size:13px; color:var(--muted)}
+.seg{display:flex; background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--r-pill); padding:4px; gap:2px; overflow-x:auto; max-width:100%}
+.seg button{border:0; background:transparent; padding:8px 14px; border-radius:var(--r-pill); font-weight:800; font-size:14px; color:var(--muted); cursor:pointer; white-space:nowrap; transition:background .15s, color .15s}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow-1)}
+.view{padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); padding-block:24px 64px}
+.view-in{max-width:1320px; margin-inline:auto; display:flex; flex-direction:column; gap:20px}
+.demo-note{display:flex; gap:10px; align-items:flex-start; background:var(--tbd-bg); color:var(--tbd-ink); border-radius:var(--r-md); padding:10px 14px; font-size:14px; line-height:1.45}
+.demo-note b{font-weight:800}
+
+/* Marco escritorio */
+.browser{background:var(--surface); border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow-2); overflow:clip}
+.browser-top{display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-soft); border-bottom:1px solid var(--line)}
+.dots{display:flex; gap:6px}
+.dots i{width:10px; height:10px; border-radius:50%; background:var(--line-strong)}
+.url{flex:1; max-width:420px; margin-inline:auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-pill); font-size:12px; color:var(--muted); padding:4px 12px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+#frame-desktop{--sticky-top:calc(61px + env(safe-area-inset-top,0px))}
+
+/* Marco celular */
+.mobile-layout{display:grid; gap:32px; align-items:start; justify-content:center}
+@media (min-width:900px){ .mobile-layout{grid-template-columns:auto minmax(0,380px)} }
+.phone{width:390px; max-width:100%; height:820px; max-height:85vh; min-height:560px; border:10px solid var(--frame); border-radius:46px; overflow:hidden; background:var(--bg); box-shadow:var(--shadow-2); margin-inline:auto; position:relative}
+.phone-screen{height:100%; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none}
+.phone-screen::-webkit-scrollbar{display:none}
+#frame-mobile{--sticky-top:0px}
+.notes{display:flex; flex-direction:column; gap:16px}
+.notes h2{font-size:22px; font-weight:900; letter-spacing:-.01em}
+.notes ol{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+.notes li{display:grid; grid-template-columns:28px 1fr; gap:10px; font-size:15px; color:var(--ink-2)}
+.notes li b{color:var(--ink); display:block}
+.notes li .n{width:28px; height:28px; border-radius:50%; background:var(--pink-50); color:var(--pink-text); font-weight:900; font-size:13px; display:grid; place-items:center}
+
+/* ---------- Componentes compartidos (sistema de diseño) ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:48px; padding-inline:22px; border-radius:var(--r-md); font-weight:800; font-size:15px; line-height:1; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:background-color .15s var(--ease), border-color .15s var(--ease), transform .12s var(--ease), color .15s}
+.btn:active{transform:scale(.97)}
+.btn .ico{width:20px; height:20px}
+.btn-primary{background:var(--pink-fill); color:#fff}
+.btn-primary:hover{background:var(--pink-hover)}
+.btn-secondary{background:var(--surface); color:var(--ink); border-color:var(--line-strong)}
+.btn-secondary:hover{border-color:var(--ink)}
+.btn-green{background:var(--green-fill); color:#fff}
+.btn-green:hover{filter:brightness(1.08)}
+.btn-ghost{background:transparent; color:var(--pink-text); padding-inline:8px}
+.btn-ghost:hover{background:var(--pink-50)}
+.btn-sm{height:40px; padding-inline:14px; font-size:14px; border-radius:10px}
+.btn-block{width:100%}
+.btn[disabled]{background:var(--line); color:var(--muted); cursor:not-allowed; border-color:transparent}
+.btn-add.is-added{background:var(--green-fill)}
+.icon-btn{width:44px; height:44px; border-radius:var(--r-md); border:0; background:transparent; display:grid; place-items:center; cursor:pointer; position:relative; color:var(--ink)}
+.icon-btn:hover{background:var(--bg-soft)}
+
+.badge{display:inline-flex; align-items:center; gap:4px; font-weight:800; font-size:12px; line-height:1; padding:6px 9px; border-radius:var(--r-pill); white-space:nowrap}
+.badge-sale{background:var(--pink-fill); color:#fff}
+.badge-new{background:var(--green-fill); color:#fff}
+.badge-soft{background:var(--surface); color:var(--ink); box-shadow:var(--shadow-1)}
+.stock{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--green-text)}
+.stock::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.stock.low{color:var(--warn)}
+.stock.out{color:var(--muted)}
+
+.sizes{display:flex; gap:6px; flex-wrap:wrap}
+.size{height:30px; padding-inline:10px; border-radius:var(--r-sm); border:1.5px solid var(--line-strong); background:var(--surface); font-weight:700; font-size:13px; cursor:pointer; color:var(--ink-2); transition:border-color .15s, background .15s, color .15s}
+.size:hover{border-color:var(--ink-2)}
+.size.is-on{border-color:var(--pink-fill); background:var(--pink-50); color:var(--pink-text)}
+
+.field{display:flex; flex-direction:column; gap:6px; min-width:0}
+.field label{font-weight:700; font-size:14px}
+.input{height:48px; border:1.5px solid var(--line-strong); border-radius:var(--r-md); background:var(--surface); color:var(--ink); padding-inline:14px; font:inherit; font-size:16px; width:100%; transition:border-color .15s, box-shadow .15s}
+.input:focus{outline:none; border-color:var(--pink-fill); box-shadow:0 0 0 4px var(--pink-100)}
+.hint{font-size:13px; color:var(--muted)}
+.stepper{display:inline-flex; align-items:center; border:1.5px solid var(--line-strong); border-radius:var(--r-md); height:48px; overflow:hidden; background:var(--surface)}
+.stepper button{width:44px; height:100%; border:0; background:transparent; font-size:20px; font-weight:700; cursor:pointer}
+.stepper button:hover{background:var(--bg-soft)}
+.stepper output{min-width:32px; text-align:center; font-weight:800}
+
+.search{position:relative; display:flex; align-items:center; width:100%}
+.search .ico{position:absolute; left:14px; color:var(--muted); pointer-events:none}
+.search input{width:100%; height:46px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font:inherit; font-size:16px; padding-left:44px; padding-right:16px; transition:border-color .15s, background .15s, box-shadow .15s}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{outline:none; background:var(--surface); border-color:var(--pink-fill); box-shadow:0 0 0 4px var(--pink-100)}
+.search .search-btn{display:none}
+
+/* Tarjeta de producto */
+.pcard{display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; min-width:0; transition:box-shadow .25s var(--ease), border-color .25s, transform .25s var(--ease)}
+.pcard-media{position:relative; aspect-ratio:1; max-width:100%; background:var(--img-bg); display:grid; place-items:center; overflow:hidden}
+.pimg{width:58%; height:auto; aspect-ratio:120/140; transition:transform .35s var(--ease)}
+.pcard .badges{position:absolute; top:10px; left:10px; right:10px; display:flex; gap:6px; flex-wrap:wrap}
+.pcard-body{padding:12px; display:flex; flex-direction:column; gap:8px; flex:1}
+.pcard-brand{font-weight:800; font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.pcard-name{font-weight:700; font-size:14px; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.7em}
+.price-box{margin-top:auto; display:flex; flex-direction:column; gap:2px}
+.price-row{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.price{font-weight:900; font-size:20px; letter-spacing:-.01em; font-variant-numeric:tabular-nums}
+.price.is-sale{color:var(--pink-text)}
+.old{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+.unit{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; min-height:18px}
+@media (hover:hover){
+  .pcard:hover{box-shadow:var(--shadow-2); border-color:transparent; transform:translateY(-2px)}
+  .pcard:hover .pimg{transform:scale(1.05) rotate(-1.5deg)}
+}
+
+/* Placeholder de foto */
+.ph{position:relative; background:var(--ph, var(--pink-100)); display:grid; place-items:center; overflow:hidden; max-width:100%}
+.ph > svg{width:34%; max-width:120px; color:var(--ph-ink, var(--pink)); opacity:.55}
+.ph-cap{position:absolute; left:10px; bottom:10px; background:var(--surface); color:var(--ink-2); font-size:11px; font-weight:700; padding:4px 8px; border-radius:var(--r-pill); box-shadow:var(--shadow-1); max-width:calc(100% - 20px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+/* Logo provisorio */
+.logo{display:inline-flex; align-items:center; gap:8px; line-height:1}
+.logo-mark{width:36px; height:36px; border-radius:50%; background:var(--pink); color:#fff; display:grid; place-items:center; flex:none}
+.logo-mark svg{width:20px; height:20px}
+.logo-text{display:flex; flex-direction:column; gap:2px}
+.logo-text b{font-weight:900; font-size:17px; letter-spacing:-.02em}
+.logo-text small{font-weight:800; font-size:10px; letter-spacing:.28em; color:var(--pink-text)}
+
+/* ---------- HOME (container queries: misma maqueta en escritorio y celular) ---------- */
+.home{container:home / inline-size; background:var(--bg); color:var(--ink); position:relative}
+.h-wrap{max-width:1240px; margin-inline:auto; padding-inline:16px}
+.h-ann{background:var(--green-fill); color:#fff; font-size:13px; font-weight:700}
+.h-ann .h-wrap{display:flex; justify-content:center; gap:24px; padding-block:8px; text-align:center}
+.h-ann .tbd{background:rgb(255 255 255 / .2); color:#fff}
+.h-ann .alt{display:none}
+
+.h-head{position:sticky; top:var(--sticky-top,0px); z-index:6; background:var(--bg); border-bottom:1px solid var(--line)}
+.h-head-row{display:grid; grid-template-columns:auto 1fr auto; grid-template-areas:"menu logo actions" "search search search"; align-items:center; gap:8px 8px; padding-block:8px 12px}
+.h-menu{grid-area:menu}
+.h-logo{grid-area:logo; justify-self:start}
+.h-actions{grid-area:actions; display:flex; align-items:center; gap:2px}
+.h-search{grid-area:search}
+.h-account-label,.h-cart-label{display:none}
+.cart-count{position:absolute; top:4px; right:2px; min-width:18px; height:18px; padding-inline:4px; border-radius:var(--r-pill); background:var(--pink-fill); color:#fff; font-size:11px; font-weight:900; display:grid; place-items:center; font-variant-numeric:tabular-nums}
+.cart-count.bump{animation:bump .45s var(--ease)}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.45)}100%{transform:scale(1)}}
+.h-nav{display:none}
+
+.h-quick{display:flex; gap:8px; overflow-x:auto; padding-block:12px 4px; scrollbar-width:none; scroll-snap-type:x proximity}
+.h-quick::-webkit-scrollbar{display:none}
+.chip{flex:none; height:36px; padding-inline:14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); font-weight:700; font-size:14px; display:inline-flex; align-items:center; gap:6px; scroll-snap-align:start; cursor:pointer; transition:border-color .15s}
+.chip:hover{border-color:var(--ink-2)}
+.chip.hot{color:var(--pink-text); border-color:var(--pink-100); background:var(--pink-50)}
+
+.h-sec{padding-block:28px}
+.sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:16px}
+.sec-head h2{font-size:22px; font-weight:900; letter-spacing:-.015em; line-height:1.15}
+.sec-head .eyebrow{display:block; margin-bottom:4px}
+.eyebrow{font-weight:800; font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--green-text)}
+.more{font-weight:800; font-size:14px; color:var(--pink-text); display:inline-flex; align-items:center; gap:2px; white-space:nowrap}
+.more .ico{width:18px; height:18px}
+.more:hover{text-decoration:underline; text-underline-offset:3px}
+
+/* Hero */
+.h-hero{display:grid; gap:12px; padding-block:12px 4px}
+.hero-main{position:relative; background:var(--pink-50); border-radius:var(--r-xl); overflow:hidden; display:grid; grid-template-areas:"visual" "copy"}
+.hero-copy{grid-area:copy; padding:20px 20px 24px; display:flex; flex-direction:column; gap:12px; align-items:flex-start; position:relative; z-index:1}
+.hero-copy h1{font-size:30px; line-height:1.08; font-weight:900; letter-spacing:-.025em}
+.hero-copy h1 em{font-style:normal; color:var(--pink-text)}
+.hero-copy p{color:var(--ink-2); font-size:16px; max-width:34ch}
+.hero-ctas{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px}
+.hero-slide{display:flex; flex-direction:column; gap:12px; align-items:flex-start; animation:fadeup .4s var(--ease)}
+@keyframes fadeup{from{opacity:.001; transform:translateY(6px)}to{opacity:1; transform:none}}
+.hero-dots{display:flex; gap:6px; margin-top:6px}
+.hero-dots button{width:8px; height:8px; padding:0; border:0; border-radius:var(--r-pill); background:var(--pink-100); cursor:pointer; transition:width .25s var(--ease), background .25s}
+.hero-dots button[aria-current="true"]{width:24px; background:var(--pink-fill)}
+.hero-visual{grid-area:visual; position:relative; min-height:180px; display:grid; place-items:center; padding:20px 20px 0}
+.blob{width:min(58%, 220px); aspect-ratio:1; max-width:100%; border-radius:58% 42% 52% 48% / 50% 56% 44% 50%; --ph:var(--pink); --ph-ink:#fff}
+.blob > svg{opacity:.9}
+.blob .ph-cap{display:none; left:50%; transform:translateX(-50%); bottom:16px}
+.float-card{position:absolute; display:flex; align-items:center; gap:8px; background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-2); padding:8px 12px 8px 8px; font-size:12px; line-height:1.25; font-weight:700; max-width:60%}
+.float-card .fc-ic{width:30px; height:30px; border-radius:9px; display:grid; place-items:center; flex:none}
+.float-card .fc-ic .ico{width:18px; height:18px}
+.float-card small{display:block; font-weight:600; color:var(--muted)}
+.fc-1{left:12px; top:28px}
+.fc-1 .fc-ic{background:var(--green-50); color:var(--green-text)}
+.fc-2{right:12px; bottom:4px}
+.fc-2 .fc-ic{background:var(--pink-50); color:var(--pink-text)}
+
+.hero-side{display:grid; grid-auto-flow:column; grid-auto-columns:84%; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none}
+.hero-side::-webkit-scrollbar{display:none}
+.promo{scroll-snap-align:start; border-radius:var(--r-lg); padding:16px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:12px; min-height:120px; position:relative; overflow:hidden; transition:transform .25s var(--ease)}
+.promo h3{font-size:17px; font-weight:900; line-height:1.15; letter-spacing:-.01em}
+.promo p{font-size:13px; color:var(--ink-2); margin-top:4px}
+.promo .more{margin-top:8px}
+.promo-a{background:var(--green-50)}
+.promo-a .eyebrow{color:var(--green-text)}
+.promo-b{background:var(--bg-soft); border:1px solid var(--line)}
+.promo-b .eyebrow{color:var(--pink-text)}
+.promo .pimg{width:72px}
+@media (hover:hover){ .promo:hover{transform:translateY(-2px)} }
+
+/* Para quién */
+.pets{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.pet{display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; cursor:pointer}
+.pet .ph{width:100%; aspect-ratio:1; border-radius:var(--r-lg); transition:transform .3s var(--ease)}
+.pet .ph > svg{width:40%}
+.pet .ph-cap{display:none}
+.pet-name{font-weight:800; font-size:15px; display:inline-flex; align-items:center; gap:2px}
+.pet-name .ico{width:16px; height:16px; color:var(--pink-text); transition:transform .2s var(--ease)}
+.pet-sub{display:none}
+.pet-dog .ph{--ph:var(--pink-100); --ph-ink:var(--pink)}
+.pet-cat .ph{--ph:var(--green-100); --ph-ink:var(--green)}
+.pet-other .ph{--ph:var(--bg-soft); --ph-ink:var(--muted)}
+@media (hover:hover){ .pet:hover .ph{transform:scale(1.02)} .pet:hover .pet-name .ico{transform:translateX(3px)} }
+
+/* Categorías */
+.cats{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; scrollbar-width:none; margin-inline:-16px; padding-inline:16px}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:0 0 82px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; scroll-snap-align:start; cursor:pointer}
+.cat-ic{width:100%; aspect-ratio:1; border-radius:50%; background:var(--img-bg); display:grid; place-items:center; transition:background .2s, transform .25s var(--ease)}
+.cat-ic svg{width:52%; height:auto; aspect-ratio:120/140}
+.cat span{font-size:13px; font-weight:700; line-height:1.2}
+@media (hover:hover){ .cat:hover .cat-ic{background:var(--pink-50); transform:translateY(-2px)} }
+
+/* Beneficios */
+.benefits{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden}
+.benefit{background:var(--surface); padding:14px; display:flex; flex-direction:column; gap:8px; min-width:0}
+.benefit-ic{width:40px; height:40px; border-radius:12px; background:var(--green-50); color:var(--green-text); display:grid; place-items:center}
+.benefit b{font-weight:800; font-size:15px; line-height:1.25}
+.benefit p{font-size:13px; color:var(--muted); line-height:1.4}
+
+/* Filas de productos */
+.p-row{display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,46%); gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; margin-inline:-16px; padding-inline:16px; scroll-padding-inline:16px; padding-bottom:4px}
+.p-row::-webkit-scrollbar{display:none}
+.p-row > *{scroll-snap-align:start}
+.band{background:var(--pink-50)}
+.band .pcard{border-color:transparent}
+
+/* Marcas */
+.brands{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.brand{height:72px; border:1px solid var(--line); border-radius:var(--r-md); display:grid; place-items:center; background:var(--surface); color:var(--muted); font-weight:800; font-size:13px; letter-spacing:.04em; cursor:pointer; transition:border-color .15s, color .15s}
+.brand:hover{border-color:var(--ink-2); color:var(--ink)}
+
+/* Local */
+.local{display:grid; gap:20px; background:var(--bg-soft); border-radius:var(--r-xl); padding:20px; overflow:hidden}
+.local h2{font-size:24px; font-weight:900; letter-spacing:-.02em; line-height:1.15}
+.local > div > p{color:var(--ink-2); margin-top:8px; max-width:46ch}
+.info{list-style:none; padding:0; margin:16px 0 20px; display:flex; flex-direction:column; gap:12px}
+.info li{display:flex; gap:12px; align-items:flex-start; font-size:15px}
+.info li .ico{color:var(--green-text); margin-top:1px}
+.info small{display:block; color:var(--muted); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em}
+.map{border-radius:var(--r-lg); aspect-ratio:4/3; --ph:var(--green-100); --ph-ink:var(--green)}
+
+/* Footer */
+.h-foot{background:var(--foot-bg); color:var(--foot-ink); margin-top:28px}
+.h-foot .h-wrap{padding-block:32px 24px; display:grid; gap:28px}
+.foot-cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.foot-brand{grid-column:1 / -1; display:flex; flex-direction:column; gap:10px}
+.foot-brand .logo-text b{color:var(--foot-ink)}
+.foot-brand .logo-text small{color:#FF6FB1}
+.foot-brand p{color:var(--foot-muted); font-size:14px}
+.foot-col h4{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.09em; color:var(--foot-muted); margin-bottom:10px}
+.foot-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:14px}
+.foot-col a:hover{text-decoration:underline; text-underline-offset:3px}
+.foot-col .tbd{background:rgb(255 243 196 / .14); color:#F3DE9A}
+.socials{display:flex; gap:8px}
+.socials a{width:40px; height:40px; border-radius:50%; border:1px solid rgb(255 255 255 / .2); display:grid; place-items:center; transition:background .15s}
+.socials a:hover{background:rgb(255 255 255 / .1)}
+.socials .ico{width:19px; height:19px}
+.pays{display:flex; flex-wrap:wrap; gap:8px}
+.pays span{font-size:12px; font-weight:800; border:1px solid rgb(255 255 255 / .2); border-radius:var(--r-sm); padding:6px 10px}
+.foot-legal{border-top:1px solid rgb(255 255 255 / .12); padding-top:16px; font-size:12px; color:var(--foot-muted); display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between}
+
+/* WhatsApp flotante */
+.wa-dock{position:sticky; bottom:0; height:0; z-index:7; display:flex; justify-content:flex-end; padding-inline:16px}
+.wa{position:absolute; bottom:calc(16px + env(safe-area-inset-bottom,0px)); right:max(16px, env(safe-area-inset-right,0px)); height:56px; min-width:56px; border-radius:var(--r-pill); background:var(--green-fill); color:#fff; display:flex; align-items:center; justify-content:center; gap:8px; padding-inline:16px; box-shadow:0 10px 24px -8px rgb(63 122 51 / .6); font-weight:800; font-size:15px; cursor:pointer; border:0; transition:transform .2s var(--ease)}
+.wa .ico{width:24px; height:24px}
+.wa span{display:none}
+.wa:hover{transform:translateY(-2px)}
+
+/* ---- Tablet ---- */
+@container home (min-width:720px){
+  .h-wrap{padding-inline:24px}
+  .h-ann .alt{display:inline}
+  .h-head-row{grid-template-columns:auto minmax(0,1fr) auto; grid-template-areas:"logo search actions"; gap:24px; padding-block:14px}
+  .h-menu{display:none}
+  .h-search input{height:48px}
+  .h-account-label,.h-cart-label{display:inline}
+  .h-actions{gap:6px}
+  .h-act{width:auto; padding-inline:10px; gap:8px; display:flex; font-weight:700; font-size:14px}
+  .h-quick{display:none}
+  .h-nav{display:block; border-top:1px solid var(--line)}
+  .h-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:4px; align-items:center; overflow-x:auto; scrollbar-width:none}
+  .h-nav a{display:inline-flex; align-items:center; gap:4px; height:44px; padding-inline:12px; font-weight:700; font-size:14px; white-space:nowrap; position:relative; color:var(--ink-2); transition:color .15s}
+  .h-nav a::after{content:""; position:absolute; left:12px; right:12px; bottom:0; height:3px; border-radius:3px 3px 0 0; background:var(--pink-fill); transform:scaleX(0); transition:transform .2s var(--ease)}
+  .h-nav a:hover{color:var(--ink)}
+  .h-nav a:hover::after{transform:scaleX(1)}
+  .h-nav a .ico{width:16px; height:16px}
+  .h-nav .hot{color:var(--pink-text)}
+  .h-nav .sep{flex:1}
+  .h-sec{padding-block:40px}
+  .sec-head h2{font-size:28px}
+  .hero-side{grid-auto-flow:row; grid-template-columns:1fr 1fr; grid-auto-columns:auto; overflow:visible}
+  .pets{gap:16px}
+  .pet{align-items:stretch; text-align:left; background:var(--bg-soft); border-radius:var(--r-lg); padding:10px 10px 16px; gap:12px}
+  .pet .ph{aspect-ratio:4/3; border-radius:12px}
+  .pet .ph-cap{display:block}
+  .pet-name{font-size:19px; padding-inline:6px}
+  .pet-sub{display:block; font-size:13px; color:var(--muted); padding-inline:6px; margin-top:-8px}
+  .benefits{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .benefit{padding:20px; flex-direction:row; align-items:flex-start; gap:12px}
+  .p-row{grid-auto-flow:row; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-columns:auto; overflow:visible; margin-inline:0; padding-inline:0; gap:16px}
+  .p-row > :nth-child(n+4){display:none}
+  .pcard-body{padding:14px 16px 16px}
+  .pcard-name{font-size:15px}
+  .price{font-size:22px}
+  .brands{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .local{grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; padding:32px}
+  .local h2{font-size:30px}
+  .foot-cols{grid-template-columns:1.4fr repeat(3,minmax(0,1fr))}
+  .foot-brand{grid-column:auto}
+  .wa span{display:inline}
+}
+/* ---- Escritorio ---- */
+@container home (min-width:1040px){
+  .h-wrap{padding-inline:32px}
+  .h-search{max-width:640px; justify-self:center; width:100%}
+  .h-search .search-btn{display:inline-flex; position:absolute; right:5px; height:38px; border-radius:var(--r-pill); padding-inline:18px}
+  .h-search input{padding-right:110px}
+  .h-hero{grid-template-columns:minmax(0,2.15fr) minmax(0,1fr); gap:16px; padding-block:20px 8px}
+  .hero-main{grid-template-areas:"copy visual"; grid-template-columns:1.3fr .9fr; min-height:400px}
+  .hero-copy{padding:48px 0 44px 48px; justify-content:center; gap:16px}
+  .hero-slide{gap:16px}
+  .hero-copy h1{font-size:46px}
+  .hero-copy p{font-size:18px}
+  .hero-visual{padding:24px}
+  .blob{width:min(88%, 320px)}
+  .blob .ph-cap{display:block}
+  .fc-1{left:0; top:56px}
+  .fc-2{right:24px; bottom:40px}
+  .hero-side{grid-template-columns:1fr; grid-template-rows:1fr 1fr; gap:16px}
+  .promo{padding:20px 22px; grid-template-columns:1fr auto}
+  .promo h3{font-size:20px}
+  .promo .pimg{width:92px}
+  .cats{display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:16px; overflow:visible; margin-inline:0; padding-inline:0}
+  .cat span{font-size:14px}
+  .p-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px}
+  .p-row > :nth-child(4){display:flex}
+  .local{padding:48px; gap:48px}
+}
+
+/* ---------- Sistema de diseño ---------- */
+.ds{display:flex; flex-direction:column; gap:20px}
+.ds-intro{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:28px; display:grid; gap:24px}
+@media (min-width:900px){ .ds-intro{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); padding:40px; gap:40px} }
+.ds-intro h1{font-size:clamp(28px, 4vw, 40px); font-weight:900; letter-spacing:-.025em; line-height:1.1}
+.ds-intro h1 em{font-style:normal; color:var(--pink-text)}
+.ds-intro > div > p{color:var(--ink-2); font-size:17px; margin-top:12px; max-width:60ch}
+.principles{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px}
+.principles li{display:grid; grid-template-columns:36px 1fr; gap:12px; font-size:15px; color:var(--ink-2)}
+.principles li b{display:block; color:var(--ink); font-size:16px}
+.principles .pi{width:36px; height:36px; border-radius:11px; display:grid; place-items:center}
+.principles .pi .ico{width:20px; height:20px}
+
+.ds-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:24px; display:flex; flex-direction:column; gap:20px; min-width:0}
+@media (min-width:900px){ .ds-card{padding:32px} }
+.ds-card > header{display:flex; flex-direction:column; gap:4px}
+.ds-card h2{font-size:22px; font-weight:900; letter-spacing:-.015em}
+.ds-card > header p{color:var(--muted); font-size:14px; max-width:70ch}
+.ds-grid{display:grid; gap:20px}
+@media (min-width:900px){ .ds-grid.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+
+.swatches{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap:12px}
+.sw{border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; min-width:0}
+.sw-chip{height:84px; display:flex; align-items:flex-end; justify-content:space-between; padding:10px 12px; font-weight:900; font-size:22px}
+.sw-body{padding:12px; display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted); flex:1}
+.sw-body b{color:var(--ink); font-size:14px; font-weight:800}
+.sw-body code{font-family:ui-monospace, "SF Mono", Menlo, monospace; font-size:12px; color:var(--ink-2)}
+.ratio{display:inline-flex; align-self:flex-start; gap:4px; align-items:center; font-weight:800; font-size:11px; padding:3px 7px; border-radius:var(--r-pill); margin-top:4px}
+.ratio.ok{background:var(--green-50); color:var(--green-text)}
+.ratio.no{background:var(--tbd-bg); color:var(--tbd-ink)}
+.callout{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; background:var(--pink-50); border-radius:var(--r-lg); padding:16px; font-size:14px; color:var(--ink-2)}
+.callout b{color:var(--ink)}
+.callout .ico{color:var(--pink-text)}
+
+.type-rows{display:flex; flex-direction:column}
+.type-row{display:grid; grid-template-columns:120px minmax(0,1fr); gap:16px; align-items:baseline; padding-block:14px; border-bottom:1px solid var(--line)}
+.type-row:last-child{border-bottom:0}
+.type-row .meta{font-size:12px; color:var(--muted); font-weight:700; line-height:1.4}
+.type-row .meta b{display:block; color:var(--ink); font-size:13px}
+.type-row .sample{min-width:0; overflow-wrap:anywhere}
+@media (max-width:560px){ .type-row{grid-template-columns:1fr; gap:4px} }
+
+.spaces{display:flex; flex-direction:column; gap:8px}
+.space{display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:center; font-size:13px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums}
+.space i{display:block; height:12px; background:var(--pink-100); border-radius:3px}
+.space small{font-weight:600}
+.radii{display:grid; grid-template-columns:repeat(auto-fill, minmax(110px,1fr)); gap:12px}
+.radius{display:flex; flex-direction:column; gap:8px; font-size:13px; color:var(--muted)}
+.radius i{display:block; height:72px; background:var(--bg-soft); border:1.5px solid var(--line-strong)}
+.radius b{color:var(--ink); font-size:14px}
+.shadows{display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:16px}
+.shadow{background:var(--surface); border-radius:var(--r-lg); padding:16px; min-height:96px; font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:4px}
+.shadow b{color:var(--ink); font-size:14px}
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.comp-label{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:10px}
+.anatomy{display:grid; gap:24px; align-items:start}
+@media (min-width:700px){ .anatomy{grid-template-columns:240px minmax(0,1fr)} }
+.anatomy ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--ink-2)}
+.anatomy ol b{color:var(--ink)}
+.motion{list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(min(100%,240px),1fr))}
+.motion li{border:1px solid var(--line); border-radius:var(--r-lg); padding:16px; font-size:14px; color:var(--ink-2)}
+.motion li b{display:block; color:var(--ink); margin-bottom:4px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="paw" viewBox="0 0 24 24"><ellipse cx="5.3" cy="10.2" rx="2.2" ry="2.8"/><ellipse cx="9.4" cy="5.6" rx="2.2" ry="2.9"/><ellipse cx="14.6" cy="5.6" rx="2.2" ry="2.9"/><ellipse cx="18.7" cy="10.2" rx="2.2" ry="2.8"/><path d="M12 11.6c-3.2 0-6.6 4-6.6 6.8 0 1.8 1.4 2.8 3 2.8 1.3 0 2.3-.6 3.6-.6s2.3.6 3.6.6c1.6 0 3-1 3-2.8 0-2.8-3.4-6.8-6.6-6.8z"/></symbol>
+    <symbol id="s-bag" viewBox="0 0 120 140"><path d="M27 24h66l7 102a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z" fill="var(--c1)"/><path d="M24 10h72l-3 16H27z" fill="var(--c1)" opacity=".7"/><path d="M28 16h64" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-dasharray="4 4"/><rect x="34" y="50" width="52" height="50" rx="12" fill="var(--c2)"/><use href="#paw" x="45" y="60" width="30" height="30" fill="var(--c1)"/><rect x="34" y="110" width="30" height="6" rx="3" fill="#fff" opacity=".7"/></symbol>
+    <symbol id="s-box" viewBox="0 0 120 140"><rect x="22" y="34" width="76" height="96" rx="8" fill="var(--c1)"/><rect x="18" y="24" width="84" height="18" rx="5" fill="var(--c1)" opacity=".75"/><rect x="32" y="56" width="56" height="44" rx="10" fill="var(--c2)"/><use href="#paw" x="46" y="63" width="28" height="28" fill="var(--c1)"/><rect x="32" y="110" width="36" height="6" rx="3" fill="#fff" opacity=".7"/></symbol>
+    <symbol id="s-toy" viewBox="0 0 120 140"><g transform="rotate(-32 60 70)" fill="var(--c1)"><rect x="30" y="60" width="60" height="20" rx="10"/><circle cx="30" cy="59" r="13"/><circle cx="30" cy="81" r="13"/><circle cx="90" cy="59" r="13"/><circle cx="90" cy="81" r="13"/></g><circle cx="60" cy="70" r="5" fill="var(--c2)"/></symbol>
+    <symbol id="s-bottle" viewBox="0 0 120 140"><rect x="46" y="10" width="28" height="14" rx="4" fill="var(--c1)" opacity=".7"/><rect x="51" y="22" width="18" height="18" rx="3" fill="var(--c1)" opacity=".85"/><rect x="34" y="38" width="52" height="94" rx="16" fill="var(--c1)"/><rect x="42" y="62" width="36" height="44" rx="8" fill="var(--c2)"/><use href="#paw" x="49" y="71" width="22" height="22" fill="var(--c1)"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.3-4.3"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2.5 3.5h2.2l2.4 11.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 1.9-1.5l1.7-7.3H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.4-3.6 4.2-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9.5h-11zM13.5 9.5h4l3 3.2v3.3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10.5V20h16v-9.5M3 10.5 5 4h14l2 6.5a2.9 2.9 0 0 1-5.6 0 2.9 2.9 0 0 1-5.6 0 2.9 2.9 0 0 1-5.6 0M10 20v-5h4v5"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h3"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.5-4.2a8.5 8.5 0 1 1 15.5-4.7z"/><path d="M9 10.5c.3 1.8 2.3 3.8 4.2 4.2l1.3-1.3 2 .9"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8.5h2.5V5H14a4 4 0 0 0-4 4v2H7.5v3.5H10V21h3.5v-6.5H16l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="bar-title"><b>Pet Company Pilar</b><span>Propuesta visual v1 · para validar</span></div>
+    <nav class="seg" aria-label="Vistas de la propuesta">
+      <button type="button" data-view="escritorio">Home escritorio</button>
+      <button type="button" data-view="celular">Home celular</button>
+      <button type="button" data-view="sistema">Sistema de diseño</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ VISTA: ESCRITORIO ============ -->
+<section class="view" id="v-escritorio" data-v="escritorio">
+  <div class="view-in">
+    <div class="demo-note"><svg class="ico"><use href="#i-eye"/></svg><span><b>Contenido de demostración.</b> Productos, marcas, precios y promociones son ejemplos. Lo marcado en amarillo son datos del negocio que faltan (zona de envío, dirección, horarios, contacto). El logo es provisorio hasta que me pases el original. Los botones de agregar y los tamaños funcionan, para que pruebes la interacción.</span></div>
+    <div class="browser">
+      <div class="browser-top"><div class="dots"><i></i><i></i><i></i></div><div class="url">Dominio a definir</div><div class="dots" style="visibility:hidden"><i></i><i></i><i></i></div></div>
+      <div id="frame-desktop"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISTA: CELULAR ============ -->
+<section class="view" id="v-celular" data-v="celular" hidden>
+  <div class="view-in">
+    <div class="mobile-layout">
+      <div class="phone"><div class="phone-screen" id="frame-mobile"></div></div>
+      <aside class="notes">
+        <h2>Pensada para el pulgar</h2>
+        <ol>
+          <li><span class="n">1</span><div><b>Buscador siempre visible</b>Queda fijo arriba al hacer scroll. Es la forma más rápida de llegar a "la bolsa de siempre".</div></li>
+          <li><span class="n">2</span><div><b>Accesos rápidos deslizables</b>Perros, Gatos y Ofertas a un toque, sin abrir el menú.</div></li>
+          <li><span class="n">3</span><div><b>Carruseles de 2 productos</b>Se ve que hay más a la derecha. Cada tarjeta tiene su botón de agregar de 40 px de alto.</div></li>
+          <li><span class="n">4</span><div><b>Tamaño y precio por kilo</b>Se elige el peso de la bolsa en la misma tarjeta y el precio se actualiza.</div></li>
+          <li><span class="n">5</span><div><b>WhatsApp a mano</b>Botón flotante abajo a la derecha, sin tapar el contenido ni abrir ventanas solas.</div></li>
+          <li><span class="n">6</span><div><b>Sin pop-ups</b>Los beneficios (envío, retiro, pagos) se cuentan en la página, no en ventanas que interrumpen.</div></li>
+        </ol>
+        <p class="hint">Deslizá dentro del teléfono para recorrer la home completa.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISTA: SISTEMA DE DISEÑO ============ -->
+<section class="view" id="v-sistema" data-v="sistema" hidden>
+  <div class="view-in ds">
+
+    <div class="ds-intro">
+      <div>
+        <span class="eyebrow">Dirección visual</span>
+        <h1 style="margin-top:8px">Un pet shop de barrio, <em>bien ordenado</em>.</h1>
+        <p>Mucho blanco y fotos grandes para que los productos sean protagonistas. El rosa aparece sólo donde hay que actuar: comprar, aprovechar una oferta, buscar. El verde habla del servicio: envíos, retiro, atención. Una sola tipografía redondeada y legible, para que la tienda se sienta cercana sin perder seriedad.</p>
+      </div>
+      <ul class="principles">
+        <li><span class="pi" style="background:var(--pink-50);color:var(--pink-text)"><svg class="ico"><use href="#i-cart"/></svg></span><div><b>Rosa = acción</b>Botones de compra, precios en oferta, descuentos. Si es rosa, se puede tocar o conviene mirarlo.</div></li>
+        <li><span class="pi" style="background:var(--green-50);color:var(--green-text)"><svg class="ico"><use href="#i-truck"/></svg></span><div><b>Verde = servicio</b>Envío sin cargo, retiro en el local, WhatsApp, novedades. Transmite confianza.</div></li>
+        <li><span class="pi" style="background:var(--bg-soft);color:var(--ink)"><svg class="ico"><use href="#paw"/></svg></span><div><b>Neutros = calma</b>Fondos blancos y grises muy claros. La huellita aparece como detalle, nunca como relleno.</div></li>
+      </ul>
+    </div>
+
+    <article class="ds-card">
+      <header><h2>Colores</h2><p>Respetamos los tres colores de marca y sumamos dos tonos de trabajo para cumplir contraste accesible (WCAG AA: 4,5:1 para texto normal).</p></header>
+      <div class="swatches">
+        <div class="sw"><div class="sw-chip" style="background:#FF1E8C;color:#fff">Aa</div><div class="sw-body"><b>Rosa marca</b><code>#FF1E8C</code>Logo, formas decorativas, superficies grandes.<span class="ratio no">3,6:1 · sólo texto grande</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#E0107A;color:#fff">Aa</div><div class="sw-body"><b>Rosa acción</b><code>#E0107A</code>Botones de compra, precio en oferta, badge de descuento, links.<span class="ratio ok">4,6:1 · AA</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#FFF0F7;color:#E0107A">Aa</div><div class="sw-body"><b>Rosa suave</b><code>#FFF0F7</code>Fondo de banners y de la sección de ofertas.</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#5A9E4B;color:#fff">Aa</div><div class="sw-body"><b>Verde marca</b><code>#5A9E4B</code>Íconos de beneficios, detalles, ilustraciones.<span class="ratio no">3,3:1 · sólo texto grande</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#3F7A33;color:#fff">Aa</div><div class="sw-body"><b>Verde servicio</b><code>#3F7A33</code>Barra de envíos, WhatsApp, badge "Nuevo", textos de beneficios.<span class="ratio ok">5,2:1 · AA</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#EFF6EC;color:#3F7A33">Aa</div><div class="sw-body"><b>Verde suave</b><code>#EFF6EC</code>Fondo de beneficios y mensajes de servicio.</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#1F1A1D;color:#fff">Aa</div><div class="sw-body"><b>Tinta</b><code>#1F1A1D</code>Títulos y texto principal. Negro con un toque cálido.<span class="ratio ok">16,8:1 · AAA</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#6E6570;color:#fff">Aa</div><div class="sw-body"><b>Gris texto</b><code>#6E6570</code>Marcas, descripciones cortas, precio anterior.<span class="ratio ok">5,6:1 · AA</span></div></div>
+        <div class="sw"><div class="sw-chip" style="background:#F7F5F6;color:#1F1A1D;border-bottom:1px solid #ECE6E9">Aa</div><div class="sw-body"><b>Fondo suave · Bordes</b><code>#F7F5F6 · #ECE6E9</code>Fondo de fotos de producto, buscador y separadores.</div></div>
+      </div>
+      <div class="callout"><svg class="ico"><use href="#i-eye"/></svg><div><b>Por qué hay dos rosas.</b> El #FF1E8C con texto blanco tiene contraste 3,6:1. Es lindo, pero en un botón de 15 px se lee mal al sol en un celular. El rosa acción es el mismo tono un poco más profundo: a simple vista es "el rosa de la marca" y se lee bien. Lo mismo pasa con el verde.</div></div>
+    </article>
+
+    <div class="ds-grid two">
+      <article class="ds-card">
+        <header><h2>Tipografía</h2><p>Nunito Sans en 4 pesos. Una sola familia carga más rápido y da coherencia. Sus terminaciones suaves acompañan las formas redondeadas.</p></header>
+        <div class="type-rows">
+          <div class="type-row"><div class="meta"><b>Display</b>50 / 900 · móvil 30</div><div class="sample" style="font-size:40px;font-weight:900;letter-spacing:-.025em;line-height:1.05">Todo para ellos</div></div>
+          <div class="type-row"><div class="meta"><b>Título sección</b>28 / 900 · móvil 22</div><div class="sample" style="font-size:26px;font-weight:900;letter-spacing:-.015em;line-height:1.15">Recién llegados</div></div>
+          <div class="type-row"><div class="meta"><b>Título tarjeta</b>15 / 700</div><div class="sample" style="font-size:15px;font-weight:700">Alimento seco para gato adulto castrado</div></div>
+          <div class="type-row"><div class="meta"><b>Texto</b>16 / 400</div><div class="sample" style="font-size:16px;color:var(--ink-2)">Pedí online y recibilo en tu casa, o pasá a retirarlo por el local.</div></div>
+          <div class="type-row"><div class="meta"><b>Etiqueta</b>12 / 800 · mayúsculas</div><div class="sample"><span class="eyebrow">Envío sin cargo</span></div></div>
+          <div class="type-row"><div class="meta"><b>Precio</b>22 / 900 · tabular</div><div class="sample"><span class="price is-sale" style="font-size:26px">$ 55.990</span> <s class="old">$ 65.990</s></div></div>
+        </div>
+      </article>
+      <article class="ds-card">
+        <header><h2>Espaciado, bordes y sombras</h2><p>Escala de 4 px. Entre secciones de la home: 28 px en celular, 40 px en escritorio.</p></header>
+        <div class="spaces">
+          <div class="space">4<i style="width:4px"></i></div>
+          <div class="space">8<i style="width:8px"></i></div>
+          <div class="space">12<i style="width:12px"></i></div>
+          <div class="space">16<i style="width:16px"></i></div>
+          <div class="space">24<i style="width:24px"></i></div>
+          <div class="space">32<i style="width:32px"></i></div>
+          <div class="space">48<i style="width:48px"></i></div>
+          <div class="space">64<i style="width:64px"></i></div>
+        </div>
+        <div class="radii">
+          <div class="radius"><i style="border-radius:8px"></i><b>8 px</b>Tamaños, chips</div>
+          <div class="radius"><i style="border-radius:12px"></i><b>12 px</b>Botones, campos</div>
+          <div class="radius"><i style="border-radius:16px"></i><b>16 px</b>Tarjetas</div>
+          <div class="radius"><i style="border-radius:24px"></i><b>24 px</b>Banners</div>
+          <div class="radius"><i style="border-radius:999px"></i><b>Píldora</b>Buscador, badges</div>
+        </div>
+        <div class="shadows">
+          <div class="shadow" style="border:1px solid var(--line)"><b>Sin sombra</b>Por defecto. Las tarjetas se separan con borde.</div>
+          <div class="shadow" style="box-shadow:var(--shadow-1)"><b>Sombra 1</b>Elementos flotantes chicos.</div>
+          <div class="shadow" style="box-shadow:var(--shadow-2)"><b>Sombra 2</b>Tarjeta en hover, carrito lateral.</div>
+        </div>
+      </article>
+    </div>
+
+    <article class="ds-card">
+      <header><h2>Botones y controles</h2><p>Alto mínimo de 40 px (48 px en acciones principales) para que se toquen fácil con el dedo. Un solo botón rosa por zona.</p></header>
+      <div>
+        <p class="comp-label">Botones</p>
+        <div class="row">
+          <button class="btn btn-primary"><svg class="ico"><use href="#i-cart"/></svg>Agregar al carrito</button>
+          <button class="btn btn-secondary">Ver detalle</button>
+          <button class="btn btn-green"><svg class="ico"><use href="#i-chat"/></svg>Escribinos</button>
+          <button class="btn btn-ghost">Ver todos <svg class="ico"><use href="#i-chev"/></svg></button>
+          <button class="btn btn-primary btn-sm">Agregar</button>
+          <button class="btn" disabled>Sin stock</button>
+        </div>
+      </div>
+      <div class="ds-grid two">
+        <div>
+          <p class="comp-label">Indicadores</p>
+          <div class="row">
+            <span class="badge badge-sale">−15%</span>
+            <span class="badge badge-new">Nuevo</span>
+            <span class="badge badge-soft">Envío sin cargo</span>
+            <span class="stock">En stock</span>
+            <span class="stock low">Últimas unidades</span>
+            <span class="stock out">Sin stock</span>
+          </div>
+        </div>
+        <div>
+          <p class="comp-label">Tamaño y cantidad</p>
+          <div class="row">
+            <div class="sizes"><button class="size">3 kg</button><button class="size is-on">7,5 kg</button><button class="size">15 kg</button></div>
+            <div class="stepper" data-stepper><button type="button" aria-label="Restar uno">−</button><output>1</output><button type="button" aria-label="Sumar uno">+</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-grid two">
+        <div>
+          <p class="comp-label">Buscador</p>
+          <form class="search" role="search"><svg class="ico"><use href="#i-search"/></svg><input id="ds-search" type="search" placeholder="Buscá alimento, marca o producto" aria-label="Buscar productos"></form>
+        </div>
+        <div class="field">
+          <label for="ds-cp">Código postal</label>
+          <input class="input" id="ds-cp" inputmode="numeric" placeholder="Ej.: 1629">
+          <span class="hint">Lo usamos para saber si llegamos con envío sin cargo.</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="ds-card">
+      <header><h2>Tarjeta de producto</h2><p>El componente que más se repite. Todo lo necesario para decidir y comprar sin entrar a la ficha.</p></header>
+      <div class="anatomy">
+        <div id="ds-card"></div>
+        <ol>
+          <li><b>Foto cuadrada sobre gris suave.</b> Todas las fotos de producto con el mismo fondo, para que el catálogo se vea parejo aunque vengan de distintos proveedores.</li>
+          <li><b>Badges arriba a la izquierda.</b> Rosa para descuento, verde para novedad. Como máximo dos.</li>
+          <li><b>Marca en mayúsculas chicas, nombre en 2 líneas.</b> El nombre se corta con "…" para que todas las tarjetas queden alineadas.</li>
+          <li><b>Tamaños en la misma tarjeta.</b> El precio cambia al tocar otro peso.</li>
+          <li><b>Precio grande, anterior tachado y precio por kilo.</b> Para comparar bolsas de distinto tamaño sin hacer cuentas.</li>
+          <li><b>Botón "Agregar" siempre visible.</b> Al tocarlo confirma en verde y el contador del carrito salta, sin abrir ventanas.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="ds-card">
+      <header><h2>Movimiento</h2><p>Suave y corto: entre 150 y 400 ms. Si la persona tiene activado "reducir movimiento" en su teléfono, se desactiva.</p></header>
+      <ul class="motion">
+        <li><b>Tarjeta en hover</b>Sube 2 px, gana sombra y la foto se acerca un poco.</li>
+        <li><b>Agregar al carrito</b>El botón pasa a verde con "Agregado" y el número del carrito rebota una vez.</li>
+        <li><b>Menú de escritorio</b>Subrayado rosa que crece desde el centro.</li>
+        <li><b>Banner principal</b>Cambio de texto con fundido. El indicador activo se alarga.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PLANTILLA DE LA HOME ============ -->
+<template id="home-tpl">
+<div class="home">
+  <div class="h-ann"><div class="h-wrap">
+    <span>Envío sin cargo en <span class="tbd">zona de cobertura</span></span>
+    <span class="alt">Retiro en nuestro local de Pilar</span>
+    <span class="alt">Mercado Pago · Transferencia · Efectivo</span>
+  </div></div>
+
+  <header class="h-head">
+    <div class="h-wrap">
+      <div class="h-head-row">
+        <button class="icon-btn h-menu" type="button" aria-label="Abrir menú"><svg class="ico"><use href="#i-menu"/></svg></button>
+        <a class="h-logo logo" href="#" aria-label="Pet Company Pilar, inicio">
+          <span class="logo-mark"><svg fill="currentColor"><use href="#paw"/></svg></span>
+          <span class="logo-text"><b>Pet Company</b><small>PILAR</small></span>
+        </a>
+        <form class="search h-search" role="search">
+          <svg class="ico"><use href="#i-search"/></svg>
+          <input type="search" placeholder="Buscá alimento, marca o producto" aria-label="Buscar productos">
+          <button class="btn btn-primary search-btn" type="submit">Buscar</button>
+        </form>
+        <div class="h-actions">
+          <a class="icon-btn h-act" href="#" aria-label="Mi cuenta"><svg class="ico"><use href="#i-user"/></svg><span class="h-account-label">Ingresar</span></a>
+          <a class="icon-btn h-act" href="#" aria-label="Carrito"><svg class="ico"><use href="#i-cart"/></svg><span class="h-cart-label">Carrito</span><span class="cart-count" data-cart>0</span></a>
+        </div>
+      </div>
+    </div>
+    <nav class="h-nav" aria-label="Categorías"><div class="h-wrap"><ul>
+      <li><a href="#">Perros <svg class="ico"><use href="#i-down"/></svg></a></li>
+      <li><a href="#">Gatos <svg class="ico"><use href="#i-down"/></svg></a></li>
+      <li><a href="#">Otras mascotas</a></li>
+      <li><a href="#">Alimentos</a></li>
+      <li><a href="#">Snacks</a></li>
+      <li><a href="#">Piedras sanitarias</a></li>
+      <li><a href="#">Accesorios</a></li>
+      <li><a href="#">Higiene</a></li>
+      <li class="sep"></li>
+      <li><a href="#" class="hot">Ofertas</a></li>
+      <li><a href="#">Marcas</a></li>
+      <li><a href="#">Envíos</a></li>
+    </ul></div></nav>
+  </header>
+
+  <div class="h-wrap">
+    <div class="h-quick">
+      <a class="chip" href="#">Perros</a><a class="chip" href="#">Gatos</a><a class="chip hot" href="#">Ofertas</a><a class="chip" href="#">Alimentos</a><a class="chip" href="#">Piedras sanitarias</a><a class="chip" href="#">Snacks</a><a class="chip" href="#">Accesorios</a>
+    </div>
+
+    <section class="h-hero" aria-label="Destacado">
+      <div class="hero-main">
+        <div class="hero-copy">
+          <div class="hero-slide" data-slide></div>
+          <div class="hero-dots" data-dots></div>
+        </div>
+        <div class="hero-visual">
+          <div class="ph blob"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto real de mascota</span></div>
+          <div class="float-card fc-1"><span class="fc-ic"><svg class="ico"><use href="#i-truck"/></svg></span><span>Envío sin cargo<small>en zona de cobertura</small></span></div>
+          <div class="float-card fc-2"><span class="fc-ic"><svg class="ico"><use href="#i-store"/></svg></span><span>Retiro en el local<small>Pilar</small></span></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <a class="promo promo-a" href="#">
+          <div><span class="eyebrow">Banner de ejemplo</span><h3>Combo alimento + piedras sanitarias</h3><span class="more">Ver combos <svg class="ico"><use href="#i-chev"/></svg></span></div>
+          <svg class="pimg" style="--c1:#5A9E4B;--c2:#E3F1DE"><use href="#s-bag"/></svg>
+        </a>
+        <a class="promo promo-b" href="#">
+          <div><span class="eyebrow">Banner de ejemplo</span><h3>Snacks y premios para el entrenamiento</h3><span class="more">Ver snacks <svg class="ico"><use href="#i-chev"/></svg></span></div>
+          <svg class="pimg" style="--c1:#FF1E8C;--c2:#FFE3F0"><use href="#s-toy"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="h-sec" aria-labelledby="t-pets">
+      <div class="sec-head"><h2 id="t-pets">¿Para quién comprás?</h2></div>
+      <div class="pets">
+        <a class="pet pet-dog" href="#"><div class="ph"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto: perro</span></div><span class="pet-name">Perros <svg class="ico"><use href="#i-chev"/></svg></span><span class="pet-sub">Alimentos, snacks, camas y paseo</span></a>
+        <a class="pet pet-cat" href="#"><div class="ph"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto: gato</span></div><span class="pet-name">Gatos <svg class="ico"><use href="#i-chev"/></svg></span><span class="pet-sub">Alimentos, piedras y rascadores</span></a>
+        <a class="pet pet-other" href="#"><div class="ph"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto: otras mascotas</span></div><span class="pet-name">Otras <svg class="ico"><use href="#i-chev"/></svg></span><span class="pet-sub">Aves, roedores y peces</span></a>
+      </div>
+    </section>
+
+    <section class="h-sec" style="padding-top:0" aria-labelledby="t-cats">
+      <div class="sec-head"><h2 id="t-cats">Comprá por categoría</h2><a class="more" href="#">Ver todas <svg class="ico"><use href="#i-chev"/></svg></a></div>
+      <div class="cats" data-cats></div>
+    </section>
+
+    <section aria-label="Beneficios">
+      <div class="benefits">
+        <div class="benefit"><span class="benefit-ic"><svg class="ico"><use href="#i-truck"/></svg></span><div><b>Envío sin cargo</b><p>En <span class="tbd">zona de cobertura</span></p></div></div>
+        <div class="benefit"><span class="benefit-ic"><svg class="ico"><use href="#i-store"/></svg></span><div><b>Retiro en el local</b><p><span class="tbd">Dirección del local</span></p></div></div>
+        <div class="benefit"><span class="benefit-ic"><svg class="ico"><use href="#i-wallet"/></svg></span><div><b>Pagá como quieras</b><p>Mercado Pago, transferencia o efectivo</p></div></div>
+        <div class="benefit"><span class="benefit-ic"><svg class="ico"><use href="#i-chat"/></svg></span><div><b>Te asesoramos</b><p>Consultanos por WhatsApp</p></div></div>
+      </div>
+    </section>
+
+    <section class="h-sec" aria-labelledby="t-feat">
+      <div class="sec-head"><h2 id="t-feat">Destacados</h2><a class="more" href="#">Ver todos <svg class="ico"><use href="#i-chev"/></svg></a></div>
+      <div class="p-row" data-list="destacados"></div>
+    </section>
+  </div>
+
+  <section class="band h-sec" aria-labelledby="t-sale">
+    <div class="h-wrap">
+      <div class="sec-head"><div><span class="eyebrow" style="color:var(--pink-text)">Precios especiales</span><h2 id="t-sale">Ofertas</h2></div><a class="more" href="#">Ver todas <svg class="ico"><use href="#i-chev"/></svg></a></div>
+      <div class="p-row" data-list="ofertas"></div>
+    </div>
+  </section>
+
+  <div class="h-wrap">
+    <section class="h-sec" aria-labelledby="t-new">
+      <div class="sec-head"><h2 id="t-new">Recién llegados</h2><a class="more" href="#">Ver todos <svg class="ico"><use href="#i-chev"/></svg></a></div>
+      <div class="p-row" data-list="nuevos"></div>
+    </section>
+
+    <section class="h-sec" style="padding-top:0" aria-labelledby="t-brands">
+      <div class="sec-head"><h2 id="t-brands">Marcas destacadas</h2><a class="more" href="#">Ver todas <svg class="ico"><use href="#i-chev"/></svg></a></div>
+      <div class="brands"><a class="brand" href="#">LOGO MARCA</a><a class="brand" href="#">LOGO MARCA</a><a class="brand" href="#">LOGO MARCA</a><a class="brand" href="#">LOGO MARCA</a><a class="brand" href="#">LOGO MARCA</a><a class="brand" href="#">LOGO MARCA</a></div>
+    </section>
+
+    <section class="local" aria-labelledby="t-local">
+      <div>
+        <span class="eyebrow">Nuestro local</span>
+        <h2 id="t-local" style="margin-top:6px">Estamos en Pilar, cerca tuyo</h2>
+        <p>Atención personalizada, como siempre. Pedí online y te lo llevamos, o pasá a retirarlo.</p>
+        <ul class="info">
+          <li><svg class="ico"><use href="#i-pin"/></svg><div><small>Dirección</small><span class="tbd">Calle y número, Pilar</span></div></li>
+          <li><svg class="ico"><use href="#i-clock"/></svg><div><small>Horarios</small><span class="tbd">Días y horarios de atención</span></div></li>
+          <li><svg class="ico"><use href="#i-chat"/></svg><div><small>WhatsApp</small><span class="tbd">Número de WhatsApp</span></div></li>
+        </ul>
+        <a class="btn btn-green" href="#"><svg class="ico"><use href="#i-chat"/></svg>Escribinos por WhatsApp</a>
+      </div>
+      <div class="ph map"><svg fill="currentColor"><use href="#i-pin"/></svg><span class="ph-cap">Mapa o foto del local</span></div>
+    </section>
+  </div>
+
+  <footer class="h-foot">
+    <div class="h-wrap">
+      <div class="foot-cols">
+        <div class="foot-brand">
+          <span class="logo"><span class="logo-mark"><svg fill="currentColor"><use href="#paw"/></svg></span><span class="logo-text"><b>Pet Company</b><small>PILAR</small></span></span>
+          <p>Todo para ellos, cerca tuyo.</p>
+          <div class="socials"><a href="#" aria-label="Instagram"><svg class="ico"><use href="#i-ig"/></svg></a><a href="#" aria-label="Facebook"><svg class="ico"><use href="#i-fb"/></svg></a></div>
+        </div>
+        <div class="foot-col"><h4>Comprar</h4><ul><li><a href="#">Perros</a></li><li><a href="#">Gatos</a></li><li><a href="#">Otras mascotas</a></li><li><a href="#">Ofertas</a></li><li><a href="#">Marcas</a></li></ul></div>
+        <div class="foot-col"><h4>Ayuda</h4><ul><li><a href="#">Envíos y retiro</a></li><li><a href="#">Medios de pago</a></li><li><a href="#">Cambios y devoluciones</a></li><li><a href="#">Preguntas frecuentes</a></li></ul></div>
+        <div class="foot-col"><h4>Contacto</h4><ul><li><span class="tbd">Dirección del local</span></li><li><span class="tbd">Horarios</span></li><li><span class="tbd">WhatsApp</span></li><li><span class="tbd">Email</span></li></ul></div>
+      </div>
+      <div class="pays" aria-label="Medios de pago"><span>Mercado Pago</span><span>Transferencia</span><span>Efectivo</span></div>
+      <div class="foot-legal"><span>© 2026 Pet Company Pilar · Pilar, Buenos Aires</span><span>Precios en pesos argentinos (ARS), IVA incluido</span></div>
+    </div>
+  </footer>
+
+  <div class="wa-dock"><button class="wa" type="button" aria-label="Escribinos por WhatsApp"><svg class="ico"><use href="#i-chat"/></svg><span>¿Te ayudamos?</span></button></div>
+</div>
+</template>
+
+<script>
+(function(){
+  const fmt = new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+  const money = n => fmt.format(n).replace(/ /g,' ');
+  const T = {
+    pink:['#FF1E8C','#FFE3F0'], green:['#5A9E4B','#E3F1DE'], slate:['#857882','#EEE9EC'], amber:['#E39A2D','#FBEFD9'], berry:['#B8186B','#FBDDEC']
+  };
+  // Productos de DEMOSTRACIÓN: nombres genéricos, marcas y precios de ejemplo.
+  const P = {
+    1:{brand:'Marca demo A', name:'Alimento seco para perro adulto, razas medianas', shape:'bag', tint:'pink', d:1, v:[{l:'3 kg',kg:3,p:18990},{l:'15 kg',kg:15,p:72990,o:81990}]},
+    2:{brand:'Marca demo B', name:'Alimento seco para gato adulto castrado', shape:'bag', tint:'green', d:1, v:[{l:'1,5 kg',kg:1.5,p:14490},{l:'7,5 kg',kg:7.5,p:55990,o:65990}]},
+    3:{brand:'Marca demo C', name:'Piedras sanitarias aglomerantes sin perfume', shape:'bag', tint:'slate', d:0, stock:'low', v:[{l:'4 kg',kg:4,p:8990},{l:'10 kg',kg:10,p:19990}]},
+    4:{brand:'Marca demo D', name:'Snacks dentales para perro, razas pequeñas', shape:'box', tint:'amber', d:0, v:[{l:'7 u.',p:6490},{l:'28 u.',p:22990}]},
+    5:{brand:'Marca demo B', name:'Alimento húmedo para gato, pouch 85 g', shape:'box', tint:'berry', d:1, v:[{l:'x1',p:1590},{l:'x12',p:16490,o:19080}]},
+    6:{brand:'Marca demo E', name:'Cama acolchada lavable con borde', shape:'box', tint:'slate', d:0, isNew:true, v:[{l:'M',p:39990},{l:'L',p:49990}]},
+    7:{brand:'Marca demo A', name:'Alimento seco para cachorro, razas pequeñas', shape:'bag', tint:'amber', d:1, isNew:true, v:[{l:'1 kg',kg:1,p:8490},{l:'3 kg',kg:3,p:22990}]},
+    8:{brand:'Marca demo F', name:'Juguete mordedor de goma resistente', shape:'toy', tint:'pink', d:0, isNew:true, v:[{l:'Único',p:7990}]},
+    9:{brand:'Marca demo G', name:'Shampoo neutro para perros y gatos', shape:'bottle', tint:'green', d:0, v:[{l:'250 ml',p:5990,o:6990},{l:'500 ml',p:9990}]},
+    10:{brand:'Marca demo E', name:'Rascador con plataforma para gato', shape:'box', tint:'green', d:0, isNew:true, stock:'low', v:[{l:'Único',p:45990}]}
+  };
+  const LISTS = { destacados:[1,2,3,4], ofertas:[5,9,1,2], nuevos:[7,6,8,10] };
+  const CATS = [
+    ['Alimento seco','bag','pink'],['Alimento húmedo','box','berry'],['Snacks','toy','amber'],['Piedras sanitarias','bag','slate'],
+    ['Higiene','bottle','green'],['Juguetes','toy','pink'],['Camas','box','slate'],['Indumentaria','box','berry'],['Accesorios','bottle','amber']
+  ];
+  const SLIDES = [
+    {e:'Pet shop en Pilar', h:'Todo para ellos, <em>cerca tuyo</em>', p:'Alimentos, accesorios y cuidado para perros y gatos. Con envío sin cargo en nuestra zona.', a:['Comprar para perros','Comprar para gatos']},
+    {e:'Banner de ejemplo', h:'Tu alimento de siempre, <em>sin cargar bolsas</em>', p:'Pedilo online y te lo llevamos a tu casa. Texto y foto editables desde el panel.', a:['Ver alimentos','Cómo funciona el envío']},
+    {e:'Banner de ejemplo', h:'Comprá online y <em>retiralo en el local</em>', p:'Elegí retiro al pagar y pasá cuando te quede cómodo.', a:['Empezar a comprar','Ver dirección']}
+  ];
+
+  const svgShape = (shape,tint,cls='pimg') => `<svg class="${cls}" viewBox="0 0 120 140" style="--c1:${T[tint][0]};--c2:${T[tint][1]}" aria-hidden="true"><use href="#s-${shape}"/></svg>`;
+
+  function priceHTML(v){
+    const sale = v.o && v.o > v.p;
+    return `<div class="price-row"><span class="price${sale?' is-sale':''}">${money(v.p)}</span>${sale?`<s class="old">${money(v.o)}</s>`:''}</div>
+      <span class="unit">${v.kg?`${money(Math.round(v.p/v.kg))} por kg`:''}</span>`;
+  }
+  function card(id){
+    const it = P[id], v = it.v[it.d];
+    const off = v.o ? Math.round((v.o - v.p)/v.o*100) : 0;
+    const badges = [off?`<span class="badge badge-sale" data-off>−${off}%</span>`:'', it.isNew?'<span class="badge badge-new">Nuevo</span>':''].join('');
+    const sizes = it.v.length > 1 ? `<div class="sizes" role="group" aria-label="Tamaño">${it.v.map((x,i)=>`<button type="button" class="size${i===it.d?' is-on':''}" data-i="${i}" aria-pressed="${i===it.d}">${x.l}</button>`).join('')}</div>` : `<div class="sizes"><span class="hint" style="line-height:30px">${v.l==='Único'?'Talle único':v.l}</span></div>`;
+    const stock = it.stock==='low' ? '<span class="stock low">Últimas unidades</span>' : '<span class="stock">En stock</span>';
+    return `<article class="pcard" data-pid="${id}">
+      <a class="pcard-media" href="#" aria-label="${it.name}">${svgShape(it.shape,it.tint)}<div class="badges">${badges}</div></a>
+      <div class="pcard-body">
+        <p class="pcard-brand">${it.brand}</p>
+        <h3 class="pcard-name"><a href="#">${it.name}</a></h3>
+        ${sizes}
+        <div class="price-box" data-price>${priceHTML(v)}</div>
+        ${stock}
+        <button type="button" class="btn btn-primary btn-sm btn-block btn-add"><svg class="ico"><use href="#i-cart"/></svg><span>Agregar</span></button>
+      </div></article>`;
+  }
+
+  function mountHome(target){
+    const node = document.getElementById('home-tpl').content.cloneNode(true);
+    node.querySelectorAll('[data-list]').forEach(el => el.innerHTML = LISTS[el.dataset.list].map(card).join(''));
+    node.querySelector('[data-cats]').innerHTML = CATS.map(([n,s,t]) => `<a class="cat" href="#"><span class="cat-ic">${svgShape(s,t,'')}</span><span>${n}</span></a>`).join('');
+    target.appendChild(node);
+    const home = target.querySelector('.home');
+    const slide = home.querySelector('[data-slide]'), dots = home.querySelector('[data-dots]');
+    dots.innerHTML = SLIDES.map((_,i)=>`<button type="button" aria-label="Banner ${i+1} de ${SLIDES.length}"></button>`).join('');
+    const show = i => {
+      const s = SLIDES[i];
+      slide.innerHTML = `<span class="eyebrow">${s.e}</span><h1>${s.h}</h1><p>${s.p}</p>
+        <div class="hero-ctas"><a class="btn btn-primary" href="#">${s.a[0]}</a><a class="btn btn-secondary" href="#">${s.a[1]}</a></div>`;
+      slide.style.animation='none'; void slide.offsetWidth; slide.style.animation='';
+      dots.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-current', j===i));
+    };
+    dots.addEventListener('click', e => { const b = e.target.closest('button'); if(b) show([...dots.children].indexOf(b)); });
+    show(0);
+  }
+  mountHome(document.getElementById('frame-desktop'));
+  mountHome(document.getElementById('frame-mobile'));
+  document.getElementById('ds-card').innerHTML = card(2);
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href="#"]'); if (a) e.preventDefault();
+    const size = e.target.closest('.size[data-i]');
+    if (size){
+      const cardEl = size.closest('.pcard'), it = P[cardEl.dataset.pid], v = it.v[+size.dataset.i];
+      cardEl.querySelectorAll('.size').forEach(b => { const on = b===size; b.classList.toggle('is-on',on); b.setAttribute('aria-pressed',on); });
+      cardEl.querySelector('[data-price]').innerHTML = priceHTML(v);
+      const badges = cardEl.querySelector('.badges'); badges.querySelector('[data-off]')?.remove();
+      if (v.o) badges.insertAdjacentHTML('afterbegin', `<span class="badge badge-sale" data-off>−${Math.round((v.o-v.p)/v.o*100)}%</span>`);
+    }
+    const add = e.target.closest('.btn-add');
+    if (add && !add.classList.contains('is-added')){
+      add.classList.add('is-added'); const label = add.querySelector('span'); const use = add.querySelector('use');
+      label.textContent = 'Agregado'; use.setAttribute('href','#i-check');
+      const count = add.closest('.home')?.querySelector('[data-cart]');
+      if (count){ count.textContent = +count.textContent + 1; count.classList.remove('bump'); void count.offsetWidth; count.classList.add('bump'); }
+      setTimeout(()=>{ add.classList.remove('is-added'); label.textContent='Agregar'; use.setAttribute('href','#i-cart'); }, 1400);
+    }
+    const step = e.target.closest('[data-stepper] button');
+    if (step){ const out = step.parentElement.querySelector('output'); out.textContent = Math.max(1, +out.textContent + (step.textContent==='+'?1:-1)); }
+  });
+  document.addEventListener('submit', e => e.preventDefault());
+
+  // Vistas por hash
+  const views = ['escritorio','celular','sistema'];
+  function route(){
+    const h = location.hash.slice(1); const v = views.includes(h) ? h : 'escritorio';
+    document.querySelectorAll('[data-v]').forEach(s => s.hidden = s.dataset.v !== v);
+    document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === v));
+  }
+  document.querySelector('.seg').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    if (location.hash.slice(1) !== b.dataset.view) location.hash = b.dataset.view; else route();
+    window.scrollTo({top:0});
+  });
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
