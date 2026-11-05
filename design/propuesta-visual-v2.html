@@ -1,0 +1,1402 @@
+<title>Pet Company Pilar · Propuesta visual</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap">
+<style>
+/* V2 · "Pet shop de barrio, bien ordenado", un 10-15% más sobrio.
+   Rosa = comprar. Verde = servicio. Más aire, menos bloques de color, un foco por sección. */
+:root{
+  --pink:#FF1E8C; --pink-fill:#E0107A; --pink-hover:#C80A6C; --pink-text:#E0107A; --pink-50:#FFF2F8; --pink-100:#FFDCEC;
+  --green:#5A9E4B; --green-fill:#3F7A33; --green-text:#3F7A33; --green-50:#F0F6EE; --green-100:#DAEBD4;
+  --bg:#FFFFFF; --bg-soft:#F7F5F6; --surface:#FFFFFF; --img-bg:#F5F2F4;
+  --line:#ECE6E9; --line-strong:#D9D1D5; --ink:#1F1A1D; --ink-2:#4A4247; --muted:#6E6570;
+  --warn:#8A5300; --tbd-bg:#FFF3C4; --tbd-ink:#5C4300;
+  --st-ok:#2F7D32; --st-sim:#1F6FD1; --st-pend:#B86E00; --st-bad:#B3261E;
+  --foot-bg:#F7F5F6; --frame:#2A2428; --scrim:rgb(20 16 18 / .42);
+  --font:"Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-pill:999px;
+  --shadow-1:0 1px 2px rgb(31 26 29 / .06), 0 2px 8px rgb(31 26 29 / .05);
+  --shadow-2:0 16px 40px -16px rgb(31 26 29 / .28);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --pink-hover:#F0308A; --pink-text:#FF6FB1; --pink-50:#2E1420; --pink-100:#4A1D33;
+    --green-text:#8FCB80; --green-50:#192417; --green-100:#25381F;
+    --bg:#151214; --bg-soft:#1C181B; --surface:#211C1F; --img-bg:#292327;
+    --line:#342D31; --line-strong:#4A4146; --ink:#F6F1F4; --ink-2:#D6CDD2; --muted:#A99EA5;
+    --warn:#F2B661; --tbd-bg:#3D3214; --tbd-ink:#F3DE9A;
+    --st-ok:#6CC070; --st-sim:#6AA8FF; --st-pend:#F2B661; --st-bad:#FF8A80;
+    --foot-bg:#1C181B; --frame:#0B0A0B; --scrim:rgb(0 0 0 / .6);
+    --shadow-1:0 1px 2px rgb(0 0 0 / .4); --shadow-2:0 16px 40px -16px rgb(0 0 0 / .8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --pink-hover:#F0308A; --pink-text:#FF6FB1; --pink-50:#2E1420; --pink-100:#4A1D33;
+  --green-text:#8FCB80; --green-50:#192417; --green-100:#25381F;
+  --bg:#151214; --bg-soft:#1C181B; --surface:#211C1F; --img-bg:#292327;
+  --line:#342D31; --line-strong:#4A4146; --ink:#F6F1F4; --ink-2:#D6CDD2; --muted:#A99EA5;
+  --warn:#F2B661; --tbd-bg:#3D3214; --tbd-ink:#F3DE9A;
+  --st-ok:#6CC070; --st-sim:#6AA8FF; --st-pend:#F2B661; --st-bad:#FF8A80;
+  --foot-bg:#1C181B; --frame:#0B0A0B; --scrim:rgb(0 0 0 / .6);
+  --shadow-1:0 1px 2px rgb(0 0 0 / .4); --shadow-2:0 16px 40px -16px rgb(0 0 0 / .8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg-soft); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--surface)}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+button{font:inherit; color:inherit}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:3px solid var(--pink); outline-offset:2px; border-radius:6px}
+.tbd{background:var(--tbd-bg); color:var(--tbd-ink); border-radius:4px; padding:0 4px; font-weight:700; box-decoration-break:clone; -webkit-box-decoration-break:clone}
+.ico{width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ---------- Barra de la propuesta ---------- */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--surface); border-bottom:1px solid var(--line);
+  padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); padding-block:10px}
+.bar-in{max-width:1320px; margin-inline:auto; display:flex; align-items:center; gap:10px 20px; flex-wrap:wrap; justify-content:space-between}
+.bar-title{display:flex; flex-direction:column; line-height:1.2; min-width:0}
+.bar-title b{font-weight:900; font-size:15px}
+.bar-title span{font-size:13px; color:var(--muted)}
+.seg{display:flex; background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--r-pill); padding:4px; gap:2px; overflow-x:auto; max-width:100%; scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{border:0; background:transparent; padding:7px 13px; border-radius:var(--r-pill); font-weight:800; font-size:13.5px; color:var(--muted); cursor:pointer; white-space:nowrap; transition:background .15s, color .15s}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow-1)}
+.view{padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); padding-block:24px 72px}
+.view-in{max-width:1320px; margin-inline:auto; display:flex; flex-direction:column; gap:20px}
+.toolrow{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between}
+.demo-note{display:flex; gap:10px; align-items:flex-start; background:var(--tbd-bg); color:var(--tbd-ink); border-radius:var(--r-md); padding:10px 14px; font-size:14px; line-height:1.45; flex:1 1 420px; min-width:0}
+.demo-note b{font-weight:800}
+.st-toggle{display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:14px; cursor:pointer; user-select:none; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-pill); padding:8px 14px 8px 10px}
+.st-toggle input{appearance:none; width:36px; height:22px; border-radius:var(--r-pill); background:var(--line-strong); position:relative; cursor:pointer; transition:background .2s; margin:0}
+.st-toggle input::after{content:""; position:absolute; top:3px; left:3px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform .2s var(--ease)}
+.st-toggle input:checked{background:var(--pink-fill)}
+.st-toggle input:checked::after{transform:translateX(14px)}
+.legend{display:none; flex-wrap:wrap; gap:8px 16px; font-size:13px; font-weight:700; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:14px; height:14px; border-radius:4px; border:2px dashed currentColor}
+body.st-on .legend{display:flex}
+body.st-on [data-st="ok"]{outline:2px dashed var(--st-ok); outline-offset:2px}
+body.st-on [data-st="sim"]{outline:2px dashed var(--st-sim); outline-offset:2px}
+body.st-on [data-st="pend"]{outline:2px dashed var(--st-pend); outline-offset:2px}
+
+/* Marcos */
+.browser{background:var(--surface); border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow-2); overflow:clip}
+.browser-top{display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-soft); border-bottom:1px solid var(--line)}
+.dots{display:flex; gap:6px}
+.dots i{width:10px; height:10px; border-radius:50%; background:var(--line-strong)}
+.url{flex:1; max-width:420px; margin-inline:auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-pill); font-size:12px; color:var(--muted); padding:4px 12px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-family:var(--mono)}
+#frame-desktop{--sticky-top:calc(var(--bar-h, 61px) + env(safe-area-inset-top,0px))}
+.mobile-layout{display:grid; gap:32px; align-items:start; justify-content:center}
+@media (min-width:900px){ .mobile-layout{grid-template-columns:auto minmax(0,380px)} }
+.phone{width:390px; max-width:100%; height:820px; max-height:86vh; min-height:560px; border:10px solid var(--frame); border-radius:46px; overflow:hidden; background:var(--bg); box-shadow:var(--shadow-2); margin-inline:auto; position:relative}
+.phone-screen{height:100%; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none}
+.phone-screen::-webkit-scrollbar{display:none}
+#frame-mobile{--sticky-top:0px}
+.notes{display:flex; flex-direction:column; gap:16px}
+.notes h2{font-size:22px; font-weight:900; letter-spacing:-.01em}
+.notes ol{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+.notes li{display:grid; grid-template-columns:28px 1fr; gap:10px; font-size:15px; color:var(--ink-2)}
+.notes li b{color:var(--ink); display:block}
+.notes .n{width:28px; height:28px; border-radius:50%; background:var(--pink-50); color:var(--pink-text); font-weight:900; font-size:13px; display:grid; place-items:center}
+.hint{font-size:13px; color:var(--muted)}
+
+/* ---------- Componentes ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:48px; padding-inline:22px; border-radius:var(--r-md); font-weight:800; font-size:15px; line-height:1; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:background-color .15s var(--ease), border-color .15s var(--ease), color .15s}
+.btn:active{transform:scale(.98)}
+.btn .ico{width:20px; height:20px}
+.btn-primary{background:var(--pink-fill); color:#fff}
+.btn-primary:hover{background:var(--pink-hover)}
+.btn-secondary{background:var(--surface); color:var(--ink); border-color:var(--line-strong)}
+.btn-secondary:hover{border-color:var(--ink)}
+.btn-wa{background:var(--green-fill); color:#fff}
+.btn-sm{height:40px; padding-inline:14px; font-size:14px; border-radius:10px}
+.btn-block{width:100%}
+.btn[disabled]{background:var(--bg-soft); color:var(--muted); border-color:var(--line); cursor:not-allowed; transform:none}
+.link{font-weight:800; font-size:14px; color:var(--pink-text); display:inline-flex; align-items:center; gap:2px; white-space:nowrap; background:none; border:0; padding:0; cursor:pointer}
+.link .ico{width:18px; height:18px}
+.link:hover{text-decoration:underline; text-underline-offset:3px}
+.icon-btn{width:44px; height:44px; border-radius:var(--r-md); border:0; background:transparent; display:grid; place-items:center; cursor:pointer; position:relative; color:var(--ink)}
+.icon-btn:hover{background:var(--bg-soft)}
+.badge{display:inline-flex; align-items:center; font-weight:800; font-size:12px; line-height:1; padding:6px 8px; border-radius:var(--r-pill); white-space:nowrap}
+.badge-sale{background:var(--pink-fill); color:#fff}
+.stock{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--green-text)}
+.stock::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.stock.low{color:var(--warn)}
+.stock.out{color:var(--muted)}
+.sizes{display:flex; gap:6px; flex-wrap:wrap}
+.size{height:30px; padding-inline:10px; border-radius:var(--r-sm); border:1.5px solid var(--line-strong); background:var(--surface); font-weight:700; font-size:13px; cursor:pointer; color:var(--ink-2); transition:border-color .15s, background .15s, color .15s}
+.size:hover{border-color:var(--ink-2)}
+.size.is-on{border-color:var(--pink-fill); background:var(--pink-50); color:var(--pink-text)}
+.size.is-out{color:var(--muted); text-decoration:line-through; text-decoration-thickness:1px}
+.size-single{font-size:13px; color:var(--muted); font-weight:700; line-height:30px}
+.stepper{display:inline-flex; align-items:center; border:1.5px solid var(--line-strong); border-radius:var(--r-md); height:48px; overflow:hidden; background:var(--surface); flex:none}
+.stepper button{width:42px; height:100%; border:0; background:transparent; font-size:20px; font-weight:700; cursor:pointer; display:grid; place-items:center}
+.stepper button:hover:not(:disabled){background:var(--bg-soft)}
+.stepper button:disabled{color:var(--line-strong); cursor:not-allowed}
+.stepper output{min-width:30px; text-align:center; font-weight:800; font-variant-numeric:tabular-nums}
+.stepper.sm{height:36px; border-radius:10px}
+.stepper.sm button{width:34px; font-size:17px}
+
+.search{position:relative; display:flex; align-items:center; width:100%}
+.search > .ico{position:absolute; left:14px; color:var(--muted); pointer-events:none}
+.search input{width:100%; height:46px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font:inherit; font-size:16px; padding-left:44px; padding-right:16px; transition:border-color .15s, background .15s, box-shadow .15s}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{outline:none; background:var(--surface); border-color:var(--pink-fill); box-shadow:0 0 0 4px var(--pink-100)}
+.search input::-webkit-search-cancel-button{display:none}
+.suggest{position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-2); padding:6px; z-index:9; display:flex; flex-direction:column}
+.suggest button{display:grid; grid-template-columns:40px 1fr auto; gap:10px; align-items:center; text-align:left; border:0; background:transparent; padding:6px 8px; border-radius:10px; cursor:pointer; min-width:0}
+.suggest button:hover,.suggest button:focus-visible{background:var(--bg-soft)}
+.suggest .s-img{width:40px; height:40px; border-radius:8px; background:var(--img-bg); display:grid; place-items:center}
+.suggest .s-img svg{width:26px; height:30px}
+.suggest .s-name{font-size:14px; font-weight:700; line-height:1.25; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.suggest .s-name small{display:block; color:var(--muted); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.06em}
+.suggest .s-price{font-size:14px; font-weight:800; font-variant-numeric:tabular-nums}
+.suggest .s-all{display:block; text-align:center; padding:10px; font-weight:800; font-size:14px; color:var(--pink-text); border-top:1px solid var(--line); border-radius:0 0 10px 10px; margin-top:4px}
+.suggest .s-empty{padding:12px; font-size:14px; color:var(--muted)}
+
+/* Tarjeta de producto: sin animaciones decorativas, información en 4 niveles */
+.pcard{display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; min-width:0; transition:border-color .2s, box-shadow .2s}
+.pcard-media{position:relative; display:grid; place-items:center; aspect-ratio:1; max-width:100%; background:var(--img-bg); border:0; padding:0; cursor:pointer; width:100%}
+.pimg{width:56%; height:auto; aspect-ratio:120/140}
+.pcard .badge{position:absolute; top:10px; left:10px}
+.pcard-body{padding:12px; display:flex; flex-direction:column; gap:8px; flex:1}
+.pcard-brand{font-weight:800; font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.pcard-name{font-weight:700; font-size:14px; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.7em; background:none; border:0; padding:0; text-align:left; cursor:pointer; color:var(--ink)}
+.pcard-name:hover{text-decoration:underline; text-underline-offset:3px}
+.price-box{margin-top:auto; display:flex; flex-direction:column; gap:1px}
+.price-row{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.price{font-weight:900; font-size:20px; letter-spacing:-.01em; font-variant-numeric:tabular-nums}
+.price.is-sale{color:var(--pink-text)}
+.old{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+.unit{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; min-height:18px}
+.card-note{font-size:12px; font-weight:700; color:var(--warn); min-height:18px}
+@media (hover:hover){ .pcard:hover{border-color:var(--line-strong); box-shadow:var(--shadow-1)} }
+
+.ph{position:relative; background:var(--ph, var(--pink-100)); display:grid; place-items:center; overflow:hidden; max-width:100%}
+.ph > svg{width:30%; max-width:96px; color:var(--ph-ink, var(--pink)); opacity:.5}
+.ph-cap{position:absolute; left:10px; bottom:10px; background:var(--surface); color:var(--ink-2); font-size:11px; font-weight:700; padding:4px 8px; border-radius:var(--r-pill); max-width:calc(100% - 20px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+.logo{display:inline-flex; align-items:center; gap:8px; line-height:1; background:none; border:0; padding:0; cursor:pointer; color:var(--ink)}
+.logo-mark{width:34px; height:34px; border-radius:50%; background:var(--pink); color:#fff; display:grid; place-items:center; flex:none}
+.logo-mark svg{width:19px; height:19px}
+.logo-text{display:flex; flex-direction:column; gap:2px; text-align:left}
+.logo-text b{font-weight:900; font-size:16px; letter-spacing:-.02em}
+.logo-text small{font-weight:800; font-size:9.5px; letter-spacing:.28em; color:var(--pink-text)}
+
+/* ---------- TIENDA (container queries) ---------- */
+.home{container:home / inline-size; background:var(--bg); color:var(--ink); position:relative; min-height:100%}
+.h-wrap{max-width:1240px; margin-inline:auto; padding-inline:16px}
+.h-ann{background:var(--green-50); color:var(--green-text); font-size:13px; font-weight:700}
+.h-ann .h-wrap{display:flex; justify-content:center; gap:20px; padding-block:7px; text-align:center}
+.h-ann .alt{display:none}
+.h-head{position:sticky; top:var(--sticky-top,0px); z-index:6; background:var(--bg); border-bottom:1px solid var(--line)}
+.h-head-row{display:grid; grid-template-columns:auto 1fr auto; grid-template-areas:"menu logo cart" "search search search"; align-items:center; gap:8px; padding-block:8px 12px}
+.h-menu{grid-area:menu}
+.h-logo{grid-area:logo; justify-self:start}
+.h-cart{grid-area:cart}
+.h-search{grid-area:search}
+.h-nav{display:none}
+.h-cart-label{display:none}
+.cart-count{position:absolute; top:3px; right:1px; min-width:18px; height:18px; padding-inline:4px; border-radius:var(--r-pill); background:var(--pink-fill); color:#fff; font-size:11px; font-weight:900; display:grid; place-items:center; font-variant-numeric:tabular-nums}
+.cart-count[hidden]{display:none}
+.mega{position:absolute; left:0; right:0; top:100%; background:var(--bg); border-bottom:1px solid var(--line); box-shadow:var(--shadow-2)}
+.mega .h-wrap{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.1fr); gap:24px; padding-block:24px 28px}
+.mega h4,.facet h4{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:8px}
+.mega ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px}
+.mega li button{border:0; background:none; padding:6px 0; font-size:15px; font-weight:700; cursor:pointer; color:var(--ink-2); text-align:left}
+.mega li button:hover{color:var(--pink-text)}
+.mega li small{color:var(--muted); font-weight:600; font-size:12px; margin-left:4px}
+.mega-all{background:var(--bg-soft); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:10px; align-items:flex-start}
+.mega-all b{font-size:17px; font-weight:900}
+
+.h-main{min-height:420px}
+.sec{padding-block:36px 0}
+.sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:16px}
+.sec-head h2{font-size:21px; font-weight:900; letter-spacing:-.015em; line-height:1.15}
+.eyebrow{font-weight:800; font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--green-text)}
+
+/* Hero simple */
+.hero{display:grid; grid-template-areas:"img" "copy"; background:var(--pink-50); border-radius:var(--r-xl); overflow:hidden; margin-top:12px}
+.hero-img{grid-area:img; aspect-ratio:2/1; max-width:100%; --ph:var(--pink-100); --ph-ink:var(--pink)}
+.hero-img .ph-cap{display:none}
+.hero-copy{grid-area:copy; padding:20px 20px 24px; display:flex; flex-direction:column; gap:10px; align-items:flex-start}
+.hero-copy h1{font-size:28px; line-height:1.08; font-weight:900; letter-spacing:-.025em}
+.hero-copy p{color:var(--ink-2); max-width:38ch}
+.hero-copy .btn{margin-top:6px}
+
+/* Accesos perros / gatos */
+.species{display:grid; gap:12px}
+.sp{display:grid; grid-template-columns:96px minmax(0,1fr); gap:14px; align-items:center; border-radius:var(--r-lg); padding:12px; background:var(--sp-bg); min-width:0}
+.sp-dog{--sp-bg:var(--pink-50); --ph:var(--pink-100); --ph-ink:var(--pink)}
+.sp-cat{--sp-bg:var(--green-50); --ph:var(--green-100); --ph-ink:var(--green)}
+.sp .ph{aspect-ratio:1; border-radius:12px; cursor:pointer; border:0; padding:0; width:100%}
+.sp .ph-cap{display:none}
+.sp-body{display:flex; flex-direction:column; gap:8px; min-width:0}
+.sp-title{font-size:18px; font-weight:900; letter-spacing:-.01em; line-height:1.15; background:none; border:0; padding:0; text-align:left; cursor:pointer; display:inline-flex; align-items:center; gap:2px; color:var(--ink)}
+.sp-title .ico{width:18px; height:18px; color:var(--pink-text)}
+.sp-links{display:flex; flex-wrap:wrap; gap:6px}
+.pill{height:32px; padding-inline:12px; border-radius:var(--r-pill); border:1px solid var(--line-strong); background:var(--surface); font-weight:700; font-size:13px; cursor:pointer; color:var(--ink-2); display:inline-flex; align-items:center; gap:6px; white-space:nowrap}
+.pill:hover{border-color:var(--ink-2); color:var(--ink)}
+.pill .ico{width:15px; height:15px}
+
+.p-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+.brands{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.brand{height:68px; border:1px solid var(--line); border-radius:var(--r-md); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; background:var(--surface); color:var(--ink-2); font-weight:800; font-size:13px; cursor:pointer; padding:6px}
+.brand small{font-weight:600; font-size:11px; color:var(--muted)}
+.brand:hover{border-color:var(--ink-2); color:var(--ink)}
+.benefits{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 16px; padding-block:28px; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.benefit{display:flex; flex-direction:column; gap:6px; min-width:0}
+.benefit .ico{color:var(--green-text)}
+.benefit b{font-weight:800; font-size:15px; line-height:1.25}
+.benefit p{font-size:13px; color:var(--muted); line-height:1.4}
+
+.h-foot{background:var(--foot-bg); margin-top:48px; border-top:1px solid var(--line)}
+.h-foot .h-wrap{padding-block:32px 24px; display:grid; gap:28px}
+.foot-cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.foot-brand{grid-column:1 / -1; display:flex; flex-direction:column; gap:8px; align-items:flex-start}
+.foot-brand p{color:var(--muted); font-size:14px}
+.foot-col h4{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin-bottom:10px}
+.foot-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:14px}
+.foot-col button{border:0; background:none; padding:0; cursor:pointer; font-size:14px; color:var(--ink-2); text-align:left}
+.foot-col button:hover{color:var(--ink); text-decoration:underline; text-underline-offset:3px}
+.pend{color:var(--muted); display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap}
+.pend em{font-style:normal; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; background:var(--tbd-bg); color:var(--tbd-ink); border-radius:4px; padding:2px 5px}
+.pays{display:flex; flex-wrap:wrap; gap:8px}
+.pays span{font-size:12px; font-weight:800; border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:6px 10px; color:var(--ink-2)}
+.foot-legal{border-top:1px solid var(--line); padding-top:16px; font-size:12px; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between}
+
+.wa-dock{position:sticky; bottom:0; height:0; z-index:7}
+.wa{position:absolute; bottom:calc(16px + env(safe-area-inset-bottom,0px)); right:max(16px, env(safe-area-inset-right,0px)); width:52px; height:52px; border-radius:50%; background:var(--green-fill); color:#fff; display:grid; place-items:center; box-shadow:0 8px 20px -8px rgb(63 122 51 / .55); cursor:pointer; border:0}
+.wa .ico{width:24px; height:24px}
+
+/* Listado */
+.crumbs{display:flex; flex-wrap:wrap; gap:4px; align-items:center; font-size:13px; color:var(--muted); padding-top:16px}
+.crumbs button{border:0; background:none; padding:0; cursor:pointer; color:var(--muted); font-size:13px; font-weight:700}
+.crumbs button:hover{color:var(--ink); text-decoration:underline}
+.crumbs .ico{width:14px; height:14px}
+.crumbs span[aria-current]{color:var(--ink-2); font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:60ch}
+.list-head{display:flex; flex-direction:column; gap:12px; padding-block:8px 16px}
+.list-head h1{font-size:24px; font-weight:900; letter-spacing:-.02em; line-height:1.15}
+.list-head h1 small{font-size:14px; font-weight:700; color:var(--muted); letter-spacing:0; margin-left:6px}
+.list-tools{display:flex; gap:8px; align-items:center}
+.list-tools .btn{flex:1}
+.select{height:40px; border-radius:10px; border:1.5px solid var(--line-strong); background:var(--surface); color:var(--ink); font:inherit; font-size:14px; font-weight:700; padding-inline:10px; flex:1; min-width:0}
+.active-f{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px}
+.active-f:empty{display:none}
+.list-layout{display:grid; gap:24px}
+.list-side{display:none}
+.facet{display:flex; flex-direction:column; gap:22px}
+.facet fieldset{border:0; margin:0; padding:0; min-width:0}
+.facet legend{padding:0; margin-bottom:8px; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.check{display:flex; align-items:center; gap:10px; padding:6px 0; font-size:15px; cursor:pointer}
+.check input{width:20px; height:20px; accent-color:var(--pink-fill); margin:0; flex:none}
+.check small{margin-left:auto; color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums}
+.check.is-zero{color:var(--muted)}
+.empty{grid-column:1 / -1; text-align:center; padding:48px 16px; display:flex; flex-direction:column; gap:12px; align-items:center; color:var(--ink-2)}
+.empty b{font-size:18px; color:var(--ink)}
+
+/* Ficha */
+.pdp{display:grid; gap:20px; padding-top:8px}
+.pdp-media{background:var(--img-bg); border-radius:var(--r-lg); aspect-ratio:1; max-width:100%; display:grid; place-items:center; position:relative}
+.pdp-media .pimg{width:52%}
+.pdp-media .badge{position:absolute; top:14px; left:14px}
+.pdp-info{display:flex; flex-direction:column; gap:14px; min-width:0}
+.pdp-brand{align-self:flex-start; font-weight:800; font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); border:0; background:none; padding:0; cursor:pointer}
+.pdp-brand:hover{color:var(--pink-text)}
+.pdp-info h1{font-size:24px; font-weight:900; letter-spacing:-.02em; line-height:1.15}
+.pdp-sizes{display:flex; flex-wrap:wrap; gap:8px}
+.vbtn{min-width:96px; border-radius:var(--r-md); border:1.5px solid var(--line-strong); background:var(--surface); padding:10px 12px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:2px; transition:border-color .15s, background .15s}
+.vbtn b{font-size:15px; font-weight:800}
+.vbtn small{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.vbtn:hover{border-color:var(--ink-2)}
+.vbtn.is-on{border-color:var(--pink-fill); background:var(--pink-50)}
+.vbtn.is-out b{text-decoration:line-through; color:var(--muted)}
+.pdp .price{font-size:30px}
+.pdp-buy{display:flex; gap:10px}
+.pdp-buy .btn{flex:1}
+.svc{list-style:none; margin:0; padding:14px 0 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--ink-2)}
+.svc li{display:flex; gap:10px; align-items:flex-start}
+.svc .ico{color:var(--green-text); width:20px; height:20px}
+.spec{width:100%; border-collapse:collapse; font-size:14px}
+.spec th{text-align:left; font-weight:700; color:var(--muted); padding:8px 12px 8px 0; width:42%; vertical-align:top}
+.spec td{padding:8px 0; font-weight:700}
+.spec tr+tr th,.spec tr+tr td{border-top:1px solid var(--line)}
+.pdp-desc{color:var(--ink-2); font-size:15px; max-width:62ch}
+.pdp-desc h2{font-size:17px; font-weight:900; color:var(--ink); margin-bottom:8px}
+
+/* ---- Tablet ---- */
+@container home (min-width:720px){
+  .h-wrap{padding-inline:24px}
+  .h-ann .alt{display:inline}
+  .h-head-row{grid-template-columns:auto auto minmax(0,1fr) auto; grid-template-areas:"menu logo search cart"; gap:16px; padding-block:12px}
+  .h-cart{display:flex; width:auto; padding-inline:10px; gap:8px; font-weight:700; font-size:14px}
+  .h-cart-label{display:inline}
+  .sec{padding-block:56px 0}
+  .sec-head h2{font-size:26px}
+  .hero{grid-template-areas:"copy img"; grid-template-columns:1.15fr 1fr; min-height:320px}
+  .hero-img{aspect-ratio:auto; height:100%}
+  .hero-img .ph-cap{display:block}
+  .hero-copy{padding:40px; justify-content:center; gap:14px}
+  .hero-copy h1{font-size:40px}
+  .hero-copy p{font-size:17px}
+  .species{grid-template-columns:1fr 1fr; gap:16px}
+  .sp{grid-template-columns:minmax(0,1fr) 140px; padding:20px 20px 20px 24px; gap:20px}
+  .sp .ph{order:2}
+  .sp-title{font-size:22px}
+  .p-grid{gap:16px}
+  .brands{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .benefits{grid-template-columns:repeat(4,minmax(0,1fr)); padding-block:32px}
+  .foot-cols{grid-template-columns:1.4fr repeat(3,minmax(0,1fr))}
+  .foot-brand{grid-column:auto}
+  .pcard-body{padding:14px 16px 16px}
+  .pcard-name{font-size:15px}
+  .price{font-size:21px}
+  .list-head{flex-direction:row; align-items:flex-end; justify-content:space-between; padding-block:8px 20px}
+  .list-head h1{font-size:30px}
+  .list-tools .btn{display:none}
+  .select{flex:none; width:auto}
+  .list-layout{grid-template-columns:220px minmax(0,1fr); gap:32px; align-items:start}
+  .list-side{display:block; position:sticky; top:calc(var(--sticky-top,0px) + 90px)}
+  .pdp{grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:40px; align-items:start}
+  .pdp-info h1{font-size:30px}
+}
+@container home (min-width:860px){
+  .p-grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .p-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* ---- Escritorio ---- */
+@container home (min-width:1040px){
+  .h-wrap{padding-inline:32px}
+  .h-head-row{grid-template-columns:auto auto minmax(0,1fr) auto; grid-template-areas:"logo nav search cart"; gap:28px; padding-block:14px}
+  .h-menu{display:none}
+  .h-nav{display:flex; grid-area:nav; gap:2px}
+  .h-nav button{height:44px; padding-inline:12px; border:0; background:none; font-weight:800; font-size:15px; cursor:pointer; color:var(--ink-2); display:inline-flex; align-items:center; gap:4px; border-radius:10px}
+  .h-nav button:hover,.h-nav button[aria-expanded="true"]{color:var(--ink); background:var(--bg-soft)}
+  .h-nav button[aria-current="page"]{color:var(--pink-text)}
+  .h-nav button .ico{width:16px; height:16px; transition:transform .2s}
+  .h-nav button[aria-expanded="true"] .ico{transform:rotate(180deg)}
+  .h-search{max-width:520px; justify-self:end; width:100%}
+  .hero{min-height:360px}
+  .hero-copy{padding:56px}
+  .hero-copy h1{font-size:46px}
+  .sp{grid-template-columns:minmax(0,1fr) 180px}
+  .pdp-media .pimg{width:46%}
+}
+
+/* ---------- Capas: menú, carrito, filtros, avisos ---------- */
+.layer{pointer-events:none; z-index:40}
+.layer.fixed{position:fixed; inset:0}
+.layer.abs{position:absolute; inset:0}
+.scrim{position:absolute; inset:0; background:var(--scrim); opacity:0; transition:opacity .2s; pointer-events:none}
+.layer.has-open .scrim{opacity:1; pointer-events:auto}
+.panel{position:absolute; background:var(--bg); color:var(--ink); display:flex; flex-direction:column; pointer-events:auto; visibility:hidden; transition:transform .25s var(--ease), visibility 0s linear .25s}
+.panel.open{visibility:visible; transform:none !important; transition:transform .25s var(--ease), visibility 0s}
+.drawer{top:0; bottom:0; width:min(88%, 400px)}
+.drawer.right{right:0; transform:translateX(100%)}
+.drawer.left{left:0; transform:translateX(-100%)}
+.sheet{left:0; right:0; bottom:0; max-height:86%; border-radius:20px 20px 0 0; transform:translateY(100%)}
+.layer.fixed .drawer{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+.panel-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 12px 12px 20px; border-bottom:1px solid var(--line)}
+.panel-head h2{font-size:18px; font-weight:900}
+.panel-body{flex:1; overflow-y:auto; padding:16px 20px; overscroll-behavior:contain}
+.panel-foot{border-top:1px solid var(--line); padding:16px 20px; display:flex; flex-direction:column; gap:10px; background:var(--bg)}
+.menu-list{list-style:none; margin:0; padding:0}
+.menu-list > li{border-bottom:1px solid var(--line)}
+.menu-list summary,.menu-list > li > button{list-style:none; display:flex; align-items:center; justify-content:space-between; width:100%; padding:16px 0; font-size:17px; font-weight:800; cursor:pointer; border:0; background:none; text-align:left; color:var(--ink)}
+.menu-list summary::-webkit-details-marker{display:none}
+.menu-list summary .ico{transition:transform .2s; color:var(--muted)}
+.menu-list details[open] summary .ico{transform:rotate(180deg)}
+.menu-sub{padding:0 0 14px; display:flex; flex-direction:column; gap:14px}
+.menu-sub h4{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px}
+.menu-sub .sp-links{gap:6px}
+.menu-help{margin-top:20px; display:flex; flex-direction:column; gap:12px; font-size:15px}
+.menu-help button{border:0; background:none; padding:0; display:flex; gap:10px; align-items:center; font-weight:700; cursor:pointer; color:var(--ink-2)}
+.cart-line{display:grid; grid-template-columns:64px minmax(0,1fr); gap:12px; padding-block:14px; border-bottom:1px solid var(--line)}
+.cart-line:first-child{padding-top:0}
+.cart-img{width:64px; height:64px; border-radius:10px; background:var(--img-bg); display:grid; place-items:center; border:0; padding:0; cursor:pointer}
+.cart-img svg{width:38px; height:44px}
+.cart-info{display:flex; flex-direction:column; gap:6px; min-width:0}
+.cart-info .t{font-size:14px; font-weight:700; line-height:1.3; background:none; border:0; padding:0; text-align:left; cursor:pointer; color:var(--ink)}
+.cart-info .v{font-size:12px; color:var(--muted); font-weight:700}
+.cart-row{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.cart-row .price{font-size:16px}
+.remove{border:0; background:none; padding:4px 0; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:3px; align-self:flex-start}
+.remove:hover{color:var(--ink)}
+.tot{display:flex; justify-content:space-between; align-items:baseline; font-size:15px}
+.tot b{font-size:22px; font-weight:900; font-variant-numeric:tabular-nums}
+.tot-note{font-size:13px; color:var(--muted)}
+.inline-msg{font-size:13px; background:var(--tbd-bg); color:var(--tbd-ink); border-radius:10px; padding:10px 12px}
+.toast{position:absolute; left:50%; bottom:calc(84px + env(safe-area-inset-bottom,0px)); transform:translate(-50%, 12px); opacity:0; pointer-events:none; background:var(--ink); color:var(--bg); border-radius:var(--r-md); padding:12px 14px 12px 16px; display:flex; align-items:center; gap:14px; font-size:14px; font-weight:700; box-shadow:var(--shadow-2); transition:opacity .2s, transform .2s var(--ease); width:max-content; max-width:calc(100% - 32px)}
+.toast.show{opacity:1; transform:translate(-50%, 0); pointer-events:auto}
+.toast button{border:0; background:none; color:inherit; font-weight:900; text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:0; white-space:nowrap}
+
+/* ---------- Páginas de documentación ---------- */
+.doc{display:flex; flex-direction:column; gap:20px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:24px; display:flex; flex-direction:column; gap:18px; min-width:0}
+@media (min-width:900px){ .card{padding:32px} }
+.card > header{display:flex; flex-direction:column; gap:6px}
+.card h1{font-size:clamp(26px, 3.6vw, 36px); font-weight:900; letter-spacing:-.025em; line-height:1.1}
+.card h2{font-size:21px; font-weight:900; letter-spacing:-.015em}
+.card h3{font-size:16px; font-weight:900}
+.card > header p,.lead{color:var(--ink-2); font-size:16px; max-width:70ch}
+.cols{display:grid; gap:20px}
+@media (min-width:900px){ .cols.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .cols.three{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.stat{display:flex; flex-direction:column; gap:2px; padding:16px; border-radius:var(--r-lg); background:var(--bg-soft)}
+.stat b{font-size:28px; font-weight:900; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.stat span{font-size:13px; color:var(--muted); font-weight:700}
+.stat s{color:var(--muted); font-weight:700; font-size:18px; margin-right:6px}
+.issues{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.issue{display:grid; gap:6px 24px; padding-block:14px; border-top:1px solid var(--line)}
+@media (min-width:800px){ .issue{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.issue:first-child{border-top:0; padding-top:0}
+.issue p{font-size:14.5px; color:var(--ink-2)}
+.issue p b{color:var(--ink)}
+.issue .fix{color:var(--ink-2)}
+.issue .fix::before{content:"V2 · "; font-weight:900; color:var(--green-text)}
+.prio{display:inline-flex; font-size:10.5px; font-weight:900; text-transform:uppercase; letter-spacing:.06em; padding:2px 6px; border-radius:4px; margin-right:6px; vertical-align:2px}
+.prio.alta{background:var(--pink-50); color:var(--pink-text)}
+.prio.media{background:var(--bg-soft); color:var(--ink-2); border:1px solid var(--line)}
+.seq{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; counter-reset:s}
+.seq li{display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; font-size:14.5px; color:var(--ink-2); counter-increment:s}
+.seq li::before{content:counter(s); width:24px; height:24px; border-radius:50%; background:var(--bg-soft); border:1px solid var(--line); font-weight:900; font-size:12px; display:grid; place-items:center; color:var(--ink)}
+.seq li b{color:var(--ink)}
+.seq.old li{color:var(--muted)}
+.seq.old li s{text-decoration-thickness:1px}
+.tree{display:grid; gap:16px}
+@media (min-width:900px){ .tree{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.tnode{border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:12px; min-width:0}
+.tnode.dog{border-top:4px solid var(--pink)}
+.tnode.cat{border-top:4px solid var(--green)}
+.tnode.alt{border-top:4px solid var(--line-strong); background:var(--bg-soft)}
+.tnode h3{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+.tnode h3 code{font-size:12px; font-weight:600}
+.tnode h4{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px}
+.tnode ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:3px; font-size:14px; font-weight:700; color:var(--ink-2)}
+.tnode p{font-size:13.5px; color:var(--ink-2)}
+code{font-family:var(--mono); font-size:.88em; background:var(--bg-soft); border:1px solid var(--line); border-radius:5px; padding:1px 5px; color:var(--ink-2)}
+.codebox{overflow-x:auto; background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--r-lg); padding:16px 18px; font-family:var(--mono); font-size:13px; line-height:1.6; color:var(--ink-2); white-space:pre; margin:0}
+.codebox .c{color:var(--muted)}
+.codebox .k{color:var(--pink-text); font-weight:700}
+.rules{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+@media (min-width:800px){ .rules{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.rules li{display:grid; grid-template-columns:24px 1fr; gap:10px; font-size:14.5px; color:var(--ink-2)}
+.rules li b{color:var(--ink)}
+.rules .ico{color:var(--green-text); width:22px; height:22px}
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg)}
+table.audit{width:100%; border-collapse:collapse; font-size:14px; min-width:760px}
+table.audit th{text-align:left; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); background:var(--bg-soft); padding:10px 14px; border-bottom:1px solid var(--line)}
+table.audit td{padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-2)}
+table.audit tr:last-child td{border-bottom:0}
+table.audit td:first-child{font-weight:800; color:var(--ink); width:22%}
+table.audit tr.group td{background:var(--bg-soft); font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding-block:8px}
+.st{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:800; white-space:nowrap; margin-bottom:4px}
+.st::before{content:""; width:8px; height:8px; border-radius:50%; background:currentColor}
+.st.ok{color:var(--st-ok)} .st.sim{color:var(--st-sim)} .st.pend{color:var(--st-pend)} .st.bad{color:var(--st-bad)} .st.off{color:var(--muted)}
+.st-sum{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px}
+.st-sum .stat b{font-size:26px}
+.st-sum .stat .st{margin:0}
+.urls{display:grid; gap:0; font-size:14px}
+.urls div{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:12px; padding-block:9px; border-top:1px solid var(--line)}
+.urls div:first-child{border-top:0}
+.urls code{justify-self:start; overflow-wrap:anywhere}
+/* Sistema */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap:12px}
+.sw{border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; min-width:0}
+.sw-chip{height:72px; display:flex; align-items:flex-end; padding:10px 12px; font-weight:900; font-size:20px}
+.sw-body{padding:12px; display:flex; flex-direction:column; gap:3px; font-size:13px; color:var(--muted); flex:1}
+.sw-body b{color:var(--ink); font-size:14px; font-weight:800}
+.sw-body code{align-self:flex-start}
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.comp-label{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:10px}
+.type-row{display:grid; grid-template-columns:130px minmax(0,1fr); gap:16px; align-items:baseline; padding-block:12px; border-top:1px solid var(--line)}
+.type-row:first-child{border-top:0}
+.type-row .meta{font-size:12px; color:var(--muted); font-weight:700}
+.type-row .meta b{display:block; color:var(--ink); font-size:13px}
+@media (max-width:560px){ .type-row{grid-template-columns:1fr; gap:4px} }
+.ds-card{max-width:240px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="paw" viewBox="0 0 24 24"><ellipse cx="5.3" cy="10.2" rx="2.2" ry="2.8"/><ellipse cx="9.4" cy="5.6" rx="2.2" ry="2.9"/><ellipse cx="14.6" cy="5.6" rx="2.2" ry="2.9"/><ellipse cx="18.7" cy="10.2" rx="2.2" ry="2.8"/><path d="M12 11.6c-3.2 0-6.6 4-6.6 6.8 0 1.8 1.4 2.8 3 2.8 1.3 0 2.3-.6 3.6-.6s2.3.6 3.6.6c1.6 0 3-1 3-2.8 0-2.8-3.4-6.8-6.6-6.8z"/></symbol>
+    <symbol id="s-bag" viewBox="0 0 120 140"><path d="M27 24h66l7 102a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z" fill="var(--c1)"/><path d="M24 10h72l-3 16H27z" fill="var(--c1)" opacity=".7"/><rect x="34" y="50" width="52" height="50" rx="12" fill="var(--c2)"/><use href="#paw" x="45" y="60" width="30" height="30" fill="var(--c1)"/><rect x="34" y="110" width="30" height="6" rx="3" fill="#fff" opacity=".7"/></symbol>
+    <symbol id="s-can" viewBox="0 0 120 140"><rect x="26" y="34" width="68" height="92" rx="10" fill="var(--c1)"/><ellipse cx="60" cy="34" rx="34" ry="9" fill="var(--c1)" opacity=".7"/><rect x="26" y="58" width="68" height="44" fill="var(--c2)"/><use href="#paw" x="47" y="66" width="26" height="26" fill="var(--c1)"/></symbol>
+    <symbol id="s-pouch" viewBox="0 0 120 140"><path d="M32 16h56l6 110a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6z" fill="var(--c1)"/><path d="M32 16h56v10H32z" fill="#fff" opacity=".25"/><rect x="38" y="54" width="44" height="44" rx="10" fill="var(--c2)"/><use href="#paw" x="47" y="63" width="26" height="26" fill="var(--c1)"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.3-4.3"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2.5 3.5h2.2l2.4 11.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 1.9-1.5l1.7-7.3H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9.5h-11zM13.5 9.5h4l3 3.2v3.3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10.5V20h16v-9.5M3 10.5 5 4h14l2 6.5a2.9 2.9 0 0 1-5.6 0 2.9 2.9 0 0 1-5.6 0 2.9 2.9 0 0 1-5.6 0M10 20v-5h4v5"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h3"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.5-4.2a8.5 8.5 0 1 1 15.5-4.7z"/><path d="M9 10.5c.3 1.8 2.3 3.8 4.2 4.2l1.3-1.3 2 .9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  </defs>
+</svg>
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bar-title"><b>Pet Company Pilar</b><span>Propuesta visual v2 · para validar</span></div>
+    <nav class="seg" aria-label="Vistas de la propuesta">
+      <button type="button" data-view="escritorio">Home escritorio</button>
+      <button type="button" data-view="celular">Home celular</button>
+      <button type="button" data-view="diagnostico">1 · Diagnóstico</button>
+      <button type="button" data-view="arquitectura">2 · Arquitectura</button>
+      <button type="button" data-view="auditoria">3 · Auditoría</button>
+      <button type="button" data-view="sistema">Sistema de diseño</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ ESCRITORIO ============ -->
+<section class="view" data-page="escritorio">
+  <div class="view-in">
+    <div class="toolrow">
+      <div class="demo-note"><svg class="ico"><use href="#i-eye"/></svg><span><b>Prototipo navegable con datos de ejemplo.</b> Productos, marcas y precios son de demostración. En amarillo, los datos del negocio que faltan. Probá buscar "castrado", entrar a Perros › Cachorros, filtrar y armar un carrito.</span></div>
+      <label class="st-toggle"><input type="checkbox" data-st-toggle> Marcar estado de cada elemento</label>
+    </div>
+    <div class="legend" aria-hidden="true"><span style="color:var(--st-ok)"><i></i>Funciona</span><span style="color:var(--st-sim)"><i></i>Simulado</span><span style="color:var(--st-pend)"><i></i>Pendiente</span></div>
+    <div class="browser">
+      <div class="browser-top"><div class="dots"><i></i><i></i><i></i></div><div class="url" data-url>petcompanypilar · /</div><div class="dots" style="visibility:hidden"><i></i><i></i><i></i></div></div>
+      <div id="frame-desktop"></div>
+    </div>
+    <div class="layer fixed" id="layer-desktop"></div>
+  </div>
+</section>
+
+<!-- ============ CELULAR ============ -->
+<section class="view" data-page="celular" hidden>
+  <div class="view-in">
+    <div class="toolrow" style="justify-content:flex-end">
+      <label class="st-toggle"><input type="checkbox" data-st-toggle> Marcar estado de cada elemento</label>
+    </div>
+    <div class="legend" aria-hidden="true" style="justify-content:flex-end"><span style="color:var(--st-ok)"><i></i>Funciona</span><span style="color:var(--st-sim)"><i></i>Simulado</span><span style="color:var(--st-pend)"><i></i>Pendiente</span></div>
+    <div class="mobile-layout">
+      <div class="phone"><div class="phone-screen"><div id="frame-mobile"></div></div><div class="layer abs" id="layer-mobile"></div></div>
+      <aside class="notes">
+        <h2>Pensada para comprar con una mano</h2>
+        <ol>
+          <li><span class="n">1</span><div><b>Buscador fijo arriba</b>Muestra productos mientras escribís. Entiende "castrado", "cachorro" o el nombre de la marca, con o sin tildes.</div></li>
+          <li><span class="n">2</span><div><b>Perros y gatos en la primera pantalla</b>Cada acceso tiene atajos a Cachorros, Adultos o Senior. Dos toques y estás viendo tu alimento.</div></li>
+          <li><span class="n">3</span><div><b>Filtros en una hoja inferior</b>Sólo aparecen los filtros que tienen productos, con la cantidad al lado. El botón dice cuántos resultados vas a ver.</div></li>
+          <li><span class="n">4</span><div><b>Peso y precio a la vista</b>Elegís la bolsa en la tarjeta y el precio por kilo se recalcula.</div></li>
+          <li><span class="n">5</span><div><b>Carrito lateral</b>Sumás, restás o quitás sin salir de la página. Respeta el stock de cada presentación.</div></li>
+          <li><span class="n">6</span><div><b>Menú con secciones desplegables</b>Perros, Gatos, Ofertas y Marcas. Nada más.</div></li>
+        </ol>
+        <p class="hint">Deslizá dentro del teléfono. Cada pantalla del celular funciona por separado de la de escritorio.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1 · DIAGNÓSTICO ============ -->
+<section class="view" data-page="diagnostico" hidden>
+  <div class="view-in doc">
+    <article class="card">
+      <header>
+        <span class="eyebrow">1 · Diagnóstico de la V1</span>
+        <h1>Mucho para mirar, poco para hacer</h1>
+        <p>La identidad funcionaba, pero la home tenía demasiados bloques que pedían atención a la vez y casi ningún botón llevaba a algún lado. Además, la V1 incluía categorías que no se van a vender, como juguetes, camas y otras mascotas.</p>
+      </header>
+      <div class="cols three">
+        <div class="stat"><span>Bloques en la home</span><b><s>13</s>8</b><span>V1 → V2</span></div>
+        <div class="stat"><span>Tarjetas de producto en la home</span><b><s>12</s>8</b><span>sin repetir productos</span></div>
+        <div class="stat"><span>Enlaces que no hacían nada</span><b><s>35</s>0</b><span>por cada vista de la home</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header><h2>Diseño</h2></header>
+      <ul class="issues">
+        <li class="issue"><p><span class="prio alta">Alta</span><b>El banner principal tenía 5 focos:</b> una mancha rosa gigante, dos tarjetas flotantes, un carrusel de 3 mensajes y dos banners laterales. Ninguno ganaba.</p><p class="fix">Un solo banner: titular, una línea de texto, un botón y la foto. Sin carrusel ni tarjetas flotantes.</p></li>
+        <li class="issue"><p><span class="prio alta">Alta</span><b>Demasiados bloques de color:</b> barra verde sólida, banner rosa, franja de ofertas rosa y bloque gris del local, uno detrás del otro.</p><p class="fix">El color de fondo queda para el banner y los dos accesos (rosa para perros, verde para gatos). El resto de la página es blanca.</p></li>
+        <li class="issue"><p><span class="prio media">Media</span><b>Tarjetas con 7 niveles de información:</b> 2 badges, marca, nombre, tamaños, precio, precio por kilo, stock y botón.</p><p class="fix">Sale el badge "Nuevo". "En stock" sólo aparece cuando quedan pocas unidades o no hay. El descuento es el único badge.</p></li>
+        <li class="issue"><p><span class="prio media">Media</span><b>Animaciones decorativas:</b> tarjetas que suben y giran, carrusel con fundido, subrayado animado y contador que rebota.</p><p class="fix">Sólo queda el movimiento que explica algo: el carrito y el menú que se deslizan y el aviso de "agregado".</p></li>
+        <li class="issue"><p><span class="prio media">Media</span><b>Tres estilos de botón compitiendo:</b> rosa, verde y contorno, a veces en la misma sección.</p><p class="fix">Un botón rosa por zona, contorno para lo secundario y links de texto para "Ver todos". El verde se usa sólo en WhatsApp.</p></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <header><h2>Organización</h2></header>
+      <ul class="issues">
+        <li class="issue"><p><span class="prio alta">Alta</span><b>Las categorías se repetían 4 veces:</b> menú, chips del celular, "¿Para quién comprás?" y los círculos de categorías.</p><p class="fix">Dos accesos (perros y gatos) con atajos por etapa. El menú repite esos mismos accesos y no agrega categorías nuevas.</p></li>
+        <li class="issue"><p><span class="prio alta">Alta</span><b>Categorías que no se van a vender:</b> otras mascotas, juguetes, camas, indumentaria, higiene y accesorios.</p><p class="fix">El catálogo es sólo de alimentos para perros y gatos. El menú y los filtros salen de los productos cargados, así que nunca hay categorías vacías.</p></li>
+        <li class="issue"><p><span class="prio alta">Alta</span><b>Productos repetidos:</b> el mismo alimento aparecía en Destacados y en Ofertas, y además había una tercera sección, "Recién llegados".</p><p class="fix">Destacados y Ofertas sin repetir productos entre sí. Las novedades pasan a ser un orden del catálogo, no una sección más.</p></li>
+        <li class="issue"><p><span class="prio media">Media</span><b>Los beneficios aparecían 4 veces:</b> barra superior, tarjetas flotantes del banner, franja de beneficios y bloque del local.</p><p class="fix">Una barra superior discreta y una franja de beneficios. Los datos del local pasan al pie de página.</p></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <header><h2>Funcionamiento</h2></header>
+      <ul class="issues">
+        <li class="issue"><p><span class="prio alta">Alta</span><b>Botones que parecían funcionar y no hacían nada:</b> logo, menú, categorías, "Ver todos", marcas, banners, WhatsApp y pie de página.</p><p class="fix">Cada elemento hace algo o está marcado como pendiente. Con "Marcar estado" ves cuál es cuál.</p></li>
+        <li class="issue"><p><span class="prio alta">Alta</span><b>El carrito sólo sumaba un número.</b> No se podía ver, cambiar cantidades ni quitar productos.</p><p class="fix">Carrito lateral con cantidades, quitar, subtotal y control de stock.</p></li>
+        <li class="issue"><p><span class="prio alta">Alta</span><b>El buscador no buscaba</b> y no había forma de abrir la ficha de un producto.</p><p class="fix">Búsqueda con sugerencias y página de resultados. La foto y el nombre abren la ficha.</p></li>
+        <li class="issue"><p><span class="prio media">Media</span><b>"Ingresar" en el encabezado</b>, cuando las cuentas de cliente no son parte del lanzamiento.</p><p class="fix">Se quita. Se compra como invitado. Cuando sumemos cuentas, vuelve.</p></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <header><h2>Secuencia de la home</h2><p>Cada sección tiene que ayudar a encontrar, comparar o comprar.</p></header>
+      <div class="cols two">
+        <div><p class="comp-label">V1 · 13 bloques</p><ol class="seq old">
+          <li>Barra verde de envíos</li><li>Encabezado + menú de 12 ítems</li><li><s>Chips de categorías (celular)</s></li><li>Banner con carrusel + 2 banners laterales</li><li><s>¿Para quién comprás? (3 mascotas)</s></li><li><s>Círculos de 9 categorías</s></li><li>Beneficios</li><li>Destacados</li><li>Ofertas</li><li><s>Recién llegados</s></li><li>Marcas</li><li><s>Bloque del local</s></li><li>Pie de página</li></ol></div>
+        <div><p class="comp-label">V2 · 8 bloques</p><ol class="seq">
+          <li><b>Encabezado:</b> logo, Perros, Gatos, Ofertas, Marcas, buscador y carrito</li><li><b>Banner simple</b> con propuesta de valor y un botón</li><li><b>Perros y Gatos</b> con atajos por etapa</li><li><b>Destacados</b> (4)</li><li><b>Ofertas</b> (4, sólo si hay productos con descuento)</li><li><b>Marcas</b> con cantidad de productos</li><li><b>Beneficios:</b> envío, retiro, pagos y asesoramiento</li><li><b>Pie de página</b> con contacto y datos comerciales</li></ol></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 2 · ARQUITECTURA ============ -->
+<section class="view" data-page="arquitectura" hidden>
+  <div class="view-in doc">
+    <article class="card">
+      <header>
+        <span class="eyebrow">2 · Arquitectura de categorías y navegación</span>
+        <h1>Un solo catálogo, dos puertas de entrada</h1>
+        <p>Hay una sola lista de productos. "Perros", "Cachorros", "Ofertas" o "Marca A" no son carpetas con copias, sino maneras distintas de filtrar esa misma lista. Un alimento se carga una vez y aparece en todos los lugares donde corresponde.</p>
+      </header>
+      <div class="tree">
+        <div class="tnode dog"><h3>Alimentos para perros <code>/perros</code></h3>
+          <div><h4>Etapa</h4><ul><li>Cachorros</li><li>Adultos</li><li>Senior</li></ul></div>
+          <div><h4>Tamaño de raza</h4><ul><li>Razas pequeñas</li><li>Razas medianas</li><li>Razas grandes</li></ul></div>
+          <div><h4>Necesidades</h4><ul><li>Control de peso</li><li>Digestión sensible</li></ul></div>
+          <div><h4>También filtra por</h4><ul><li>Tipo (seco / húmedo)</li><li>Marca</li><li>Presentación (peso)</li></ul></div>
+        </div>
+        <div class="tnode cat"><h3>Alimentos para gatos <code>/gatos</code></h3>
+          <div><h4>Etapa</h4><ul><li>Gatitos</li><li>Adultos</li><li>Senior</li></ul></div>
+          <div><h4>Necesidades</h4><ul><li>Castrados</li><li>Cuidado urinario</li><li>Bolas de pelo</li></ul></div>
+          <div><h4>También filtra por</h4><ul><li>Tipo (seco / húmedo)</li><li>Marca</li><li>Presentación (peso)</li></ul></div>
+          <p>El tamaño de raza no aparece en gatos porque no aplica.</p>
+        </div>
+        <div class="tnode alt"><h3>Ofertas <code>/ofertas</code></h3>
+          <p>Se arma sola: entra todo producto que tenga un precio anterior mayor al actual. Cuando la promo termina en el panel, el producto sale de Ofertas. No hay que mantener una lista aparte.</p>
+          <p>Suma un filtro "Mascota" porque mezcla perros y gatos.</p>
+        </div>
+        <div class="tnode alt"><h3>Marcas <code>/marcas</code></h3>
+          <p>Lista de marcas con la cantidad de productos de cada una. Cada marca abre el catálogo filtrado por ella.</p>
+          <p>Una marca sin productos activos no se muestra.</p>
+        </div>
+      </div>
+      <div class="cols two">
+        <div><h3 style="margin-bottom:10px">Navegación</h3><ul class="rules">
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Menú de 4 ítems:</b> Perros, Gatos, Ofertas y Marcas.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Submenú generado desde los datos</b>, con la cantidad de productos de cada opción.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Celular:</b> cajón lateral con secciones desplegables.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Buscador</b> sobre nombre, marca, etapa y necesidades.</div></li>
+        </ul></div>
+        <div><h3 style="margin-bottom:10px">Reglas de filtros</h3><ul class="rules">
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Sin filtros vacíos:</b> una opción aparece sólo si hay productos que la cumplan.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Sin filtros inútiles:</b> si todas las opciones dan lo mismo (por ejemplo, todo es seco), el grupo no se muestra.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Conteo en vivo:</b> cada opción muestra cuántos productos quedarían.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Orden:</b> relevancia, menor precio, mayor precio y novedades.</div></li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header><h2>Estructura de un producto</h2><p>Todos los productos tienen la misma forma. Las presentaciones (3 kg, 15 kg…) son variantes del mismo producto, cada una con su precio, su precio anterior y su stock. Así el filtro de peso, el precio por kilo y las ofertas se calculan solos.</p></header>
+<pre class="codebox"><span class="c">// Producto (se carga una sola vez desde el panel)</span>
+{
+  <span class="k">id</span>, <span class="k">slug</span>:        <span class="c">"alimento-gato-adulto-castrado-marca-a"</span>
+  <span class="k">nombre</span>, <span class="k">marca</span>, <span class="k">descripcion</span>, <span class="k">imagenes</span>[]
+  <span class="k">especie</span>:     <span class="c">"perro" | "gato"</span>
+  <span class="k">etapa</span>[]:     <span class="c">cachorro | gatito | adulto | senior</span>
+  <span class="k">tamanoRaza</span>[]:<span class="c">pequena | mediana | grande       (sólo perros)</span>
+  <span class="k">necesidades</span>[]:<span class="c">castrado | control de peso | urinario | ...</span>
+  <span class="k">tipo</span>:        <span class="c">"seco" | "humedo"</span>
+  <span class="k">destacado</span>:   <span class="c">sí / no   → sección Destacados</span>
+  <span class="k">activo</span>:      <span class="c">sí / no   → desactivar sin borrar</span>
+  <span class="k">variantes</span>: [
+    { <span class="k">sku</span>, <span class="k">presentacion</span>: <span class="c">"7,5 kg"</span>, <span class="k">pesoKg</span>: 7.5,
+      <span class="k">precio</span>, <span class="k">precioAnterior</span>: <span class="c">opcional → si es mayor, entra en Ofertas</span>,
+      <span class="k">stock</span> }
+  ]
+}</pre>
+    </article>
+
+    <article class="card">
+      <header><h2>Direcciones para Google</h2><p>Cada entrada de la navegación tiene su propia dirección, legible y fácil de indexar.</p></header>
+      <div class="urls">
+        <div><span>Alimentos para perros</span><code>/perros</code></div>
+        <div><span>Perros › Cachorros</span><code>/perros/cachorros</code></div>
+        <div><span>Perros › Razas pequeñas</span><code>/perros/razas-pequenas</code></div>
+        <div><span>Gatos › Castrados</span><code>/gatos/castrados</code></div>
+        <div><span>Ofertas</span><code>/ofertas</code></div>
+        <div><span>Una marca</span><code>/marcas/marca-a</code></div>
+        <div><span>Ficha de producto</span><code>/producto/alimento-gato-adulto-castrado-marca-a</code></div>
+        <div><span>Búsqueda (no se indexa)</span><code>/buscar?q=castrado</code></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 3 · AUDITORÍA ============ -->
+<section class="view" data-page="auditoria" hidden>
+  <div class="view-in doc">
+    <article class="card">
+      <header>
+        <span class="eyebrow">3 · Auditoría de elementos interactivos</span>
+        <h1>Qué funciona, qué está simulado y qué falta</h1>
+        <p>"Funciona" quiere decir que la lógica ya está resuelta en el prototipo y se reutiliza en la tienda real. "Simulado" quiere decir que el elemento responde, pero con datos de ejemplo o sin el servicio real detrás. "Pendiente" queda marcado en pantalla y no se hace pasar por un botón que funciona.</p>
+      </header>
+      <div class="st-sum" data-st-sum></div>
+      <div class="tbl-wrap"><table class="audit">
+        <thead><tr><th>Elemento</th><th>V1</th><th>V2 · este prototipo</th><th>En la tienda real</th></tr></thead>
+        <tbody data-audit></tbody>
+      </table></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SISTEMA ============ -->
+<section class="view" data-page="sistema" hidden>
+  <div class="view-in doc">
+    <article class="card">
+      <header><span class="eyebrow">Sistema de diseño V2</span><h1>Lo mismo, con menos ruido</h1><p>Se mantienen los colores, la tipografía y las formas de la V1. Cambia cuánto y dónde se usa cada cosa.</p></header>
+      <ul class="rules">
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Rosa = comprar.</b> Botón principal, precio en oferta y badge de descuento. Un solo botón rosa por zona.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Verde = servicio.</b> Barra de envíos (ahora en verde suave), íconos de beneficios, accesos a gatos y WhatsApp.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Fondo de color sólo en 3 lugares:</b> el banner, el acceso a perros y el acceso a gatos.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Más aire:</b> 36 px entre secciones en celular y 56 px en escritorio (antes 28 y 40).</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Encabezados de sección iguales:</b> título a la izquierda y "Ver todos" a la derecha, siempre con el mismo estilo.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Movimiento sólo con propósito:</b> paneles que se deslizan y el aviso de "agregado". Sin efectos al pasar el mouse por encima.</div></li>
+      </ul>
+    </article>
+    <article class="card">
+      <header><h2>Colores</h2><p>Los tonos de trabajo de la V1 se mantienen para cumplir el contraste accesible.</p></header>
+      <div class="swatches">
+        <div class="sw"><div class="sw-chip" style="background:#FF1E8C;color:#fff">Aa</div><div class="sw-body"><b>Rosa marca</b><code>#FF1E8C</code>Logo, ilustraciones.</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#E0107A;color:#fff">Aa</div><div class="sw-body"><b>Rosa acción</b><code>#E0107A</code>Botones, ofertas. 4,6:1</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#FFF2F8;color:#E0107A">Aa</div><div class="sw-body"><b>Rosa suave</b><code>#FFF2F8</code>Banner, acceso a perros.</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#3F7A33;color:#fff">Aa</div><div class="sw-body"><b>Verde servicio</b><code>#3F7A33</code>Textos de servicio, WhatsApp. 5,2:1</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#F0F6EE;color:#3F7A33">Aa</div><div class="sw-body"><b>Verde suave</b><code>#F0F6EE</code>Barra de envíos, acceso a gatos.</div></div>
+        <div class="sw"><div class="sw-chip" style="background:#1F1A1D;color:#fff">Aa</div><div class="sw-body"><b>Tinta</b><code>#1F1A1D</code>Texto principal.</div></div>
+      </div>
+    </article>
+    <div class="cols two">
+      <article class="card">
+        <header><h2>Tipografía</h2><p>Nunito Sans. Bajamos un escalón el titular del banner (de 50 a 46 px).</p></header>
+        <div>
+          <div class="type-row"><div class="meta"><b>Banner</b>46 / 900 · cel. 28</div><div style="font-size:34px;font-weight:900;letter-spacing:-.025em;line-height:1.05">Todo para ellos</div></div>
+          <div class="type-row"><div class="meta"><b>Sección</b>26 / 900 · cel. 21</div><div style="font-size:24px;font-weight:900;letter-spacing:-.015em">Destacados</div></div>
+          <div class="type-row"><div class="meta"><b>Tarjeta</b>15 / 700</div><div style="font-size:15px;font-weight:700">Alimento seco para gato adulto castrado</div></div>
+          <div class="type-row"><div class="meta"><b>Texto</b>16 / 400</div><div style="color:var(--ink-2)">Pedí online y recibilo en tu casa.</div></div>
+          <div class="type-row"><div class="meta"><b>Precio</b>21 / 900</div><div><span class="price is-sale">$ 55.990</span> <s class="old">$ 65.990</s></div></div>
+        </div>
+      </article>
+      <article class="card">
+        <header><h2>Botones y controles</h2><p>Tres tipos de botón y nada más. Alto mínimo de 40 px.</p></header>
+        <div><p class="comp-label">Botones</p><div class="row"><button class="btn btn-primary" type="button">Agregar al carrito</button><button class="btn btn-secondary" type="button">Seguir comprando</button><button class="link" type="button">Ver todos <svg class="ico"><use href="#i-chev"/></svg></button></div></div>
+        <div><p class="comp-label">Tamaño y cantidad</p><div class="row"><div class="sizes"><button class="size" type="button">1,5 kg</button><button class="size is-on" type="button">7,5 kg</button><button class="size is-out" type="button">15 kg</button></div><div class="stepper sm"><button type="button" disabled aria-label="Restar">−</button><output>1</output><button type="button" disabled aria-label="Sumar">+</button></div></div></div>
+        <div><p class="comp-label">Indicadores</p><div class="row"><span class="badge badge-sale">−15%</span><span class="stock low">Últimas unidades</span><span class="stock out">Sin stock</span></div></div>
+      </article>
+    </div>
+    <article class="card">
+      <header><h2>Tarjeta de producto</h2><p>Foto, marca, nombre, presentaciones, precio y botón. El stock sólo aparece cuando hay que avisar algo.</p></header>
+      <div class="ds-card" id="ds-card"></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PLANTILLA DE LA TIENDA ============ -->
+<template id="shop-tpl">
+<div class="home">
+  <div class="h-ann"><div class="h-wrap">
+    <span>Envío sin cargo en <span class="tbd">zona de cobertura</span></span>
+    <span class="alt">Retiro en el local · Mercado Pago, transferencia o efectivo</span>
+  </div></div>
+  <header class="h-head">
+    <div class="h-wrap">
+      <div class="h-head-row">
+        <button class="icon-btn h-menu" type="button" aria-label="Abrir menú" data-act="menu-open" data-st="ok"><svg class="ico"><use href="#i-menu"/></svg></button>
+        <button class="h-logo logo" type="button" data-act="home" aria-label="Pet Company Pilar, ir al inicio" data-st="ok">
+          <span class="logo-mark"><svg fill="currentColor"><use href="#paw"/></svg></span>
+          <span class="logo-text"><b>Pet Company</b><small>PILAR</small></span>
+        </button>
+        <nav class="h-nav" aria-label="Principal" data-st="ok">
+          <button type="button" data-act="mega" data-species="perro" aria-expanded="false">Perros <svg class="ico"><use href="#i-down"/></svg></button>
+          <button type="button" data-act="mega" data-species="gato" aria-expanded="false">Gatos <svg class="ico"><use href="#i-down"/></svg></button>
+          <button type="button" data-act="list" data-coll="ofertas" data-nav="ofertas">Ofertas</button>
+          <button type="button" data-act="brands" data-nav="marcas">Marcas</button>
+        </nav>
+        <form class="search h-search" role="search" data-search data-st="ok">
+          <svg class="ico"><use href="#i-search"/></svg>
+          <input type="search" placeholder="Buscá tu alimento o marca" aria-label="Buscar alimentos" autocomplete="off" enterkeyhint="search">
+          <div class="suggest" hidden></div>
+        </form>
+        <button class="icon-btn h-cart" type="button" data-act="cart-open" aria-label="Abrir carrito" data-st="ok"><svg class="ico"><use href="#i-cart"/></svg><span class="h-cart-label">Carrito</span><span class="cart-count" data-cart-count hidden>0</span></button>
+      </div>
+    </div>
+    <div class="mega" hidden data-mega></div>
+  </header>
+  <main class="h-main" data-main></main>
+  <footer class="h-foot">
+    <div class="h-wrap">
+      <div class="foot-cols">
+        <div class="foot-brand">
+          <button class="logo" type="button" data-act="home" data-st="ok"><span class="logo-mark"><svg fill="currentColor"><use href="#paw"/></svg></span><span class="logo-text"><b>Pet Company</b><small>PILAR</small></span></button>
+          <p>Todo para ellos, cerca tuyo.</p>
+        </div>
+        <div class="foot-col"><h4>Comprar</h4><ul>
+          <li><button type="button" data-act="list" data-species="perro" data-st="ok">Alimentos para perros</button></li>
+          <li><button type="button" data-act="list" data-species="gato" data-st="ok">Alimentos para gatos</button></li>
+          <li><button type="button" data-act="list" data-coll="ofertas" data-st="ok">Ofertas</button></li>
+          <li><button type="button" data-act="brands" data-st="ok">Marcas</button></li></ul></div>
+        <div class="foot-col"><h4>Ayuda</h4><ul>
+          <li class="pend" data-st="pend">Envíos y retiro <em>Pendiente</em></li>
+          <li class="pend" data-st="pend">Medios de pago <em>Pendiente</em></li>
+          <li class="pend" data-st="pend">Preguntas frecuentes <em>Pendiente</em></li></ul></div>
+        <div class="foot-col"><h4>Contacto</h4><ul>
+          <li><span class="tbd">Dirección del local, Pilar</span></li>
+          <li><span class="tbd">Días y horarios</span></li>
+          <li><button type="button" data-act="wa" data-st="sim">WhatsApp</button></li>
+          <li class="pend" data-st="pend">Instagram · Facebook <em>Faltan links</em></li></ul></div>
+      </div>
+      <div class="pays" aria-label="Medios de pago"><span>Mercado Pago</span><span>Transferencia</span><span>Efectivo</span></div>
+      <div class="foot-legal"><span>© 2026 Pet Company Pilar · Pilar, Buenos Aires</span><span>Precios en pesos argentinos (ARS)</span></div>
+    </div>
+  </footer>
+  <div class="wa-dock"><button class="wa" type="button" data-act="wa" aria-label="Escribinos por WhatsApp" data-st="sim"><svg class="ico"><use href="#i-chat"/></svg></button></div>
+</div>
+</template>
+
+<template id="layer-tpl">
+  <div class="scrim" data-act="close-all"></div>
+  <aside class="panel drawer left" data-panel="menu" aria-label="Menú" aria-hidden="true">
+    <div class="panel-head"><h2>Menú</h2><button class="icon-btn" type="button" data-act="close-all" aria-label="Cerrar menú"><svg class="ico"><use href="#i-x"/></svg></button></div>
+    <div class="panel-body" data-menu-body></div>
+  </aside>
+  <aside class="panel drawer right" data-panel="cart" aria-label="Carrito" aria-hidden="true">
+    <div class="panel-head"><h2 data-cart-title>Tu carrito</h2><button class="icon-btn" type="button" data-act="close-all" aria-label="Cerrar carrito"><svg class="ico"><use href="#i-x"/></svg></button></div>
+    <div class="panel-body" data-cart-body></div>
+    <div class="panel-foot" data-cart-foot></div>
+  </aside>
+  <aside class="panel sheet" data-panel="filters" aria-label="Filtros" aria-hidden="true">
+    <div class="panel-head"><h2>Filtrar</h2><button class="icon-btn" type="button" data-act="close-all" aria-label="Cerrar filtros"><svg class="ico"><use href="#i-x"/></svg></button></div>
+    <div class="panel-body" data-sheet-body></div>
+    <div class="panel-foot" style="flex-direction:row"><button class="btn btn-secondary" type="button" data-act="clear" style="flex:1">Limpiar</button><button class="btn btn-primary" type="button" data-act="close-all" data-sheet-cta style="flex:1.4">Ver productos</button></div>
+  </aside>
+  <div class="toast" role="status" aria-live="polite" data-toast><span data-toast-msg></span></div>
+</template>
+
+<script>
+(function(){
+  /* ================= DATOS DE DEMOSTRACIÓN =================
+     Un producto = una entrada. Las colecciones (Perros, Cachorros, Ofertas, Marca X)
+     son filtros sobre esta misma lista. */
+  const fmt = new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+  const money = n => fmt.format(n).replace(/ /g,' ');
+  const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const TINT = {pink:['#FF1E8C','#FFE3F0'], green:['#5A9E4B','#E3F1DE'], slate:['#857882','#EEE9EC'], amber:['#E39A2D','#FBEFD9'], berry:['#B8186B','#FBDDEC'], teal:['#2E8C86','#DDF1EF']};
+  const SPECIES = {perro:{label:'Perros', title:'Alimentos para perros', tint:'pink'}, gato:{label:'Gatos', title:'Alimentos para gatos', tint:'green'}};
+  const L = {
+    species:{perro:'Perros', gato:'Gatos'},
+    stage:{cachorro:'Cachorros', gatito:'Gatitos', adulto:'Adultos', senior:'Senior'},
+    size:{pequena:'Razas pequeñas', mediana:'Razas medianas', grande:'Razas grandes'},
+    need:{castrado:'Castrados', peso:'Control de peso', sensible:'Digestión sensible', urinario:'Cuidado urinario', bolas:'Bolas de pelo'},
+    type:{seco:'Seco', humedo:'Húmedo'},
+    pres:{p1:'Hasta 3 kg', p2:'De 3 a 10 kg', p3:'Más de 10 kg'}
+  };
+  const GROUPS = [['species','Mascota'],['stage','Etapa'],['size','Tamaño de raza'],['need','Necesidades'],['type','Tipo de alimento'],['brand','Marca'],['pres','Presentación']];
+  const ORDER = {stage:['cachorro','gatito','adulto','senior'], size:['pequena','mediana','grande'], pres:['p1','p2','p3'], type:['seco','humedo'], species:['perro','gato'], need:['castrado','peso','sensible','urinario','bolas']};
+  const bucket = kg => kg <= 3 ? 'p1' : kg <= 10 ? 'p2' : 'p3';
+  const V = (sku,l,kg,p,o,s) => ({sku,l,kg,p,o,s});
+  const PRODUCTS = [
+    {id:1, species:'perro', stage:['adulto'], size:['mediana','grande'], need:[], type:'seco', brand:'Marca demo A', name:'Alimento seco para perro adulto, razas medianas y grandes', shape:'bag', tint:'pink', featured:true, added:'2026-08-10', d:1, v:[V('A1-3','3 kg',3,18990,0,14),V('A1-15','15 kg',15,72990,81990,9)]},
+    {id:2, species:'perro', stage:['cachorro'], size:['pequena'], need:[], type:'seco', brand:'Marca demo A', name:'Alimento seco para cachorro, razas pequeñas', shape:'bag', tint:'amber', added:'2026-10-20', d:1, v:[V('A2-1','1 kg',1,8490,0,20),V('A2-3','3 kg',3,22990,0,11)]},
+    {id:3, species:'perro', stage:['cachorro'], size:['mediana','grande'], need:[], type:'seco', brand:'Marca demo B', name:'Alimento seco para cachorro, razas medianas y grandes', shape:'bag', tint:'teal', added:'2026-09-15', d:0, v:[V('B3-3','3 kg',3,21990,0,8),V('B3-15','15 kg',15,79990,0,0)]},
+    {id:4, species:'perro', stage:['adulto'], size:['pequena'], need:[], type:'seco', brand:'Marca demo C', name:'Alimento seco para perro adulto, razas pequeñas', shape:'bag', tint:'berry', featured:true, added:'2026-07-02', d:1, v:[V('C4-1','1 kg',1,7990,0,16),V('C4-3','3 kg',3,21490,23990,12),V('C4-7','7,5 kg',7.5,47990,0,6)]},
+    {id:5, species:'perro', stage:['senior'], size:['pequena','mediana','grande'], need:[], type:'seco', brand:'Marca demo B', name:'Alimento seco para perro senior, todas las razas', shape:'bag', tint:'slate', added:'2026-06-12', d:0, v:[V('B5-3','3 kg',3,24990,0,7),V('B5-12','12 kg',12,84990,94990,4)]},
+    {id:6, species:'perro', stage:['adulto'], size:['mediana'], need:['peso'], type:'seco', brand:'Marca demo D', name:'Alimento seco control de peso para perro adulto', shape:'bag', tint:'green', added:'2026-05-30', d:0, v:[V('D6-3','3 kg',3,23990,0,9),V('D6-12','12 kg',12,79990,0,3)]},
+    {id:7, species:'perro', stage:['adulto'], size:['pequena','mediana','grande'], need:['sensible'], type:'seco', brand:'Marca demo D', name:'Alimento seco para perro adulto con digestión sensible', shape:'bag', tint:'teal', added:'2026-09-01', d:1, v:[V('D7-2','2 kg',2,19990,0,10),V('D7-10','10 kg',10,76990,85990,5)]},
+    {id:8, species:'perro', stage:['adulto'], size:['pequena','mediana','grande'], need:[], type:'humedo', brand:'Marca demo C', name:'Alimento húmedo para perro adulto, lata 340 g', shape:'can', tint:'amber', added:'2026-10-02', d:0, v:[V('C8-1','x1',0.34,3290,0,40),V('C8-12','x12',4.08,35990,0,6)]},
+    {id:9, species:'gato', stage:['adulto'], size:[], need:[], type:'seco', brand:'Marca demo B', name:'Alimento seco para gato adulto', shape:'bag', tint:'green', featured:true, added:'2026-08-01', d:1, v:[V('B9-1','1,5 kg',1.5,14490,0,18),V('B9-7','7,5 kg',7.5,55990,65990,7)]},
+    {id:10, species:'gato', stage:['adulto'], size:[], need:['castrado'], type:'seco', brand:'Marca demo A', name:'Alimento seco para gato adulto castrado', shape:'bag', tint:'pink', featured:true, added:'2026-07-18', d:1, v:[V('A10-1','1,5 kg',1.5,15990,0,15),V('A10-7','7,5 kg',7.5,59990,0,6)]},
+    {id:11, species:'gato', stage:['gatito'], size:[], need:[], type:'seco', brand:'Marca demo C', name:'Alimento seco para gatito', shape:'bag', tint:'amber', added:'2026-10-28', d:0, v:[V('C11-1','1 kg',1,9490,0,12),V('C11-3','3 kg',3,24990,0,5)]},
+    {id:12, species:'gato', stage:['senior'], size:[], need:['castrado'], type:'seco', brand:'Marca demo E', name:'Alimento seco para gato senior castrado', shape:'bag', tint:'slate', added:'2026-04-22', d:0, v:[V('E12-1','1,5 kg',1.5,16990,0,2)]},
+    {id:13, species:'gato', stage:['adulto'], size:[], need:['urinario'], type:'seco', brand:'Marca demo D', name:'Alimento seco cuidado urinario para gato adulto', shape:'bag', tint:'teal', added:'2026-09-24', d:0, v:[V('D13-1','1,5 kg',1.5,18990,20990,8),V('D13-7','7,5 kg',7.5,69990,0,3)]},
+    {id:14, species:'gato', stage:['adulto'], size:[], need:[], type:'humedo', brand:'Marca demo E', name:'Alimento húmedo para gato adulto, pouch 85 g', shape:'pouch', tint:'berry', added:'2026-10-12', d:1, v:[V('E14-1','x1',0.085,1590,0,60),V('E14-12','x12',1.02,16490,19080,10)]},
+    {id:15, species:'gato', stage:['adulto'], size:[], need:['bolas'], type:'seco', brand:'Marca demo A', name:'Alimento seco control de bolas de pelo para gato', shape:'bag', tint:'green', added:'2026-06-05', d:0, v:[V('A15-3','3 kg',3,31990,0,2)]}
+  ];
+  const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+  const vals = (p,k) => k==='species' ? [p.species] : k==='type' ? [p.type] : k==='brand' ? [p.brand] : k==='pres' ? [...new Set(p.v.map(v => bucket(v.kg)))] : (p[k] || []);
+  const lab = (k,v) => k==='brand' ? v : (L[k] && L[k][v]) || v;
+  const offPct = v => v && v.o > v.p ? Math.round((v.o - v.p) / v.o * 100) : 0;
+  const isOffer = p => p.v.some(v => v.o > v.p);
+  const maxOff = p => Math.max(...p.v.map(offPct));
+  const minPrice = p => Math.min(...p.v.map(v => v.p));
+  const offerVariant = p => { let i = p.v.findIndex(v => v.o > v.p); return i < 0 ? p.d : i; };
+  const haystack = p => norm([p.name, p.brand, L.species[p.species], p.species, ...p.stage.map(s => L.stage[s]), ...p.need.map(n => L.need[n]), ...p.size.map(s => L.size[s]), L.type[p.type]].join(' '));
+  const matchQ = (p,q) => { const h = haystack(p); return norm(q).split(/\s+/).filter(Boolean).every(t => h.includes(t.replace(/s$/,''))); };
+  const sortOpts = (k, arr) => { const o = ORDER[k]; return o ? arr.sort((a,b) => o.indexOf(a) - o.indexOf(b)) : arr.sort((a,b) => a.localeCompare(b)); };
+  const svgShape = (p, cls='pimg') => `<svg class="${cls}" viewBox="0 0 120 140" style="--c1:${TINT[p.tint][0]};--c2:${TINT[p.tint][1]}" aria-hidden="true"><use href="#s-${p.shape}"/></svg>`;
+  const BRANDS = sortOpts('brand', [...new Set(PRODUCTS.map(p => p.brand))]);
+  const FEATURED = PRODUCTS.filter(p => p.featured).slice(0,4);
+  const OFFERS_HOME = PRODUCTS.filter(p => isOffer(p) && !p.featured).sort((a,b) => maxOff(b) - maxOff(a)).slice(0,4);
+
+  function facetsFor(base, f, skipSpecies){
+    // devuelve grupos con opciones y conteos; oculta grupos con menos de 2 opciones
+    const out = [];
+    for (const [k,title] of GROUPS){
+      if (k==='species' && skipSpecies) continue;
+      const opts = sortOpts(k, [...new Set(base.flatMap(p => vals(p,k)))]);
+      if (opts.length < 2) continue;
+      const others = base.filter(p => matchFilters(p, f, k));
+      out.push({k, title, opts: opts.map(v => ({v, label: lab(k,v), n: others.filter(p => vals(p,k).includes(v)).length, on: !!(f[k] && f[k].has(v))}))});
+    }
+    return out;
+  }
+  function matchFilters(p, f, skip){
+    for (const k in f){ if (k===skip || !f[k].size) continue; if (!vals(p,k).some(v => f[k].has(v))) return false; }
+    return true;
+  }
+
+  /* ================= TIENDA (una instancia por marco) ================= */
+  function createShop(frame, layer){
+    frame.appendChild(document.getElementById('shop-tpl').content.cloneNode(true));
+    layer.appendChild(document.getElementById('layer-tpl').content.cloneNode(true));
+    const $ = (s, r=frame) => r.querySelector(s);
+    const main = $('[data-main]'), mega = $('[data-mega]');
+    const S = { view:{name:'home'}, cart:[], pdp:{vi:0, qty:1}, open:null, toastT:0 };
+    const urlEl = frame.closest('.browser')?.querySelector('[data-url]');
+
+    /* ---------- tarjetas ---------- */
+    function priceHTML(v){
+      const sale = v.o > v.p;
+      return `<div class="price-row"><span class="price${sale?' is-sale':''}">${money(v.p)}</span>${sale?`<s class="old"><span class="sr">Antes </span>${money(v.o)}</s>`:''}</div><span class="unit">${v.kg >= 0.5 ? money(Math.round(v.p / v.kg)) + ' por kg' : ''}</span>`;
+    }
+    function stockNote(v){ return v.s === 0 ? 'Sin stock en esta presentación' : v.s <= 3 ? `Últimas ${v.s} unidades` : ''; }
+    function card(p, vi){
+      vi = vi ?? p.d; const v = p.v[vi], off = offPct(v);
+      const sizes = p.v.length > 1
+        ? `<div class="sizes" role="group" aria-label="Presentación">${p.v.map((x,i) => `<button type="button" class="size${i===vi?' is-on':''}${x.s===0?' is-out':''}" data-act="card-size" data-i="${i}" aria-pressed="${i===vi}" data-st="ok">${x.l}</button>`).join('')}</div>`
+        : `<div class="sizes"><span class="size-single">${p.v[0].l}</span></div>`;
+      return `<article class="pcard" data-pid="${p.id}" data-vi="${vi}">
+        <button class="pcard-media" type="button" data-act="product" data-id="${p.id}" aria-label="Ver ${esc(p.name)}" data-st="ok">${svgShape(p)}${off?`<span class="badge badge-sale">−${off}%</span>`:''}</button>
+        <div class="pcard-body">
+          <p class="pcard-brand">${esc(p.brand)}</p>
+          <button class="pcard-name" type="button" data-act="product" data-id="${p.id}">${esc(p.name)}</button>
+          ${sizes}
+          <div class="price-box">${priceHTML(v)}</div>
+          <span class="card-note">${stockNote(v)}</span>
+          <button type="button" class="btn btn-primary btn-sm btn-block" data-act="add-card" ${v.s===0?'disabled':''} data-st="ok">${v.s===0?'Sin stock':'Agregar'}</button>
+        </div></article>`;
+    }
+
+    /* ---------- vistas ---------- */
+    const crumbs = items => `<nav class="crumbs" aria-label="Estás en">${items.map((it,i) => i < items.length-1 ? `<button type="button" ${it.attrs}>${esc(it.t)}</button><svg class="ico"><use href="#i-chev"/></svg>` : `<span aria-current="page">${esc(it.t)}</span>`).join('')}</nav>`;
+    const spLinks = sp => {
+      const base = PRODUCTS.filter(p => p.species===sp);
+      return sortOpts('stage', [...new Set(base.flatMap(p => p.stage))]).map(s => `<button type="button" class="pill" data-act="list" data-species="${sp}" data-k="stage" data-v="${s}" data-st="ok">${L.stage[s]}</button>`).join('')
+        + (sp==='gato' && base.some(p => p.need.includes('castrado')) ? `<button type="button" class="pill" data-act="list" data-species="gato" data-k="need" data-v="castrado" data-st="ok">Castrados</button>` : '');
+    };
+    const secHead = (title, attrs, label='Ver todos') => `<div class="sec-head"><h2>${title}</h2>${attrs?`<button type="button" class="link" ${attrs} data-st="ok">${label} <svg class="ico"><use href="#i-chev"/></svg></button>`:''}</div>`;
+
+    function viewHome(){
+      const nSp = sp => PRODUCTS.filter(p => p.species===sp).length;
+      return `<div class="h-wrap">
+        <section class="hero" aria-label="Destacado">
+          <div class="hero-copy">
+            <span class="eyebrow">Pet shop en Pilar</span>
+            <h1>Todo para ellos, cerca tuyo</h1>
+            <p>Alimento para perros y gatos, con envío sin cargo en nuestra zona o retiro en el local.</p>
+            <button class="btn btn-primary" type="button" data-act="list" data-coll="ofertas" data-st="ok">Ver ofertas</button>
+          </div>
+          <div class="ph hero-img"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto real · banner editable desde el panel</span></div>
+        </section>
+        <section class="sec" aria-label="Elegí tu mascota">
+          <div class="species">
+            ${['perro','gato'].map(sp => `<div class="sp sp-${sp==='perro'?'dog':'cat'}">
+              <button class="ph" type="button" data-act="list" data-species="${sp}" aria-label="${SPECIES[sp].title}" data-st="ok"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto: ${sp}</span></button>
+              <div class="sp-body">
+                <button class="sp-title" type="button" data-act="list" data-species="${sp}" data-st="ok">${SPECIES[sp].title} <svg class="ico"><use href="#i-chev"/></svg></button>
+                <span class="hint">${nSp(sp)} productos</span>
+                <div class="sp-links">${spLinks(sp)}</div>
+              </div></div>`).join('')}
+          </div>
+        </section>
+        <section class="sec">${secHead('Destacados','data-act="list" data-coll="destacados"')}<div class="p-grid four">${FEATURED.map(p => card(p)).join('')}</div></section>
+        ${OFFERS_HOME.length ? `<section class="sec">${secHead('Ofertas','data-act="list" data-coll="ofertas"','Ver todas')}<div class="p-grid four">${OFFERS_HOME.map(p => card(p, offerVariant(p))).join('')}</div></section>` : ''}
+        <section class="sec">${secHead('Marcas','data-act="brands"','Ver todas')}<div class="brands">${BRANDS.map(b => `<button type="button" class="brand" data-act="list" data-brand="${esc(b)}" data-st="ok">${esc(b.replace('Marca demo','MARCA'))}<small>${PRODUCTS.filter(p => p.brand===b).length} productos</small></button>`).join('')}</div></section>
+        <section class="sec" aria-label="Beneficios"><div class="benefits">
+          <div class="benefit"><svg class="ico"><use href="#i-truck"/></svg><b>Envío sin cargo</b><p>En <span class="tbd">zona de cobertura</span></p></div>
+          <div class="benefit"><svg class="ico"><use href="#i-store"/></svg><b>Retiro en el local</b><p><span class="tbd">Dirección, Pilar</span></p></div>
+          <div class="benefit"><svg class="ico"><use href="#i-wallet"/></svg><b>Pagá como quieras</b><p>Mercado Pago, transferencia o efectivo</p></div>
+          <div class="benefit"><svg class="ico"><use href="#i-chat"/></svg><b>Te asesoramos</b><p>Consultanos qué alimento le conviene</p></div>
+        </div></section>
+      </div>`;
+    }
+
+    function listBase(b){
+      let base = PRODUCTS;
+      if (b.species) base = base.filter(p => p.species===b.species);
+      if (b.coll==='ofertas') base = base.filter(isOffer);
+      if (b.coll==='destacados') base = base.filter(p => p.featured);
+      if (b.brand) base = base.filter(p => p.brand===b.brand);
+      if (b.q) base = base.filter(p => matchQ(p, b.q));
+      return base;
+    }
+    function listTitle(b){
+      if (b.q) return `Resultados para “${esc(b.q)}”`;
+      if (b.coll==='ofertas') return 'Ofertas';
+      if (b.coll==='destacados') return 'Destacados';
+      if (b.brand) return esc(b.brand);
+      return SPECIES[b.species].title;
+    }
+    function facetHTML(groups){
+      return `<div class="facet">${groups.map(g => `<fieldset><legend>${g.title}</legend>${g.opts.map(o => `<label class="check${o.n===0 && !o.on?' is-zero':''}"><input type="checkbox" data-act="facet" data-k="${g.k}" data-v="${esc(o.v)}" data-fkey="${g.k}:${esc(o.v)}" ${o.on?'checked':''} ${o.n===0 && !o.on?'disabled':''}><span>${esc(o.label)}</span><small>${o.n}</small></label>`).join('')}</fieldset>`).join('')}</div>`;
+    }
+    function viewList(){
+      const vw = S.view, b = vw.base, base = listBase(b);
+      const res = base.filter(p => matchFilters(p, vw.f));
+      const sorters = {rel:(a,c) => (c.featured?1:0)-(a.featured?1:0) || a.id-c.id, asc:(a,c) => minPrice(a)-minPrice(c), desc:(a,c) => minPrice(c)-minPrice(a), new:(a,c) => c.added.localeCompare(a.added)};
+      res.sort(sorters[vw.sort]);
+      const groups = facetsFor(base, vw.f, !!b.species);
+      vw._groups = groups; vw._count = res.length;
+      const active = Object.entries(vw.f).flatMap(([k,set]) => [...set].map(v => `<button type="button" class="pill" data-act="facet-off" data-k="${k}" data-v="${esc(v)}" data-st="ok">${esc(lab(k,v))} <svg class="ico"><use href="#i-x"/></svg></button>`));
+      const crumbList = [{t:'Inicio', attrs:'data-act="home"'}];
+      if (b.brand) crumbList.push({t:'Marcas', attrs:'data-act="brands"'});
+      crumbList.push({t: b.q ? 'Búsqueda' : listTitle(b).replace(/&amp;/g,'&')});
+      const showOffer = p => b.coll==='ofertas' ? offerVariant(p) : undefined;
+      return `<div class="h-wrap">${crumbs(crumbList)}
+        <div class="list-head"><h1>${listTitle(b)}<small>${res.length} ${res.length===1?'producto':'productos'}</small></h1>
+          <div class="list-tools">
+            ${groups.length ? `<button class="btn btn-secondary btn-sm" type="button" data-act="filters-open" data-st="ok"><svg class="ico"><use href="#i-filter"/></svg>Filtrar${active.length?` (${active.length})`:''}</button>` : ''}
+            <label class="sr" for="${frame.id}-sort">Ordenar por</label>
+            <select class="select" id="${frame.id}-sort" data-act="sort" data-st="ok">
+              ${[['rel','Más relevantes'],['asc','Menor precio'],['desc','Mayor precio'],['new','Novedades']].map(([k,t]) => `<option value="${k}" ${vw.sort===k?'selected':''}>${t}</option>`).join('')}
+            </select>
+          </div></div>
+        <div class="active-f">${active.join('')}${active.length?`<button type="button" class="link" data-act="clear" style="padding-inline:6px">Limpiar filtros</button>`:''}</div>
+        <div class="list-layout">
+          <aside class="list-side" aria-label="Filtros" data-st="ok">${groups.length ? facetHTML(groups) : '<p class="hint">No hay filtros para esta selección.</p>'}</aside>
+          <div class="p-grid three">${res.length ? res.map(p => card(p, showOffer(p))).join('') : `<div class="empty"><b>No encontramos productos${b.q?` para “${esc(b.q)}”`:' con esos filtros'}</b><span>Probá con otra palabra o sacá algún filtro.</span>${active.length?'<button class="btn btn-secondary" type="button" data-act="clear">Limpiar filtros</button>':`<button class="btn btn-secondary" type="button" data-act="home">Volver al inicio</button>`}</div>`}</div>
+        </div></div>`;
+    }
+
+    function viewBrands(){
+      return `<div class="h-wrap">${crumbs([{t:'Inicio', attrs:'data-act="home"'},{t:'Marcas'}])}
+        <div class="list-head"><h1>Marcas<small>${BRANDS.length} marcas</small></h1></div>
+        <div class="brands">${BRANDS.map(b => `<button type="button" class="brand" style="height:96px" data-act="list" data-brand="${esc(b)}" data-st="ok">${esc(b.replace('Marca demo','MARCA'))}<small>${PRODUCTS.filter(p => p.brand===b).length} productos</small></button>`).join('')}</div></div>`;
+    }
+
+    function viewProduct(){
+      const p = byId[S.view.id], vi = S.pdp.vi, v = p.v[vi], off = offPct(v);
+      const maxQ = Math.max(1, v.s), q = Math.min(S.pdp.qty, maxQ);
+      const related = PRODUCTS.filter(x => x.id!==p.id && x.species===p.species && x.stage.some(s => p.stage.includes(s))).slice(0,4);
+      const spec = [['Mascota', SPECIES[p.species].label.slice(0,-1)], ['Etapa', p.stage.map(s => L.stage[s]).join(', ')], p.size.length ? ['Tamaño de raza', p.size.map(s => L.size[s].replace('Razas ','')).join(', ')] : null, p.need.length ? ['Necesidades', p.need.map(n => L.need[n]).join(', ')] : null, ['Tipo', L.type[p.type]], ['Marca', p.brand]].filter(Boolean);
+      return `<div class="h-wrap">${crumbs([{t:'Inicio', attrs:'data-act="home"'},{t:SPECIES[p.species].label, attrs:`data-act="list" data-species="${p.species}"`},{t:p.name}])}
+        <div class="pdp">
+          <div class="pdp-media">${svgShape(p)}${off?`<span class="badge badge-sale">−${off}%</span>`:''}</div>
+          <div class="pdp-info">
+            <button class="pdp-brand" type="button" data-act="list" data-brand="${esc(p.brand)}" data-st="ok">${esc(p.brand)}</button>
+            <h1>${esc(p.name)}</h1>
+            ${p.v.length > 1 ? `<div><p class="comp-label" style="margin-bottom:8px">Presentación</p><div class="pdp-sizes" role="group" aria-label="Presentación">${p.v.map((x,i) => `<button type="button" class="vbtn${i===vi?' is-on':''}${x.s===0?' is-out':''}" data-act="pdp-size" data-i="${i}" aria-pressed="${i===vi}" data-st="ok"><b>${x.l}</b><small>${x.s===0?'Sin stock':money(x.p)}</small></button>`).join('')}</div></div>` : `<p class="hint">Presentación: <b>${p.v[0].l}</b></p>`}
+            <div class="price-box">${priceHTML(v)}</div>
+            <span class="stock${v.s===0?' out':v.s<=3?' low':''}">${v.s===0?'Sin stock en esta presentación':v.s<=3?`Últimas ${v.s} unidades`:'En stock'}</span>
+            <div class="pdp-buy">
+              <div class="stepper" data-st="ok"><button type="button" data-act="pdp-qty" data-d="-1" aria-label="Restar uno" ${q<=1||v.s===0?'disabled':''}>−</button><output aria-live="polite">${v.s===0?0:q}</output><button type="button" data-act="pdp-qty" data-d="1" aria-label="Sumar uno" ${q>=maxQ||v.s===0?'disabled':''}>+</button></div>
+              <button class="btn btn-primary" type="button" data-act="add-pdp" ${v.s===0?'disabled':''} data-st="ok"><svg class="ico"><use href="#i-cart"/></svg>${v.s===0?'Sin stock':'Agregar al carrito'}</button>
+            </div>
+            <ul class="svc">
+              <li><svg class="ico"><use href="#i-truck"/></svg><span>Envío sin cargo en <span class="tbd">zona de cobertura</span></span></li>
+              <li><svg class="ico"><use href="#i-store"/></svg><span>Retiro en el local: <span class="tbd">dirección y horarios</span></span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cols two" style="padding-top:36px">
+          <div class="pdp-desc"><h2>Descripción</h2><p><span class="tbd">Texto de ejemplo.</span> Acá va la descripción del fabricante: ingredientes principales, beneficios y forma de uso. Se carga desde el panel junto con el producto.</p></div>
+          <div><h2 style="font-size:17px;font-weight:900;margin-bottom:8px">Características</h2><table class="spec"><tbody>${spec.map(([k,v]) => `<tr><th scope="row">${k}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>
+        </div>
+        ${related.length ? `<section class="sec">${secHead('También te puede servir', `data-act="list" data-species="${p.species}" data-k="stage" data-v="${p.stage[0]}"`)}<div class="p-grid four">${related.map(x => card(x)).join('')}</div></section>` : ''}
+      </div>`;
+    }
+
+    /* ---------- navegación ---------- */
+    function urlFor(vw){
+      if (vw.name==='home') return '/';
+      if (vw.name==='brands') return '/marcas';
+      if (vw.name==='product') return '/producto/' + norm(byId[vw.id].name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      const b = vw.base; if (b.q) return '/buscar?q=' + encodeURIComponent(b.q);
+      if (b.coll) return '/' + b.coll; if (b.brand) return '/marcas/' + norm(b.brand).replace(/[^a-z0-9]+/g,'-');
+      const fk = Object.entries(vw.f).find(([,s]) => s.size===1);
+      return '/' + (b.species==='perro'?'perros':'gatos') + (fk && Object.values(vw.f).filter(s => s.size).length===1 ? '/' + norm(lab(fk[0],[...fk[1]][0])).replace(/[^a-z0-9]+/g,'-') : '');
+    }
+    function render(keepScroll){
+      const vw = S.view;
+      const ae = document.activeElement, fkey = ae && (frame.contains(ae) || layer.contains(ae)) ? ae.dataset.fkey : null, inLayer = fkey && layer.contains(ae);
+      main.innerHTML = vw.name==='home' ? viewHome() : vw.name==='list' ? viewList() : vw.name==='brands' ? viewBrands() : viewProduct();
+      if (urlEl) urlEl.textContent = 'petcompanypilar · ' + urlFor(vw);
+      frame.querySelectorAll('.h-nav [data-nav]').forEach(b => b.toggleAttribute('aria-current', (b.dataset.nav==='ofertas' && vw.name==='list' && vw.base.coll==='ofertas') || (b.dataset.nav==='marcas' && (vw.name==='brands' || (vw.name==='list' && vw.base.brand)))));
+      frame.querySelectorAll('.h-nav [data-act="mega"]').forEach(b => b.toggleAttribute('aria-current', vw.name==='list' && vw.base.species===b.dataset.species && !vw.base.q));
+      if (S.open==='filters') renderSheet();
+      if (fkey){ const el = (inLayer ? layer : frame).querySelector(`[data-fkey="${CSS.escape(fkey)}"]`); el && el.focus({preventScroll:true}); }
+      if (!keepScroll) scrollTop();
+    }
+    function scrollTop(){
+      const sc = frame.closest('.phone-screen');
+      if (sc) sc.scrollTop = 0;
+      else { const r = frame.getBoundingClientRect(); if (r.top < 0) window.scrollBy(0, r.top - 70); }
+    }
+    function go(vw){ S.view = vw; closeAll(); closeMega(); render(); }
+    function goList(d){
+      const base = {}; if (d.species) base.species = d.species; if (d.coll) base.coll = d.coll; if (d.brand) base.brand = d.brand; if (d.q) base.q = d.q;
+      const f = {}; if (d.k) f[d.k] = new Set([d.v]);
+      go({name:'list', base, f, sort:'rel'});
+    }
+
+    /* ---------- menú escritorio y celular ---------- */
+    function menuGroups(sp){
+      const base = PRODUCTS.filter(p => p.species===sp);
+      return GROUPS.filter(([k]) => ['stage','size','need','type'].includes(k)).map(([k,title]) => {
+        const opts = sortOpts(k, [...new Set(base.flatMap(p => vals(p,k)))]);
+        return opts.length < 2 && k!=='need' ? null : {k, title, opts: opts.map(v => ({v, label: lab(k,v), n: base.filter(p => vals(p,k).includes(v)).length}))};
+      }).filter(g => g && g.opts.length);
+    }
+    function openMega(sp){
+      const groups = menuGroups(sp), n = PRODUCTS.filter(p => p.species===sp).length;
+      mega.innerHTML = `<div class="h-wrap">${groups.map(g => `<div><h4>${g.title}</h4><ul>${g.opts.map(o => `<li><button type="button" data-act="list" data-species="${sp}" data-k="${g.k}" data-v="${o.v}">${o.label}<small>${o.n}</small></button></li>`).join('')}</ul></div>`).join('')}${'<div></div>'.repeat(Math.max(0, 4 - groups.length))}
+        <div class="mega-all"><span class="eyebrow">${SPECIES[sp].label}</span><b>${SPECIES[sp].title}</b><span class="hint">${n} productos</span><button class="btn btn-primary btn-sm" type="button" data-act="list" data-species="${sp}">Ver todos</button></div></div>`;
+      mega.hidden = false; S.mega = sp;
+      frame.querySelectorAll('[data-act="mega"]').forEach(b => b.setAttribute('aria-expanded', b.dataset.species===sp));
+    }
+    function closeMega(){ if (mega.hidden) return; mega.hidden = true; S.mega = null; frame.querySelectorAll('[data-act="mega"]').forEach(b => b.setAttribute('aria-expanded','false')); }
+    function renderMenu(){
+      const body = layer.querySelector('[data-menu-body]');
+      body.innerHTML = `<ul class="menu-list">
+        ${['perro','gato'].map(sp => `<li><details><summary data-st="ok">${SPECIES[sp].title}<svg class="ico"><use href="#i-down"/></svg></summary><div class="menu-sub">
+          <div><button type="button" class="btn btn-secondary btn-sm" data-act="list" data-species="${sp}" data-st="ok">Ver todos (${PRODUCTS.filter(p => p.species===sp).length})</button></div>
+          ${menuGroups(sp).map(g => `<div><h4>${g.title}</h4><div class="sp-links">${g.opts.map(o => `<button type="button" class="pill" data-act="list" data-species="${sp}" data-k="${g.k}" data-v="${o.v}" data-st="ok">${o.label}</button>`).join('')}</div></div>`).join('')}
+        </div></details></li>`).join('')}
+        <li><button type="button" data-act="list" data-coll="ofertas" data-st="ok">Ofertas<svg class="ico"><use href="#i-chev"/></svg></button></li>
+        <li><button type="button" data-act="brands" data-st="ok">Marcas<svg class="ico"><use href="#i-chev"/></svg></button></li>
+      </ul>
+      <div class="menu-help"><p class="comp-label" style="margin:0">Ayuda</p>
+        <button type="button" data-act="wa" data-st="sim"><svg class="ico" style="color:var(--green-text)"><use href="#i-chat"/></svg>Escribinos por WhatsApp</button>
+        <span class="pend" data-st="pend">Envíos, retiro y pagos <em>Pendiente</em></span></div>`;
+    }
+
+    /* ---------- carrito ---------- */
+    const cartQty = () => S.cart.reduce((a,l) => a + l.qty, 0);
+    const cartTotal = () => S.cart.reduce((a,l) => a + byId[l.pid].v[l.vi].p * l.qty, 0);
+    function addToCart(pid, vi, qty){
+      const v = byId[pid].v[vi]; let line = S.cart.find(l => l.sku===v.sku);
+      const have = line ? line.qty : 0, can = Math.max(0, Math.min(qty, v.s - have));
+      if (!can){ toast(`No hay más stock de ${v.l}`); return; }
+      if (line) line.qty += can; else S.cart.push({sku:v.sku, pid, vi, qty:can});
+      updateCount(); if (S.open==='cart') renderCart();
+      toast(`${can > 1 ? can + ' × ' : ''}${v.l} agregado al carrito`, 'Ver carrito', 'cart-open');
+    }
+    function updateCount(){ const n = cartQty(); frame.querySelectorAll('[data-cart-count]').forEach(c => { c.textContent = n; c.hidden = n===0; }); frame.querySelector('.h-cart').setAttribute('aria-label', `Abrir carrito, ${n} ${n===1?'producto':'productos'}`); }
+    function renderCart(){
+      const body = layer.querySelector('[data-cart-body]'), foot = layer.querySelector('[data-cart-foot]'), n = cartQty();
+      layer.querySelector('[data-cart-title]').textContent = n ? `Tu carrito (${n})` : 'Tu carrito';
+      if (!S.cart.length){
+        body.innerHTML = `<div class="empty" style="padding-top:32px"><b>Tu carrito está vacío</b><span>Buscá el alimento de siempre o empezá por perros o gatos.</span><div class="row" style="justify-content:center"><button class="btn btn-secondary btn-sm" type="button" data-act="list" data-species="perro">Perros</button><button class="btn btn-secondary btn-sm" type="button" data-act="list" data-species="gato">Gatos</button></div></div>`;
+        foot.hidden = true; return;
+      }
+      foot.hidden = false;
+      body.innerHTML = S.cart.map(l => { const p = byId[l.pid], v = p.v[l.vi]; return `<div class="cart-line" data-sku="${v.sku}">
+        <button class="cart-img" type="button" data-act="product" data-id="${p.id}" aria-label="Ver ${esc(p.name)}">${svgShape(p,'')}</button>
+        <div class="cart-info"><button class="t" type="button" data-act="product" data-id="${p.id}">${esc(p.name)}</button><span class="v">${esc(p.brand)} · ${v.l} · ${money(v.p)} c/u</span>
+          <div class="cart-row"><div class="stepper sm" data-st="ok"><button type="button" data-act="cart-qty" data-d="-1" aria-label="Restar uno" ${l.qty<=1?'disabled':''}>−</button><output aria-live="polite">${l.qty}</output><button type="button" data-act="cart-qty" data-d="1" aria-label="Sumar uno" ${l.qty>=v.s?'disabled':''}>+</button></div><span class="price">${money(v.p * l.qty)}</span></div>
+          ${l.qty>=v.s?`<span class="card-note">Máximo disponible: ${v.s}</span>`:''}
+          <button class="remove" type="button" data-act="cart-remove" data-st="ok">Quitar</button></div></div>`; }).join('');
+      foot.innerHTML = `<div class="tot"><span>Subtotal</span><b>${money(cartTotal())}</b></div>
+        <span class="tot-note">El envío o retiro se elige en el siguiente paso.</span>
+        <button class="btn btn-primary btn-block" type="button" data-act="checkout" data-st="pend">Iniciar compra</button>
+        <div class="inline-msg" data-checkout-msg hidden>El checkout (datos de entrega, envío o retiro y pago) se construye en la próxima etapa, después de validar este diseño.</div>
+        <button class="btn btn-secondary btn-block" type="button" data-act="close-all">Seguir comprando</button>`;
+    }
+
+    /* ---------- capas ---------- */
+    function openPanel(name){
+      closeMega(); S.open = name;
+      if (name==='cart') renderCart(); if (name==='menu') renderMenu(); if (name==='filters') renderSheet();
+      layer.classList.add('has-open');
+      layer.querySelectorAll('[data-panel]').forEach(p => { const on = p.dataset.panel===name; p.classList.toggle('open', on); p.setAttribute('aria-hidden', !on); });
+      const first = layer.querySelector(`[data-panel="${name}"] .panel-head button`); first && setTimeout(() => first.focus({preventScroll:true}), 30);
+    }
+    function closeAll(){
+      if (!S.open) return; S.open = null; layer.classList.remove('has-open');
+      layer.querySelectorAll('[data-panel]').forEach(p => { p.classList.remove('open'); p.setAttribute('aria-hidden','true'); });
+    }
+    function renderSheet(){
+      if (S.view.name!=='list') return;
+      const groups = facetsFor(listBase(S.view.base), S.view.f, !!S.view.base.species);
+      layer.querySelector('[data-sheet-body]').innerHTML = facetHTML(groups);
+      const n = listBase(S.view.base).filter(p => matchFilters(p, S.view.f)).length;
+      layer.querySelector('[data-sheet-cta]').textContent = `Ver ${n} ${n===1?'producto':'productos'}`;
+    }
+    function toast(msg, action, act){
+      const t = layer.querySelector('[data-toast]');
+      t.innerHTML = `<span>${esc(msg)}</span>${action?`<button type="button" data-act="${act}">${action}</button>`:''}`;
+      t.classList.add('show'); clearTimeout(S.toastT); S.toastT = setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    /* ---------- buscador ---------- */
+    const form = $('[data-search]'), input = form.querySelector('input'), sug = form.querySelector('.suggest');
+    function renderSuggest(){
+      const q = input.value.trim();
+      if (q.length < 2){ sug.hidden = true; return; }
+      const res = PRODUCTS.filter(p => matchQ(p,q));
+      sug.innerHTML = res.length ? res.slice(0,5).map(p => `<button type="button" data-act="product" data-id="${p.id}"><span class="s-img">${svgShape(p,'')}</span><span class="s-name"><small>${esc(p.brand)}</small>${esc(p.name)}</span><span class="s-price">${money(minPrice(p))}</span></button>`).join('') + `<button type="button" class="s-all" data-act="search-all">Ver los ${res.length} resultados</button>` : `<div class="s-empty">No encontramos "${esc(q)}". Probá con la marca o con "cachorro", "castrado", "senior"…</div>`;
+      sug.hidden = false;
+    }
+    input.addEventListener('input', renderSuggest);
+    input.addEventListener('focus', renderSuggest);
+    input.addEventListener('keydown', e => { if (e.key==='Escape'){ sug.hidden = true; input.blur(); } });
+    form.addEventListener('submit', e => { e.preventDefault(); const q = input.value.trim(); if (!q) return; sug.hidden = true; input.blur(); goList({q}); });
+    document.addEventListener('pointerdown', e => { if (!form.contains(e.target)) sug.hidden = true; if (!e.target.closest('.h-head') ) closeMega(); });
+
+    /* ---------- acciones ---------- */
+    function onAct(e){
+      const el = e.target.closest('[data-act]'); if (!el) return;
+      const a = el.dataset.act, d = el.dataset;
+      if (e.type==='change' && !['facet','sort'].includes(a)) return;
+      if (e.type==='click' && ['facet','sort'].includes(a)) return;
+      switch(a){
+        case 'home': go({name:'home'}); input.value=''; break;
+        case 'list': goList(d); if (!d.q) input.value=''; break;
+        case 'brands': go({name:'brands'}); break;
+        case 'product': sug.hidden = true; S.pdp = {vi: (byId[d.id].v[byId[d.id].d].s === 0 ? byId[d.id].v.findIndex(v => v.s>0) : byId[d.id].d), qty:1}; if (S.pdp.vi < 0) S.pdp.vi = 0; go({name:'product', id:+d.id}); break;
+        case 'search-all': form.requestSubmit(); break;
+        case 'mega': S.mega===d.species ? closeMega() : openMega(d.species); break;
+        case 'menu-open': openPanel('menu'); break;
+        case 'cart-open': openPanel('cart'); break;
+        case 'filters-open': openPanel('filters'); break;
+        case 'close-all': closeAll(); break;
+        case 'card-size': {
+          const c = el.closest('.pcard'), p = byId[c.dataset.pid];
+          c.outerHTML = card(p, +d.i);
+          const nc = frame.querySelector(`.pcard[data-pid="${p.id}"][data-vi="${d.i}"] .size[data-i="${d.i}"]`) || layer.ownerDocument.querySelector(`#ds-card .size[data-i="${d.i}"]`);
+          nc && nc.focus({preventScroll:true}); break; }
+        case 'add-card': { const c = el.closest('.pcard'); addToCart(+c.dataset.pid, +c.dataset.vi, 1); break; }
+        case 'pdp-size': S.pdp = {vi:+d.i, qty:1}; render(true); break;
+        case 'pdp-qty': S.pdp.qty = Math.max(1, S.pdp.qty + +d.d); render(true); break;
+        case 'add-pdp': addToCart(S.view.id, S.pdp.vi, S.pdp.qty); break;
+        case 'cart-qty': { const l = S.cart.find(x => x.sku===el.closest('.cart-line').dataset.sku); const max = byId[l.pid].v[l.vi].s; l.qty = Math.min(max, Math.max(1, l.qty + +d.d)); updateCount(); renderCart(); break; }
+        case 'cart-remove': { const sku = el.closest('.cart-line').dataset.sku; const l = S.cart.find(x => x.sku===sku); S.cart = S.cart.filter(x => x.sku!==sku); updateCount(); renderCart(); toast('Producto quitado', 'Deshacer', 'cart-undo'); S.undo = l; break; }
+        case 'cart-undo': if (S.undo){ S.cart.push(S.undo); S.undo = null; updateCount(); renderCart(); layer.querySelector('[data-toast]').classList.remove('show'); } break;
+        case 'checkout': layer.querySelector('[data-checkout-msg]').hidden = false; break;
+        case 'facet': { const f = S.view.f; (f[d.k] ||= new Set()); el.checked ? f[d.k].add(d.v) : f[d.k].delete(d.v); render(true); break; }
+        case 'facet-off': S.view.f[d.k]?.delete(d.v); render(true); break;
+        case 'clear': S.view.f = {}; render(true); break;
+        case 'sort': S.view.sort = el.value; render(true); break;
+        case 'wa': toast('Falta el número de WhatsApp. Cuando lo tengamos, abre el chat con un mensaje listo.'); break;
+      }
+    }
+    [frame, layer].forEach(r => { r.addEventListener('click', onAct); r.addEventListener('change', onAct); });
+    document.addEventListener('keydown', e => { if (e.key==='Escape'){ closeAll(); closeMega(); } });
+
+    render(true);
+    return {card};
+  }
+
+  /* ================= AUDITORÍA ================= */
+  const AUDIT = [
+    ['g','Navegación'],
+    ['Logo → inicio','bad','No hacía nada','ok','Vuelve al inicio desde cualquier pantalla.','Igual.'],
+    ['Menú de escritorio (Perros / Gatos)','bad','Las flechas no abrían nada','ok','Submenú con etapa, tamaño, necesidades y tipo, generado desde los productos y con cantidades.','Igual, leyendo la base de datos.'],
+    ['Ofertas y Marcas en el menú','bad','No hacían nada','ok','Abren el catálogo filtrado y la página de marcas.','Igual.'],
+    ['Menú en celular','bad','El botón no abría nada','ok','Cajón lateral con secciones desplegables, atajos y ayuda.','Igual.'],
+    ['Migas de pan ("Inicio › Perros")','off','No existían','ok','Permiten volver un nivel atrás.','Igual, con datos estructurados para Google.'],
+    ['g','Encontrar productos'],
+    ['Buscador','bad','No buscaba','ok','Sugerencias mientras escribís y página de resultados. Tolera tildes y plurales.','Igual. Si el catálogo supera unos cientos de productos, conviene un buscador con tolerancia a errores de tipeo.'],
+    ['Accesos Perros / Gatos y atajos por etapa','bad','No hacían nada','ok','Abren el catálogo ya filtrado.','Igual.'],
+    ['Filtros','off','No existían','ok','Sólo opciones con productos, con conteo. En celular, hoja inferior que muestra cuántos resultados vas a ver.','Igual.'],
+    ['Ordenar','off','No existía','ok','Relevancia, menor precio, mayor precio y novedades.','Igual.'],
+    ['Ver todos / Ver todas','bad','No hacían nada','ok','Llevan a la colección completa de esa sección.','Igual.'],
+    ['Marcas','bad','No hacían nada','ok','Abren el catálogo de la marca.','Igual.'],
+    ['g','Producto'],
+    ['Tarjeta → ficha de producto','bad','No se podía abrir','ok','La foto y el nombre abren la ficha.','Igual.'],
+    ['Presentaciones (pesos)','ok','Cambiaban el precio de la tarjeta','ok','En tarjeta y ficha. Las presentaciones sin stock se ven tachadas y no se pueden agregar.','Igual, con stock real.'],
+    ['Precio, descuento y precio por kilo','ok','Calculado en la tarjeta','ok','Se calculan desde la presentación elegida.','Igual.'],
+    ['Cantidad en la ficha','off','No existía','ok','Selector con tope en el stock disponible.','Igual.'],
+    ['g','Carrito'],
+    ['Agregar al carrito','sim','Sólo sumaba al contador','ok','Agrega la presentación elegida y confirma con un aviso que tiene acceso al carrito.','Guarda el carrito para que no se pierda al recargar.'],
+    ['Contador del carrito','sim','Sumaba sin carrito detrás','ok','Muestra las unidades. Se oculta en 0.','Igual.'],
+    ['Cambiar cantidades','off','No existía','ok','Más y menos, con tope de stock.','Igual.'],
+    ['Quitar productos','off','No existía','ok','"Quitar" con opción de deshacer.','Igual.'],
+    ['Subtotal','off','No existía','ok','Se calcula al instante.','Igual. El costo de envío se suma en el checkout.'],
+    ['Iniciar compra (checkout)','off','No existía','pend','Visible y marcado: al tocarlo explica que es la próxima etapa.','Etapa 3: datos de entrega, envío o retiro y pago.'],
+    ['g','Comercial y contacto'],
+    ['Banner principal','bad','Carrusel decorativo, botones sin acción','ok','Un banner con un botón que lleva a Ofertas.','Imagen, texto y destino editables desde el panel.'],
+    ['Ofertas','bad','Sección fija sin enlace','ok','Se arma sola con los productos que tienen precio anterior.','Igual, desde el panel.'],
+    ['WhatsApp','bad','No hacía nada','sim','Avisa que falta el número.','Abre el chat con un mensaje armado, por ejemplo "Hola, quiero consultar por…".'],
+    ['Ingresar / Mi cuenta','bad','No hacía nada','off','Se quitó: no es parte del lanzamiento.','Más adelante, junto con favoritos y compras recurrentes.'],
+    ['Páginas de ayuda (envíos, pagos, preguntas)','bad','Enlaces vacíos','pend','Marcadas como pendientes.','Contenido a definir con vos.'],
+    ['Redes sociales','bad','Íconos sin enlace','pend','Marcadas: faltan los links.','Enlaces reales.'],
+    ['g','Datos y administración'],
+    ['Productos, precios y stock','sim','Ejemplos fijos','sim','15 productos de ejemplo con la estructura definitiva.','Panel para cargar, editar y desactivar productos.'],
+    ['Medios de pago y envío configurables','off','No existía','pend','Sólo mencionados.','Configurables desde el panel, sin tocar código.'],
+    ['Panel administrativo','off','No existía','pend','No incluido en esta etapa.','Productos, precios, stock, ofertas, banners y pedidos.']
+  ];
+  const ST = {ok:'Funciona', sim:'Simulado', pend:'Pendiente', bad:'No funcionaba', off:'No existía'};
+  const ST2 = {...ST, off:'Quitado / no aplica'};
+  function renderAudit(){
+    const tb = document.querySelector('[data-audit]');
+    tb.innerHTML = AUDIT.map(r => r[0]==='g' ? `<tr class="group"><td colspan="4">${r[1]}</td></tr>` :
+      `<tr><td>${r[0]}</td><td><span class="st ${r[1]}">${ST[r[1]]}</span><br>${r[2]}</td><td><span class="st ${r[3]}">${r[3]==='off'?'Quitado':ST2[r[3]]}</span><br>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+    const rows = AUDIT.filter(r => r[0]!=='g'), c = k => rows.filter(r => r[3]===k).length, b = rows.filter(r => r[1]==='bad').length;
+    document.querySelector('[data-st-sum]').innerHTML = `
+      <div class="stat"><span class="st bad">V1 no funcionaba</span><b>${b}</b><span>de ${rows.length} elementos</span></div>
+      <div class="stat"><span class="st ok">V2 funciona</span><b>${c('ok')}</b><span>lógica reutilizable</span></div>
+      <div class="stat"><span class="st sim">V2 simulado</span><b>${c('sim')}</b><span>falta dato o servicio real</span></div>
+      <div class="stat"><span class="st pend">V2 pendiente</span><b>${c('pend')}</b><span>marcado en pantalla</span></div>`;
+  }
+
+  /* ================= ARRANQUE ================= */
+  const desk = createShop(document.getElementById('frame-desktop'), document.getElementById('layer-desktop'));
+  createShop(document.getElementById('frame-mobile'), document.getElementById('layer-mobile'));
+  document.getElementById('ds-card').innerHTML = desk.card(byId[10]);
+  document.getElementById('ds-card').addEventListener('click', e => {
+    const s = e.target.closest('[data-act="card-size"]'); if (!s) return;
+    document.getElementById('ds-card').innerHTML = desk.card(byId[10], +s.dataset.i);
+  });
+  renderAudit();
+
+  const bar = document.getElementById('bar');
+  const setBarH = () => document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  setBarH(); window.addEventListener('resize', setBarH);
+
+  document.querySelectorAll('[data-st-toggle]').forEach(t => t.addEventListener('change', () => {
+    document.body.classList.toggle('st-on', t.checked);
+    document.querySelectorAll('[data-st-toggle]').forEach(o => o.checked = t.checked);
+  }));
+
+  const views = ['escritorio','celular','diagnostico','arquitectura','auditoria','sistema'];
+  function route(){
+    const h = location.hash.slice(1), v = views.includes(h) ? h : 'escritorio';
+    document.querySelectorAll('section[data-page]').forEach(s => s.hidden = s.dataset.page !== v);
+    document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === v));
+    setBarH();
+  }
+  document.querySelector('.seg').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (location.hash.slice(1) !== b.dataset.view) location.hash = b.dataset.view; else route();
+    window.scrollTo({top:0});
+  });
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
