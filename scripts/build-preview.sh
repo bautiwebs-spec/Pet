@@ -2,7 +2,7 @@
 # Genera docs/index.html (página pública vía GitHub Pages) a partir de la propuesta de diseño.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-SRC=design/propuesta-visual-v2.html
+SRC=design/propuesta-visual-v3.html
 OUT=docs/index.html
 {
   echo '<!doctype html>'
