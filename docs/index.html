@@ -674,6 +674,259 @@ table.t.matrix td:first-child{text-align:left}
 @media (min-width:900px){ .lab{grid-template-columns:repeat(3,minmax(0,1fr))} }
 .lab-box{border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:12px; align-items:flex-start; min-width:0}
 
+
+/* ================= V4 ================= */
+.ctl{max-width:100%; white-space:normal; flex-wrap:wrap}
+.ctl select{max-width:100%; min-width:0}
+:root{--bad-bg:#FDECEA; --info-bg:#EEF4FD}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--bad-bg:#3A1A18; --info-bg:#172235} }
+:root[data-theme="dark"]{--bad-bg:#3A1A18; --info-bg:#172235}
+
+/* Home más tranquila */
+.sec{padding-block:40px 0}
+@container home (min-width:720px){ .sec{padding-block:64px 0} .sec-head{margin-bottom:20px} .sec-head h2{font-size:26px} }
+.sec-head h2{font-size:21px; font-weight:650; letter-spacing:-.02em}
+.ctile{border-color:transparent; background:var(--bg-soft); padding:14px 6px 12px}
+.ctile.in{animation:fadeIn .25s ease both; animation-delay:0s}
+@keyframes fadeIn{from{opacity:.001}}
+@media (hover:hover){ .ctile:hover{border-color:transparent; box-shadow:none; background:var(--tile-bg, var(--pink-50))} }
+.ctile-ic{width:46px; height:46px; background:var(--surface)}
+.ctiles.hub .ctile{background:var(--surface); border:1px solid var(--line)}
+.brands.strip{grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:40%; overflow-x:auto; scrollbar-width:none; margin-inline:-16px; padding-inline:16px; scroll-snap-type:x proximity}
+.brands.strip::-webkit-scrollbar{display:none}
+.brands.strip .brand{scroll-snap-align:start}
+@container home (min-width:720px){ .brands.strip{grid-auto-flow:row; grid-template-columns:repeat(6,minmax(0,1fr)); overflow:visible; margin-inline:0; padding-inline:0} }
+.pcard-body{gap:6px}
+.card-note:empty{display:none}
+.size.more{border-style:dashed; color:var(--muted)}
+.pcard.is-soldout .pimg{opacity:.4; filter:grayscale(.7)}
+.pcard.is-soldout .price{color:var(--muted)}
+.badge-out{background:var(--surface); color:var(--ink-2); box-shadow:var(--shadow-1)}
+.btn-light{background:#fff; color:#1F1A1D}
+.btn-light:hover{background:#F3EEF1}
+
+/* Encabezado compacto en celular al bajar */
+.home.is-condensed .h-head-row{grid-template-columns:auto minmax(0,1fr) auto; grid-template-areas:"menu search cart"; padding-block:8px}
+.home.is-condensed .h-logo{display:none}
+.home.is-condensed .h-search input{height:40px}
+
+/* Sin resultados */
+.noresults{grid-column:1 / -1; display:flex; flex-direction:column; gap:12px; align-items:flex-start; padding:24px; border:1px dashed var(--line-strong); border-radius:var(--r-lg)}
+.noresults b{font-size:18px; font-weight:650}
+.noresults .s-chips{padding:0}
+.noresults .row{display:flex; gap:8px; flex-wrap:wrap}
+
+/* ---------- Carrusel ---------- */
+.carousel{container:car / inline-size; position:relative; margin-top:12px; --peek:0px}
+.car-viewport{position:relative; overflow:hidden; aspect-ratio:1 / 1.14; max-width:100%; border-radius:var(--r-xl); touch-action:pan-y; -webkit-user-select:none; user-select:none; --sw:100%; --step:100%}
+.car-slide{position:absolute; top:0; bottom:0; left:0; width:var(--sw); border-radius:var(--r-xl); overflow:hidden; background:var(--s-bg); color:var(--s-ink); transform:translateX(calc(var(--p, 0) * var(--step) + var(--drag, 0px))); transition:transform .85s cubic-bezier(.65,.05,.25,1), opacity .5s; cursor:grab}
+.car-slide.jump,.car-slide.jump .art-inner,.car-viewport.dragging .car-slide,.car-viewport.dragging .art-inner{transition:none}
+.car-viewport.dragging .car-slide{cursor:grabbing}
+.car-slide.is-next{cursor:pointer; opacity:.9}
+.slide-art{position:absolute; inset:0; overflow:hidden}
+.art-inner{position:absolute; top:0; bottom:0; left:-10%; right:-10%; transition:transform .85s cubic-bezier(.65,.05,.25,1)}
+.carousel[data-mode="b"] .art-inner{transform:translateX(calc(var(--p, 0) * -9%)) scale(1.03)}
+.art-stage{position:absolute; left:10%; right:10%; top:4%; height:50%; display:flex; align-items:center; justify-content:center; isolation:isolate}
+.art-disc{position:absolute; top:50%; left:50%; translate:-50% -50%; height:86%; aspect-ratio:1; border-radius:50%; background:var(--s-acc); z-index:-1}
+.art-main{height:74%; width:auto; aspect-ratio:120/140; filter:drop-shadow(0 18px 22px rgb(0 0 0 / .14))}
+.art-sec{height:44%; width:auto; aspect-ratio:120/140; margin-left:-9%; align-self:flex-end; margin-bottom:9%; filter:drop-shadow(0 12px 16px rgb(0 0 0 / .14))}
+.art-icon{width:38%; height:auto; aspect-ratio:1; fill:none; stroke:currentColor; stroke-width:1.1; color:var(--s-ink); opacity:.85}
+.art-cards{position:relative; width:min(62%, 300px); aspect-ratio:1.586}
+.art-card{position:absolute; inset:0; border-radius:16px; background:linear-gradient(135deg,#FF1E8C,#9E1460); color:#fff; padding:6%; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 24px 40px -16px rgb(0 0 0 / .55); rotate:-7deg; font-size:12px}
+.art-card.c2{background:linear-gradient(135deg,#5A9E4B,#2E6B27); rotate:7deg; translate:14% 8%}
+.art-card .chip{width:34px; height:24px; border-radius:6px; background:linear-gradient(135deg,#F3DE9A,#C9A74B)}
+.art-card b{font-weight:600; font-size:13px}
+.art-card i{font-style:normal; letter-spacing:.2em; opacity:.8}
+.art-cap{position:absolute; top:12px; right:12px; font-size:10.5px; padding:3px 8px; border-radius:var(--r-pill); background:rgb(255 255 255 / .88); color:#4A4247; max-width:72%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.slide-copy{position:absolute; left:0; right:0; bottom:0; padding:36px 20px 22px; background:linear-gradient(to top, var(--s-bg) 80%, transparent); display:flex; flex-direction:column; gap:8px; align-items:flex-start}
+.s-eyebrow{font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; opacity:.8}
+.slide-copy h2{font-size:25px; line-height:1.08; font-weight:700; letter-spacing:-.03em; max-width:17ch}
+.slide-copy p{font-size:14.5px; opacity:.85; max-width:36ch}
+.slide-copy .btn{margin-top:6px; height:44px}
+.carousel[data-mode="b"] .slide-copy > *{transition:opacity .45s ease, transform .6s var(--ease)}
+.carousel[data-mode="b"] .car-slide:not(.is-cur) .slide-copy > *{opacity:0; transform:translateX(28px)}
+.carousel[data-mode="b"] .car-slide.is-cur .slide-copy > *{transition-delay:.32s}
+.carousel[data-mode="b"] .car-slide.is-cur .slide-copy > :nth-child(2){transition-delay:.38s}
+.carousel[data-mode="b"] .car-slide.is-cur .slide-copy > :nth-child(3){transition-delay:.44s}
+.carousel[data-mode="b"] .car-slide.is-cur .slide-copy > :nth-child(4){transition-delay:.5s}
+.car-arrow{display:none; position:absolute; top:50%; translate:0 -50%; width:44px; height:44px; border-radius:50%; border:0; background:rgb(255 255 255 / .94); color:#1F1A1D; box-shadow:var(--shadow-1); place-items:center; cursor:pointer; opacity:0; transition:opacity .2s; z-index:3}
+.carousel:hover .car-arrow,.car-arrow:focus-visible{opacity:1}
+.car-arrow.prev{left:14px}
+.car-arrow.next{right:calc(var(--peek) + 14px)}
+.car-ctrl{display:flex; align-items:center; justify-content:center; gap:12px; margin-top:12px}
+.car-dots{display:flex; gap:8px; align-items:center}
+.car-dot{width:8px; height:8px; padding:0; border:0; border-radius:var(--r-pill); background:var(--line-strong); cursor:pointer; position:relative; overflow:hidden; transition:width .3s var(--ease), background .3s}
+.car-dot::after{content:""; position:absolute; inset:-10px -4px}
+.car-dot.on{width:30px; background:var(--pink-100)}
+.car-dot i{position:absolute; inset:0; background:var(--pink-fill); transform:scaleX(0); transform-origin:left; border-radius:inherit}
+.car-dot.on i{animation:prog var(--dur, 6500ms) linear forwards}
+.carousel.paused .car-dot.on i{animation-play-state:paused}
+.carousel.static .car-dot.on i{animation:none; transform:none}
+@keyframes prog{to{transform:none}}
+.car-pause{width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:var(--surface); display:grid; place-items:center; cursor:pointer; color:var(--ink-2)}
+.car-pause .ico{width:15px; height:15px}
+.carousel.static .car-pause{display:none}
+@container car (min-width:720px){
+  .car-viewport{aspect-ratio:2.5 / 1}
+  .art-stage{left:auto; right:6%; top:6%; bottom:6%; height:auto; width:46%}
+  .slide-copy{top:0; bottom:0; right:auto; width:60%; padding:40px 56px; justify-content:center; background:linear-gradient(90deg, var(--s-bg) 58%, transparent)}
+  .slide-copy h2{font-size:clamp(28px, 4.4cqi, 46px); max-width:15ch}
+  .slide-copy p{font-size:16.5px}
+  .slide-copy .btn{height:48px}
+  .car-arrow{display:grid}
+}
+
+/* ---------- Checkout ---------- */
+.co-head{display:none; align-items:center; justify-content:space-between; gap:12px; padding-block:12px}
+.home.is-checkout .h-ann,.home.is-checkout .h-head-row,.home.is-checkout .subnav,.home.is-checkout .mega,.home.is-checkout .h-foot,.home.is-checkout .wa-dock{display:none !important}
+.home.is-checkout .co-head{display:flex}
+.co-secure{display:none; align-items:center; gap:6px; font-size:13px; color:var(--muted)}
+.co-secure .ico{width:16px; height:16px; color:var(--green-text)}
+.co-steps{list-style:none; margin:0; padding:18px 0 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px}
+.co-step > *{display:flex; flex-direction:column; gap:7px; width:100%; border:0; background:none; padding:0; text-align:left; font-size:12.5px; color:var(--muted)}
+.co-step button{cursor:pointer}
+.co-step button:hover .t{color:var(--ink); text-decoration:underline}
+.co-step .bar{height:4px; border-radius:4px; background:var(--line); transition:background .3s}
+.co-step.past .bar,.co-step.cur .bar{background:var(--pink-fill)}
+.co-step .lbl{display:flex; gap:6px; align-items:baseline; min-width:0}
+.co-step .t{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.co-step.cur > *{color:var(--ink); font-weight:600}
+.co-layout{display:grid; gap:20px; padding-block:18px 56px}
+.co-main{display:flex; flex-direction:column; gap:20px; min-width:0}
+.co-main h1{font-size:24px; font-weight:650; letter-spacing:-.02em; line-height:1.15}
+.co-side{display:none}
+.co-card{border:1px solid var(--line); border-radius:var(--r-lg); padding:20px; display:flex; flex-direction:column; gap:16px; background:var(--surface)}
+.co-card h2{font-size:17px; font-weight:650}
+.co-mob-sum{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--bg-soft)}
+.co-mob-sum summary{list-style:none; display:flex; align-items:center; gap:10px; padding:14px 16px; cursor:pointer; font-weight:600; font-size:15px}
+.co-mob-sum summary::-webkit-details-marker{display:none}
+.co-mob-sum summary small{font-weight:400; color:var(--muted)}
+.co-mob-sum summary b{margin-left:auto; font-variant-numeric:tabular-nums}
+.co-mob-sum summary .ico{width:18px; height:18px; transition:transform .2s}
+.co-mob-sum[open] summary .ico{transform:rotate(180deg)}
+.co-sum{display:flex; flex-direction:column; gap:14px}
+.co-mob-sum .co-sum{padding:0 16px 16px}
+.sum-lines{display:flex; flex-direction:column; gap:12px}
+.sum-line{display:grid; grid-template-columns:48px minmax(0,1fr) auto; gap:12px; align-items:center; font-size:14px}
+.sum-img{position:relative; width:48px; height:48px; border-radius:10px; background:var(--img-bg); display:grid; place-items:center}
+.sum-img svg{width:28px; height:34px}
+.sum-img em{position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; border-radius:var(--r-pill); background:var(--ink-2); color:var(--bg); font-style:normal; font-size:11px; font-weight:600; display:grid; place-items:center; padding-inline:5px}
+.sum-name{display:flex; flex-direction:column; line-height:1.3; min-width:0}
+.sum-name small{color:var(--muted); font-size:12.5px}
+.sum-price{font-variant-numeric:tabular-nums; font-weight:600}
+.sum-rows{display:flex; flex-direction:column; gap:8px; border-top:1px solid var(--line); padding-top:14px}
+.sum-row{display:flex; justify-content:space-between; gap:12px; font-size:14.5px; color:var(--ink-2)}
+.sum-row span:last-child{font-variant-numeric:tabular-nums; text-align:right}
+.sum-row.disc{color:var(--green-text)}
+.sum-row.total{font-size:18px; font-weight:700; color:var(--ink); border-top:1px solid var(--line); padding-top:10px; margin-top:4px}
+.sum-code{display:flex; flex-direction:column; gap:6px}
+.code-form{display:flex; gap:8px}
+.co-sec{border:0; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; min-width:0}
+.co-sec legend{font-size:17px; font-weight:650; margin-bottom:14px; padding:0}
+.co-sec legend .opt,.fld .opt{font-weight:400; color:var(--muted); font-size:14px}
+.co-sec:focus{outline:none}
+.fld{display:flex; flex-direction:column; gap:6px; min-width:0}
+.fld label{font-size:14px; font-weight:600}
+.inp{height:48px; border:1.5px solid var(--line-strong); border-radius:var(--r-md); background:var(--surface); color:var(--ink); padding-inline:14px; font-size:16px; width:100%; transition:border-color .15s, box-shadow .15s}
+.inp:focus{outline:none; border-color:var(--pink-fill); box-shadow:0 0 0 4px var(--pink-100)}
+.inp[aria-invalid="true"]{border-color:var(--st-bad)}
+.inp[aria-invalid="true"]:focus{box-shadow:0 0 0 4px var(--bad-bg)}
+.inp.sm{height:40px; font-size:15px}
+textarea.inp{height:auto; min-height:92px; padding-block:12px; resize:vertical; line-height:1.4}
+.err{display:flex; gap:6px; align-items:flex-start; font-size:13px; color:var(--st-bad); line-height:1.35}
+.err:empty{display:none}
+.err .ico{width:16px; height:16px; margin-top:1px}
+.frow{display:grid; gap:14px}
+.cp-row{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:start}
+.cp-row .btn{margin-top:27px}
+.co-addr{display:flex; flex-direction:column; gap:14px}
+.opt-cards{display:grid; gap:10px}
+.ocard{display:grid; grid-template-columns:22px minmax(0,1fr) auto; gap:12px; align-items:start; border:1.5px solid var(--line-strong); border-radius:var(--r-lg); padding:14px 16px; cursor:pointer; transition:border-color .15s, background .15s}
+.ocard:hover{border-color:var(--ink-2)}
+.ocard input{appearance:none; width:20px; height:20px; border-radius:50%; border:1.5px solid var(--line-strong); margin:2px 0 0; background:var(--surface); transition:border-width .15s var(--spring), border-color .15s; cursor:pointer}
+.ocard input:checked{border:6px solid var(--pink-fill)}
+.ocard:has(input:checked){border-color:var(--pink-fill); background:var(--pink-50)}
+.ocard > span{display:flex; flex-direction:column; gap:2px; min-width:0}
+.ocard b{font-weight:600}
+.ocard small{font-size:13.5px; color:var(--ink-2); line-height:1.4}
+.ocard .why{color:var(--warn)}
+.ocard.is-disabled{opacity:.65; cursor:not-allowed; background:var(--bg-soft)}
+.ocard.is-disabled input{cursor:not-allowed}
+.tag-sub{font-size:11px; font-weight:600; padding:3px 7px; border-radius:var(--r-pill); background:var(--tbd-bg); color:var(--tbd-ink); white-space:nowrap}
+.notice{display:flex; gap:10px; align-items:flex-start; padding:12px 14px; border-radius:var(--r-md); font-size:14px; line-height:1.45}
+.notice .ico{width:20px; height:20px; flex:none; margin-top:1px}
+.notice.ok{background:var(--green-50); color:var(--green-text)}
+.notice.warn{background:var(--tbd-bg); color:var(--tbd-ink)}
+.notice.bad{background:var(--bad-bg); color:var(--st-bad)}
+.notice.info{background:var(--info-bg); color:var(--ink-2)}
+.notice.info .ico{color:var(--st-sim)}
+.notice.small{padding:8px 10px; font-size:13px}
+.notice .link{font-size:inherit; white-space:normal}
+.err-sum{border:1.5px solid var(--st-bad); background:var(--bad-bg); border-radius:var(--r-md); padding:14px 16px; display:flex; flex-direction:column; gap:6px; font-size:14px; color:var(--ink)}
+.err-sum:focus{outline:3px solid var(--pink); outline-offset:2px}
+.err-sum ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:4px}
+.err-sum .link{color:var(--st-bad); text-decoration:underline; white-space:normal; text-align:left; font-weight:500}
+.co-lines{display:flex; flex-direction:column}
+.co-line{display:grid; grid-template-columns:76px minmax(0,1fr); gap:14px; padding-block:16px; border-top:1px solid var(--line)}
+.co-line:last-child{border-bottom:1px solid var(--line)}
+.co-line.is-bad .co-img{opacity:.45}
+.co-img{width:76px; height:76px; border-radius:12px; background:var(--img-bg); display:grid; place-items:center}
+.co-img svg{width:44px; height:52px}
+.co-info{display:flex; flex-direction:column; gap:6px; min-width:0}
+.co-info > b{font-weight:500; font-size:15px; line-height:1.3}
+.co-info .v{font-size:13px; color:var(--muted)}
+.co-actions{display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap-reverse; margin-top:4px}
+.co-actions .btn{flex:1 1 200px}
+.sim-btn{display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:6px 12px; border-radius:10px; border:1.5px dashed var(--st-sim); background:transparent; color:var(--st-sim); font-size:13px; font-weight:600; cursor:pointer; text-align:left}
+.sim-tag{font-size:11px; font-weight:600; padding:2px 7px; border-radius:var(--r-pill); border:1px dashed var(--st-sim); color:var(--st-sim)}
+.co-review{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px 20px; align-items:start; border:1px solid var(--line); border-radius:var(--r-lg); padding:14px 16px; font-size:14px}
+.co-review > div{display:flex; flex-direction:column; gap:2px; min-width:0}
+.co-review b{font-weight:600}
+.co-review .link{grid-column:2; grid-row:1}
+.co-done{display:flex; flex-direction:column; gap:16px; align-items:flex-start}
+.done-ic{width:56px; height:56px; border-radius:50%; background:var(--green-50); color:var(--green-text); display:grid; place-items:center; animation:pop .45s var(--spring)}
+.done-ic .ico{width:30px; height:30px; stroke-width:2.4}
+.status-row{display:flex; gap:8px; flex-wrap:wrap}
+.spill{display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:4px 12px; border-radius:var(--r-pill); font-size:13.5px; font-weight:600}
+.spill::before{content:""; width:8px; height:8px; border-radius:50%; background:currentColor}
+.spill.ok{background:var(--green-50); color:var(--green-text)}
+.spill.wait{background:var(--tbd-bg); color:var(--tbd-ink)}
+.spill.bad{background:var(--bad-bg); color:var(--st-bad)}
+.timeline{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.timeline li{display:grid; grid-template-columns:24px 1fr; gap:12px; padding-bottom:16px; position:relative; font-size:14.5px; color:var(--ink-2)}
+.timeline li::before{content:""; width:12px; height:12px; border-radius:50%; border:2px solid var(--line-strong); background:var(--surface); margin:4px 0 0 4px; position:relative; z-index:1}
+.timeline li::after{content:""; position:absolute; left:11px; top:20px; bottom:0; width:2px; background:var(--line)}
+.timeline li:last-child::after{display:none}
+.timeline li.done::before{background:var(--green-fill); border-color:var(--green-fill)}
+.timeline li b{display:block; color:var(--ink); font-weight:600}
+.co-empty{display:flex; flex-direction:column; gap:12px; align-items:flex-start; padding-block:16px}
+.co-empty .row{display:flex; gap:8px; flex-wrap:wrap}
+.tdl{display:grid; grid-template-columns:minmax(0,40%) minmax(0,1fr); gap:10px 14px; font-size:14px; margin:0}
+.tdl dt{color:var(--muted)}
+.tdl dd{margin:0; font-weight:500}
+@container home (min-width:560px){
+  .co-secure{display:inline-flex}
+  .frow.two{grid-template-columns:1fr 1fr}
+  .frow.addr{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+  .co-actions .btn{flex:0 0 auto}
+}
+@container home (max-width:559px){ .co-step:not(.cur) .t{display:none} }
+@container home (min-width:860px){
+  .co-layout{grid-template-columns:minmax(0,1fr) 380px; gap:48px; align-items:start; padding-top:28px}
+  .co-side{display:block; position:sticky; top:calc(var(--sticky-top,0px) + 84px)}
+  .co-mob-sum{display:none}
+  .co-main h1{font-size:30px}
+}
+
+/* Documentación V4 */
+.cmp{display:grid; gap:28px}
+.cmp-item{display:flex; flex-direction:column; gap:10px; min-width:0}
+.cmp-item header{display:flex; justify-content:space-between; align-items:baseline; gap:8px 16px; flex-wrap:wrap}
+.cmp-item header b{font-size:17px; font-weight:650}
+.flow{display:grid; gap:10px}
+@media (min-width:900px){ .flow{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.flow .level ul{margin:0; padding-left:18px; font-size:13.5px; color:var(--ink-2); display:flex; flex-direction:column; gap:3px}
+
 /* Movimiento reducido: preferencia del sistema o interruptor de la propuesta */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
@@ -731,22 +984,24 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     <symbol id="i-ruler" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 8v3M11 8v4M15 8v3"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
     <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5h.01"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
   </defs>
 </svg>
 
 <header class="bar" id="bar">
   <div class="bar-in">
-    <div class="bar-title"><b>Pet Company Pilar</b><span>Propuesta v3 · para validar</span></div>
+    <div class="bar-title"><b>Pet Company Pilar</b><span>Propuesta v4 · para validar</span></div>
     <nav class="seg" aria-label="Vistas de la propuesta">
       <button type="button" data-view="escritorio">Escritorio</button>
       <button type="button" data-view="celular">Celular</button>
-      <button type="button" data-view="arquitectura">1 · Catálogo</button>
-      <button type="button" data-view="mascotas">2 · Perros y Gatos</button>
-      <button type="button" data-view="filtros">3 · Filtros</button>
-      <button type="button" data-view="tipografia">4 · Tipografía</button>
-      <button type="button" data-view="interacciones">5 · Interacciones</button>
-      <button type="button" data-view="ux">6 · Diagnóstico UX</button>
-      <button type="button" data-view="auditoria">Auditoría</button>
+      <button type="button" data-view="carrusel">1 · Carrusel</button>
+      <button type="button" data-view="home">2 · Home</button>
+      <button type="button" data-view="ux">3 · Auditoría UX</button>
+      <button type="button" data-view="checkout">4 · Checkout</button>
+      <button type="button" data-view="auditoria">5 · Interacciones</button>
     </nav>
   </div>
 </header>
@@ -754,9 +1009,10 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
 <!-- ============ PROTOTIPO ============ -->
 <template id="proto-controls">
   <div class="toolrow">
-    <label class="ctl">Tipografía <select data-font-select aria-label="Tipografía del prototipo"><option value="dmsans">DM Sans (recomendada)</option><option value="manrope">Manrope</option><option value="inter">Inter</option><option value="nunito">Nunito Sans (V2)</option></select></label>
+    <label class="ctl">Carrusel <select data-car-mode aria-label="Transición del carrusel"><option value="b">B · Con profundidad</option><option value="a">A · Suave</option></select></label>
     <label class="ctl"><input type="checkbox" data-st-toggle> Marcar estado</label>
     <label class="ctl"><input type="checkbox" data-rm-toggle> Reducir movimiento</label>
+    <a class="ctl" href="https://bautiwebs-spec.github.io/Pet/v3/" target="_blank" rel="noopener" style="padding-left:12px">Ver la V3 para comparar ↗</a>
   </div>
   <div class="legend" aria-hidden="true"><span style="color:var(--st-ok)"><i></i>Funciona</span><span style="color:var(--st-sim)"><i></i>Simulado</span><span style="color:var(--st-pend)"><i></i>Pendiente</span></div>
 </template>
@@ -764,9 +1020,15 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
 <section class="view" data-page="escritorio">
   <div class="view-in">
     <div class="toolrow" style="align-items:stretch">
-      <div class="demo-note"><svg class="ico"><use href="#i-eye"/></svg><span><b>Prototipo navegable con 41 productos de ejemplo.</b> Probá Perros › Descanso › Cuchas exteriores, buscá "ropa" o "casita", filtrá y volvé desde una ficha: los filtros se mantienen.</span></div>
+      <div class="demo-note"><svg class="ico"><use href="#i-eye"/></svg><span><b>V4 navegable con datos de ejemplo.</b> Nuevo: carrusel de campañas, checkout completo (Carrito → Datos y entrega → Pago → Confirmación), productos sin stock y búsqueda sin resultados con alternativas.</span></div>
     </div>
     <div data-controls></div>
+    <div class="demos">
+      <button class="demo-btn" type="button" data-demo="checkout" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Checkout con carrito de ejemplo</button>
+      <button class="demo-btn" type="button" data-demo="checkout-pago" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Ir directo al pago</button>
+      <button class="demo-btn" type="button" data-demo="noresults" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Búsqueda con error de tipeo</button>
+      <button class="demo-btn" type="button" data-demo="soldout" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Producto sin stock</button>
+    </div>
     <div class="browser">
       <div class="browser-top"><div class="dots"><i></i><i></i><i></i></div><div class="url" data-url>petcompanypilar · /</div><div class="dots" style="visibility:hidden"><i></i><i></i><i></i></div></div>
       <div id="frame-desktop"></div>
@@ -781,17 +1043,18 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     <div class="mobile-layout">
       <div class="phone"><div class="phone-screen"><div id="frame-mobile"></div></div><div class="layer abs" id="layer-mobile"></div></div>
       <aside class="notes">
-        <h2>Cuatro pasos, siempre en el mismo orden</h2>
+        <h2>Qué cambió en celular</h2>
         <ol>
-          <li><span class="n">1</span><div><b>Mascota</b>Perros o Gatos, desde la home, el menú o el buscador.</div></li>
-          <li><span class="n">2</span><div><b>Categoría</b>Barra de pestañas con íconos, fija debajo del buscador. Se desliza con el dedo y marca dónde estás.</div></li>
-          <li><span class="n">3</span><div><b>Tipo</b>Sólo si la categoría lo necesita: Cuchas, Colchones o Colchonetas; Buzos o Camperas.</div></li>
-          <li><span class="n">4</span><div><b>Filtros de esa categoría</b>En una hoja inferior con botones grandes. El botón dice cuántos productos vas a ver.</div></li>
+          <li><span class="n">1</span><div><b>Carrusel casi cuadrado</b>Imagen arriba y texto abajo, sobre un fondo liso. Se desliza con el dedo y avanza solo cada 6,5 segundos.</div></li>
+          <li><span class="n">2</span><div><b>Perros y Gatos al primer scroll</b>El bloque "Comprá para" queda justo debajo del carrusel.</div></li>
+          <li><span class="n">3</span><div><b>Encabezado compacto</b>Al bajar, el logo se oculta y el buscador comparte fila con el menú y el carrito: pasa de 118 a 56 px de alto.</div></li>
+          <li><span class="n">4</span><div><b>Checkout en una columna</b>Resumen plegable arriba, campos de 48 px y errores junto a cada campo.</div></li>
         </ol>
         <div class="demos">
-          <button class="demo-btn" type="button" data-demo="B" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Cuchas para perro grande</button>
-          <button class="demo-btn" type="button" data-demo="filtros-celular" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Hoja de filtros</button>
-          <button class="demo-btn" type="button" data-demo="D" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Guía de talles</button>
+          <button class="demo-btn" type="button" data-demo="checkout" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Checkout en celular</button>
+          <button class="demo-btn" type="button" data-demo="condensed" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Encabezado compacto</button>
+          <button class="demo-btn" type="button" data-demo="noresults" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Sin resultados</button>
+          <button class="demo-btn" type="button" data-demo="terms" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Condiciones de promo bancaria</button>
         </div>
         <p class="hint">Deslizá dentro del teléfono. La pantalla del celular funciona por separado de la de escritorio.</p>
       </aside>
@@ -799,273 +1062,207 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
   </div>
 </section>
 
-<!-- ============ 1 · CATÁLOGO ============ -->
-<section class="view" data-page="arquitectura" hidden>
+<!-- ============ 1 · CARRUSEL ============ -->
+<section class="view" data-page="carrusel" hidden>
   <div class="view-in doc">
     <article class="card">
       <header>
-        <span class="eyebrow">1 · Arquitectura del catálogo</span>
-        <h1>Dos mascotas, seis categorías, un solo catálogo</h1>
-        <p>Cada producto se carga una vez con su mascota (perro, gato o ambos), su categoría y su tipo. Los menús, las pestañas y los filtros se arman solos a partir de eso. Si una categoría no tiene productos para una mascota, no aparece. Por eso Gatos no muestra Indumentaria ni Cuchas exteriores.</p>
+        <span class="eyebrow">1 · Carrusel promocional</span>
+        <h1>El elemento más expresivo de la home</h1>
+        <p>Reemplaza al banner fijo. Cada campaña tiene una imagen para escritorio y otra para celular, un texto opcional y un destino coherente con lo que promete. Abajo están las dos transiciones funcionando con los mismos banners: tocá, arrastrá o esperá a que avancen solas.</p>
       </header>
-      <div class="tree" data-tree></div>
-      <p class="hint">Árbol generado a partir de los productos de ejemplo del prototipo. En la tienda real se genera igual, desde la base de datos.</p>
+      <div class="cmp">
+        <div class="cmp-item"><header><b>A · Desplazamiento horizontal suave</b><span class="hint">Imagen y texto se mueven juntos, como una sola pieza.</span></header><div data-cmp="a"></div></div>
+        <div class="cmp-item"><header><b>B · Con profundidad <span class="badge badge-sale" style="vertical-align:2px">Recomendada</span></b><span class="hint">La foto se desplaza un poco más lento que el marco y el texto entra después.</span></header><div data-cmp="b"></div></div>
+      </div>
+      <div class="notice info"><svg class="ico"><use href="#i-eye"/></svg><span><b>Por qué recomiendo B.</b> La profundidad es sutil (9% de desfase, sin 3D) y hace que cada campaña "entre" con su mensaje en vez de pasar como un bloque. Cuesta lo mismo en rendimiento que A: las dos usan sólo <code>transform</code> y <code>opacity</code>.</span></div>
     </article>
     <article class="card">
-      <header><h2>Accesos alternativos al mismo catálogo</h2><p>No tienen productos propios: muestran productos de las categorías con otro criterio.</p></header>
+      <header><h2>Comportamiento</h2></header>
       <ul class="rules">
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Ofertas</b> reúne todo producto que tenga precio anterior. Se filtra por mascota, categoría y precio.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Marcas</b> muestra cada marca con sus productos. Una marca sin productos activos no aparece.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Buscador</b> encuentra productos y también categorías ("cucha" lleva a Cuchas exteriores) y entiende sinónimos ("ropa", "casita", "comida").</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Productos para ambos</b> (shampoo, comederos, colchonetas) aparecen en Perros y en Gatos sin duplicarse.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Avanza hacia la izquierda cada 6,5 s</b>, en un ciclo continuo. El indicador activo se llena como barra de progreso.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Manual:</b> flechas discretas en escritorio (aparecen al pasar el mouse), indicadores, teclado ← → y arrastre con el dedo o el mouse.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Se pausa</b> al pasar el mouse, al navegar con teclado dentro del carrusel, al arrastrar, cuando la pestaña no está visible y cuando el carrusel sale de la pantalla.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Botón de pausa</b> siempre visible, como pide la norma de accesibilidad para contenido que se mueve solo.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Movimiento reducido:</b> no avanza solo y los cambios son instantáneos. Las flechas y los indicadores siguen funcionando.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Sin saltos al cargar:</b> el alto está reservado con una proporción fija (2,5:1 en escritorio, 1:1,14 en celular).</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Continuidad en escritorio:</b> se ve una franja de 72 px del banner siguiente. Al tocarla, avanza.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Texto legible sobre cualquier foto:</b> el texto va sobre un degradado del color de la campaña, a la izquierda en escritorio y abajo en celular.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Lectores de pantalla:</b> cada banner se anuncia como "2 de 6", los banners ocultos no reciben foco y los cambios manuales se anuncian.</div></li>
       </ul>
     </article>
     <article class="card">
-      <header><h2>Estructura de un producto</h2><p>La parte común es igual para todos. Los atributos cambian según la categoría, y cada variante (peso, tamaño o talle) tiene su propio precio y stock.</p></header>
-<pre class="codebox"><span class="c">// Común a todos</span>
-{ <span class="k">id</span>, <span class="k">slug</span>, <span class="k">nombre</span>, <span class="k">marca</span>, <span class="k">descripcion</span>, <span class="k">imagenes</span>[], <span class="k">activo</span>, <span class="k">destacado</span>
-  <span class="k">mascota</span>:   <span class="c">["perro"] | ["gato"] | ["perro","gato"]</span>
-  <span class="k">categoria</span>: <span class="c">alimentos | descanso | juguetes | accesorios | higiene | indumentaria</span>
-  <span class="k">tipo</span>:      <span class="c">cuchas | colchones | colchonetas | buzos | camperas | seco | ...</span>
-  <span class="k">atributos</span>: <span class="c">según la categoría ↓</span>
-  <span class="k">variantes</span>: [{ <span class="k">sku</span>, <span class="k">etiqueta</span>, <span class="k">precio</span>, <span class="k">precioAnterior</span>?, <span class="k">stock</span>, <span class="c">+ datos de la variante</span> }] }
+      <header><h2>Banners configurados (datos de ejemplo)</h2><p>Esta tabla muestra lo que en el futuro se carga desde el panel. Hoy (5/11/2026) se muestran sólo los banners activos y vigentes, en el orden indicado. El resto se oculta solo, sin tocar código.</p></header>
+      <div class="tbl-wrap"><table class="t" data-banner-table></table></div>
+    </article>
+    <div class="cols two">
+      <article class="card">
+        <header><h2>Campos de cada banner</h2></header>
+        <ul class="rules" style="grid-template-columns:1fr">
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Imagen de escritorio</b> 1600 × 640 px, con el motivo a la derecha y el lado izquierdo despejado para el texto.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Imagen de celular</b> 1080 × 1080 px, con el motivo en la mitad superior.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Etiqueta, título y descripción</b> opcionales. Un banner puede ser sólo imagen.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Acción:</b> llevar a una mascota, categoría, tipo, colección u oferta, abrir condiciones o no tener botón.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Orden, fecha de inicio, fecha de fin y estado</b> (activo o inactivo).</div></li>
+        </ul>
+      </article>
+      <article class="card">
+        <header><h2>Promociones bancarias</h2></header>
+        <ul class="rules" style="grid-template-columns:1fr">
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>No se publican incompletas.</b> Para activarse necesitan banco, beneficio, medios alcanzados, días, tope, vigencia, dónde aplica, restricciones y legales.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Condiciones a un toque:</b> el botón del banner abre el detalle completo, no un listado de productos.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Sin datos inventados:</b> en el prototipo todo lo que depende del banco está entre corchetes y en amarillo.</div></li>
+        </ul>
+        <button class="demo-btn" type="button" data-demo="terms" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Ver condiciones de ejemplo</button>
+      </article>
+    </div>
+  </div>
+</section>
 
-<span class="c">// Atributos y datos de variante por categoría</span>
-<span class="k">alimentos</span>     etapa[], tamañoRaza[] (perros), necesidades[]   · variante: pesoKg
-<span class="k">descanso</span>      material                                     · variante: tamaño, medidas, largoCm, pesoRecomendado
-<span class="k">indumentaria</span>  color                                        · variante: talle, espaldaCm, pechoCm
-<span class="k">juguetes</span>      material                                     · variante: tamaño (si aplica)
-<span class="k">accesorios</span>    material                                     · variante: tamaño / medida de cuello (si aplica)
-<span class="k">higiene</span>       —                                            · variante: contenido (ml, kg, unidades)</pre>
+<!-- ============ 2 · HOME ============ -->
+<section class="view" data-page="home" hidden>
+  <div class="view-in doc">
+    <article class="card">
+      <header>
+        <span class="eyebrow">2 · Refinamiento de la home</span>
+        <h1>Un elemento expresivo, el resto tranquilo</h1>
+        <p>El carrusel se lleva el color y el movimiento. Todo lo demás baja un tono: menos bordes, más aire y una sola tipografía (DM Sans) con una jerarquía más clara.</p>
+      </header>
+      <div class="tbl-wrap"><table class="t">
+        <thead><tr><th>Aspecto</th><th>V3</th><th>V4</th></tr></thead>
+        <tbody>
+          <tr><td>Banner</td><td>Fijo, con una foto y el botón "Ver ofertas".</td><td>Carrusel de 6 campañas con destinos distintos y vigencia.</td></tr>
+          <tr><td>Jerarquía de títulos</td><td>Pesos 650–700 y secciones de 26 px en escritorio.</td><td>Titular del carrusel 46/25 px a 700. Secciones 26/21 px a 650. Nombres de producto a 500. Así sólo el carrusel "grita".</td></tr>
+          <tr><td>Espaciado</td><td>56 px entre secciones en escritorio y 36 px en celular.</td><td>64 px y 40 px. Más aire entre bloques, sin agregar ninguno.</td></tr>
+          <tr><td>Categorías</td><td>Tarjetas con borde y aparición en cascada.</td><td>Fondo gris suave sin borde, aparición simple. Al pasar el mouse toman el color de la mascota.</td></tr>
+          <tr><td>Marcas</td><td>Grilla de 6 en dos filas en celular.</td><td>Una sola fila deslizable en celular. Ocupa la mitad de alto.</td></tr>
+          <tr><td>Tarjetas de producto</td><td>Hasta 5 talles visibles y un renglón reservado aunque estuviera vacío.</td><td>Máximo 4 opciones más "+N". Sin renglones vacíos. Estado "Sin stock" claro.</td></tr>
+          <tr><td>Rosa y verde</td><td>Rosa en botones, ofertas y filtros. Verde en servicio.</td><td>Igual, y el carrusel es el único lugar con grandes superficies de color. Las promociones bancarias usan fondo oscuro para distinguirse.</td></tr>
+          <tr><td>Elementos en el primer pantallazo del celular</td><td>Banner + parte de "Comprá para".</td><td>Encabezado, carrusel y el título de "Comprá para". Al primer scroll, las 6 categorías.</td></tr>
+          <tr><td>Botones</td><td>48 px principales y 40 px en tarjetas.</td><td>Igual: 48 px en banner y checkout, 40 px en tarjetas, 44 px en el carrusel en celular.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="notice warn"><svg class="ico"><use href="#i-eye"/></svg><span><b>Fotografías:</b> para que la home se vea consistente, todas las fotos de producto deberían ser cuadradas, sobre fondo blanco o gris muy claro, con el producto centrado y la misma luz. Las de campaña conviene producirlas con el lado del texto despejado. Las ilustraciones del prototipo marcan dónde va cada foto.</span></div>
+      <div class="demos">
+        <button class="demo-btn" type="button" data-demo="home" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Ver home en escritorio</button>
+        <button class="demo-btn" type="button" data-demo="home" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver home en celular</button>
+        <a class="demo-btn" href="https://bautiwebs-spec.github.io/Pet/v3/" target="_blank" rel="noopener">Abrir la V3 para comparar ↗</a>
+      </div>
     </article>
   </div>
 </section>
 
-<!-- ============ 2 · PERROS Y GATOS ============ -->
-<section class="view" data-page="mascotas" hidden>
+<!-- ============ 3 · AUDITORÍA UX ============ -->
+<section class="view" data-page="ux" hidden>
   <div class="view-in doc">
     <article class="card">
       <header>
-        <span class="eyebrow">2 · Páginas de Perros y Gatos</span>
-        <h1>Primero qué buscás, después cómo lo filtrás</h1>
-        <p>La V2 mezclaba niveles: "Cachorros" era una categoría en la home, pero en el listado aparecía como filtro. En la V3 cada nivel tiene un solo lugar y una sola forma visual, siempre en el mismo orden.</p>
+        <span class="eyebrow">3 · Auditoría UX de la V3</span>
+        <h1>Problemas concretos, ordenados por impacto</h1>
+        <p>Revisé la V3 punto por punto con lo que pediste. Cada problema tiene su prioridad, la solución y si ya está aplicada en esta V4.</p>
       </header>
-      <div class="levels">
-        <div class="level"><span class="n">1</span><b>Mascota</b><p>Menú principal, home y buscador. Define todo lo que sigue.</p><code>/perros</code></div>
-        <div class="level"><span class="n">2</span><b>Categoría</b><p>Barra de pestañas con íconos, fija bajo el encabezado. Con un indicador rosa que se desliza a la pestaña activa.</p><code>/perros/descanso</code></div>
-        <div class="level"><span class="n">3</span><b>Tipo</b><p>Botones en una fila, sólo cuando la categoría tiene más de un tipo. Seleccionado en tinta: no compite con el rosa de comprar.</p><code>/perros/descanso/cuchas</code></div>
-        <div class="level"><span class="n">4</span><b>Filtros</b><p>Específicos de la categoría. Aparecen recién cuando elegiste una categoría.</p><code>?tamano=xl</code></div>
-      </div>
-      <div class="demos">
-        <button class="demo-btn" type="button" data-demo="perros" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Abrir Perros (escritorio)</button>
-        <button class="demo-btn" type="button" data-demo="perros" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Abrir Perros (celular)</button>
-        <button class="demo-btn" type="button" data-demo="E" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Gatos › Juguetes (celular)</button>
-      </div>
+      <div class="tbl-wrap"><table class="t">
+        <thead><tr><th>Problema</th><th>Prioridad</th><th>Solución</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>"Iniciar compra" no llevaba a ningún lado</td><td><span class="prio alta">Alta</span></td><td>Checkout de 4 pasos, como invitado, con validaciones y resumen.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>El encabezado fijo ocupaba el 23% de la pantalla del celular (184 px con pestañas)</td><td><span class="prio alta">Alta</span></td><td>Encabezado compacto al bajar: el logo se oculta y el buscador queda en la fila del menú y el carrito. Pasa a 56 px, o 102 px con pestañas.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>Una búsqueda sin resultados era un callejón sin salida</td><td><span class="prio alta">Alta</span></td><td>"¿Quisiste decir…?" que corrige errores de tipeo ("cuxa" → "cucha"), búsquedas sugeridas, accesos a Perros y Gatos y productos destacados.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>Un producto agotado en todas sus opciones no se distinguía</td><td><span class="prio alta">Alta</span></td><td>Etiqueta "Sin stock", foto atenuada, se ubica al final de la lista y ofrece "Avisarme cuando vuelva".</td><td><span class="st ok">En V4</span><br><span class="hint">El aviso por email está simulado</span></td></tr>
+          <tr><td>Las promociones necesitan enlaces coherentes</td><td><span class="prio media">Media</span></td><td>Cada banner lleva exactamente a lo que promete. La promo bancaria abre sus condiciones, no un listado. Un banner informativo puede no tener botón.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>Tarjetas con 5 talles se veían saturadas</td><td><span class="prio media">Media</span></td><td>Máximo 4 opciones visibles más "+N", que abre la ficha. Si un filtro eligió un talle oculto, se muestra igual.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>En celular, llegar a Perros o Gatos requería pasar el banner</td><td><span class="prio media">Media</span></td><td>"Comprá para" queda inmediatamente debajo del carrusel. Además siguen el menú y el buscador.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>Renglones vacíos reservados en las tarjetas (aviso de stock)</td><td><span class="prio baja">Baja</span></td><td>El renglón aparece sólo si hay algo que avisar.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>La aparición en cascada de las categorías era decoración</td><td><span class="prio baja">Baja</span></td><td>Se reemplaza por un fundido simple.</td><td><span class="st ok">En V4</span></td></tr>
+          <tr><td>¿El buscador está suficientemente visible?</td><td><span class="prio baja">Baja</span></td><td>Sí: en celular siempre visible y fijo, en escritorio a la derecha del menú con 520 px de ancho. Se mantiene.</td><td><span class="st off">Revisado, sin cambios</span></td></tr>
+          <tr><td>¿Categorías y filtros funcionan?</td><td><span class="prio baja">Baja</span></td><td>Sí, y lo verifiqué con clics reales. Una aclaración: el filtro de Precio aparece recién con 4 productos o más, por regla.</td><td><span class="st off">Revisado, sin cambios</span></td></tr>
+          <tr><td>Una opción sin stock dentro de un producto</td><td><span class="prio baja">Baja</span></td><td>Ya estaba claro en la V3: la opción aparece tachada, con "Sin stock en esta opción", y las demás se pueden elegir.</td><td><span class="st off">Revisado, sin cambios</span></td></tr>
+        </tbody>
+      </table></div>
     </article>
     <article class="card">
-      <header><h2>Opciones evaluadas</h2><p>Usamos cada patrón donde rinde más, no todos en todos lados.</p></header>
+      <header><h2>¿Las microinteracciones aportan o decoran?</h2></header>
       <div class="tbl-wrap"><table class="t">
-        <thead><tr><th>Patrón</th><th>Dónde lo usamos</th><th>Por qué</th></tr></thead>
+        <thead><tr><th>Interacción</th><th>Veredicto</th><th>Por qué</th></tr></thead>
         <tbody>
-          <tr><td>Categorías visuales con íconos</td><td>Home (bloque "Comprá para") y página de inicio de cada mascota.</td><td>Son el punto de partida de quien explora. Un ícono simple se reconoce más rápido que una lista de texto y ocupa poco.</td></tr>
-          <tr><td>Pestañas horizontales</td><td>Barra de categorías dentro de Perros y Gatos.</td><td>Permiten cambiar de categoría sin volver atrás. En celular se deslizan y la activa queda centrada. Son 6 como máximo, así que no se vuelven interminables.</td></tr>
-          <tr><td>Menú desplegable</td><td>Sólo en escritorio, en Perros y Gatos. Una columna por categoría con sus tipos.</td><td>En escritorio permite llegar a "Colchonetas" en dos clics. En celular un desplegable así sería una lista larga, por eso no se usa.</td></tr>
-          <tr><td>Menú lateral</td><td>Celular: Perros y Gatos desplegables, una fila por categoría con ícono y cantidad.</td><td>Muestra 6 filas, no 30 etiquetas. Los tipos aparecen después, en la página de la categoría.</td></tr>
-          <tr><td>Migas de pan + "Volver"</td><td>Listados y fichas.</td><td>Las migas dicen dónde estás. "Volver a Cuchas exteriores · 1 filtro" te devuelve a la misma lista, con los mismos filtros y en el mismo lugar.</td></tr>
-          <tr><td>Fila de tipos</td><td>Debajo del título de la categoría, sólo si hay más de un tipo.</td><td>Separa claramente "qué producto" (tipo) de "qué características" (filtros).</td></tr>
+          <tr><td>Producto que vuela al carrito</td><td><span class="st ok">Aporta</span></td><td>Confirma la acción y muestra dónde quedó el producto, sin abrir nada.</td></tr>
+          <tr><td>Sacudida de talles si falta elegir</td><td><span class="st ok">Aporta</span></td><td>Explica qué falta y evita compras equivocadas.</td></tr>
+          <tr><td>"Pop" al seleccionar</td><td><span class="st ok">Aporta</span></td><td>Confirma la selección. Dura 280 ms.</td></tr>
+          <tr><td>Indicador que se desliza en las pestañas</td><td><span class="st ok">Aporta</span></td><td>Indica dónde estás al cambiar de categoría.</td></tr>
+          <tr><td>Pulso en la cantidad de resultados</td><td><span class="st ok">Aporta</span></td><td>Muestra que el filtro cambió la lista.</td></tr>
+          <tr><td>Zoom de la foto al pasar el mouse</td><td><span class="st sim">Neutro</span></td><td>Indica que la tarjeta se puede tocar. Es leve y sólo en escritorio: se mantiene.</td></tr>
+          <tr><td>Cascada de categorías</td><td><span class="st bad">Decoraba</span></td><td>Se quitó en la V4.</td></tr>
+          <tr><td>Profundidad del carrusel (B)</td><td><span class="st ok">Aporta</span></td><td>Le da a cada campaña un momento propio. Con movimiento reducido se desactiva.</td></tr>
         </tbody>
       </table></div>
     </article>
   </div>
 </section>
 
-<!-- ============ 3 · FILTROS ============ -->
-<section class="view" data-page="filtros" hidden>
+<!-- ============ 4 · CHECKOUT ============ -->
+<section class="view" data-page="checkout" hidden>
   <div class="view-in doc">
     <article class="card">
       <header>
-        <span class="eyebrow">3 · Sistema de filtros</span>
-        <h1>Cada categoría, sus filtros</h1>
-        <p>Un filtro entra sólo si ayuda a decidir. El "tipo" no es un filtro, porque ya se elige en la fila de tipos. Además, un filtro se muestra sólo si en esa lista hay al menos dos opciones con productos.</p>
+        <span class="eyebrow">4 · Checkout</span>
+        <h1>Cuatro pasos, sin cuenta y sin distracciones</h1>
+        <p>Encabezado simplificado (logo, "Compra segura" y "Volver a la tienda"), indicador de pasos y resumen siempre a mano: columna lateral fija en escritorio y desplegable arriba en celular. Los datos se conservan al volver a un paso anterior.</p>
       </header>
-      <div class="tbl-wrap"><table class="t matrix" data-matrix></table></div>
-      <p class="hint">Tamaño de raza sólo aparece en alimentos para perros. Precio usa tres rangos calculados con los productos de cada lista, así nunca quedan rangos vacíos.</p>
+      <div class="flow">
+        <div class="level"><span class="n">1</span><b>Carrito</b><ul><li>Foto, nombre, variante y precio unitario</li><li>Cantidad con tope de stock</li><li>Quitar</li><li>Aviso si una opción se agotó, con alternativas</li></ul></div>
+        <div class="level"><span class="n">2</span><b>Datos y entrega</b><ul><li>Compra como invitado</li><li>Nombre, apellido, email y teléfono</li><li>Envío o retiro</li><li>Código postal con verificación de cobertura</li><li>Dirección y observaciones</li></ul></div>
+        <div class="level"><span class="n">3</span><b>Pago</b><ul><li>Mercado Pago, transferencia y efectivo</li><li>Efectivo sólo con retiro</li><li>Sin datos de tarjeta en la página</li><li>Promociones sólo informativas</li></ul></div>
+        <div class="level"><span class="n">4</span><b>Confirmación</b><ul><li>Pedido recibido y estado del pago, por separado</li><li>Número de pedido de demostración</li><li>Próximos pasos</li><li>Volver a la tienda</li></ul></div>
+      </div>
+      <div class="demos">
+        <button class="demo-btn" type="button" data-demo="checkout" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Probar en escritorio</button>
+        <button class="demo-btn" type="button" data-demo="checkout" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Probar en celular</button>
+        <button class="demo-btn" type="button" data-demo="checkout-pago" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Ir directo al pago (datos cargados)</button>
+      </div>
     </article>
     <div class="cols two">
       <article class="card">
-        <header><h2>Escritorio</h2></header>
-        <ul class="rules" style="grid-template-columns:1fr">
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Columna lateral fija</b> que acompaña el scroll. Grupos siempre abiertos.</div></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Efecto inmediato:</b> cada clic actualiza la lista y la cantidad de resultados.</div></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Botones para valores cortos</b> (tamaño, talle, presentación, medidas, precio) y casillas para listas (marca, material, color).</div></li>
-        </ul>
-        <button class="demo-btn" type="button" data-demo="filtros-escritorio" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Ver en escritorio</button>
+        <header><h2>Pedido recibido ≠ pago aprobado</h2><p>Son dos estados distintos y la confirmación los muestra por separado.</p></header>
+        <div class="tbl-wrap"><table class="t" style="min-width:0">
+          <thead><tr><th>Medio</th><th>Al confirmar</th><th>Pasa a "Pago aprobado" cuando…</th></tr></thead>
+          <tbody>
+            <tr><td>Mercado Pago</td><td><span class="spill ok">Pedido recibido</span> <span class="spill wait">Pago pendiente</span></td><td>Mercado Pago confirma el pago. En el prototipo podés simular aprobado o rechazado.</td></tr>
+            <tr><td>Transferencia</td><td><span class="spill ok">Pedido recibido</span> <span class="spill wait">Pago pendiente</span></td><td>El local verifica la transferencia.</td></tr>
+            <tr><td>Efectivo</td><td><span class="spill ok">Pedido recibido</span> <span class="spill wait">Pago al retirar</span></td><td>El cliente paga en el local.</td></tr>
+          </tbody>
+        </table></div>
       </article>
       <article class="card">
-        <header><h2>Celular</h2></header>
+        <header><h2>Datos para probar</h2><p>La cobertura y los costos son de ejemplo. En la tienda real se configuran desde el panel, y el envío sin cargo aparece sólo si la zona lo tiene configurado.</p></header>
         <ul class="rules" style="grid-template-columns:1fr">
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Hoja inferior</b> que se abre desde "Filtrar", al alcance del pulgar.</div></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Grupos desplegables</b> que muestran lo elegido ("Tamaño · XL") sin abrirlos.</div></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Botón "Ver 3 productos"</b>: sabés el resultado antes de cerrar. Al lado, "Limpiar".</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>CP 1629 o 1630:</b> "Zona 1 (ejemplo)", envío sin cargo.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>CP 1631, 1633, 1635, 1664 o 1669:</b> "Zona 2 (ejemplo)", envío con costo de ejemplo.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Cualquier otro CP:</b> sin cobertura, ofrece cambiar a retiro.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>Código de descuento DEMO10:</b> 10% de ejemplo. Cualquier otro muestra el error.</div></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><div><b>"Simulación: un producto se queda sin stock"</b> en el paso 1 muestra cómo se avisa y se resuelve.</div></li>
         </ul>
-        <button class="demo-btn" type="button" data-demo="filtros-celular" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en celular</button>
       </article>
     </div>
     <article class="card">
-      <header><h2>Reglas que se cumplen en el prototipo</h2></header>
+      <header><h2>Validaciones y accesibilidad</h2></header>
       <ul class="rules">
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Combinables:</b> dentro de un grupo suman ("M o L"); entre grupos restringen ("M y espuma").</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Indicador de filtros activos:</b> chips rosas arriba de la lista, con X para quitar cada uno, y número en el botón "Filtrar".</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Limpiar:</b> en la fila de chips y en la hoja de celular.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Cantidad de resultados</b> bajo el título, con un leve pulso cuando cambia.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Orden:</b> relevancia, menor precio, mayor precio y novedades.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Se mantienen al volver:</b> la ficha recuerda la lista de origen con sus filtros, el orden y la posición.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>La tarjeta acompaña al filtro:</b> si filtrás talle M, la tarjeta ya muestra el M elegido y su precio.</div></li>
-        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Sin opciones muertas:</b> las opciones que dejarían 0 resultados se ocultan.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Errores claros y concretos:</b> "El código postal tiene 4 números, por ejemplo 1629", no "Campo inválido".</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Resumen de errores</b> arriba del formulario, con enlaces que llevan a cada campo.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Etiquetas visibles</b> y campos marcados como inválidos para lectores de pantalla. Cada error está asociado a su campo.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Validación al salir del campo</b> después del primer intento, y el error se borra apenas se corrige.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Teclados adecuados en celular</b> (email, teléfono, numérico) y autocompletado del navegador.</div></li>
+        <li><svg class="ico"><use href="#i-check"/></svg><div><b>Nunca se pierde lo cargado:</b> volver al carrito o salir a la tienda conserva los datos.</div></li>
       </ul>
-    </article>
-  </div>
-</section>
-
-<!-- ============ 4 · TIPOGRAFÍA ============ -->
-<section class="view" data-page="tipografia" hidden>
-  <div class="view-in doc">
-    <article class="card">
-      <header>
-        <span class="eyebrow">4 · Comparación tipográfica</span>
-        <h1>Las tres opciones, sobre los mismos componentes</h1>
-        <p>Nunito Sans se veía infantil por la combinación de terminaciones redondeadas y pesos 800–900. En las tres opciones bajamos los títulos a 650–700 y los nombres de producto a 500. Todavía no hay una elegida: el prototipo usa DM Sans por defecto y podés cambiarla arriba del prototipo con "Tipografía".</p>
-      </header>
-      <div class="fonts" data-fonts></div>
-    </article>
-    <article class="card">
-      <header><h2>Jerarquía propuesta</h2><p>Igual para las tres. Sólo cambia el peso exacto de títulos y precios según cómo se ve cada familia.</p></header>
-      <div>
-        <div class="scale-row"><b>Titular del banner</b><span>46 px escritorio · 30 px celular</span><span class="m">700 · 1.06</span></div>
-        <div class="scale-row"><b>Título de página</b><span>32 px · 26 px</span><span class="m">650–700 · 1.12</span></div>
-        <div class="scale-row"><b>Título de sección</b><span>26 px · 21 px</span><span class="m">650–700 · 1.15</span></div>
-        <div class="scale-row"><b>Menú, pestañas, botones</b><span>14,5–15 px</span><span class="m">600 · 1</span></div>
-        <div class="scale-row"><b>Nombre de producto</b><span>15 px · 14,5 px</span><span class="m">500 · 1.35</span></div>
-        <div class="scale-row"><b>Precio</b><span>20 px tarjeta · 30 px ficha</span><span class="m">650–700 · tabular</span></div>
-        <div class="scale-row"><b>Texto</b><span>16 px</span><span class="m">400 · 1.5</span></div>
-        <div class="scale-row"><b>Etiquetas y marca</b><span>11–12 px, mayúsculas</span><span class="m">600 · +0.06em</span></div>
-      </div>
     </article>
   </div>
 </section>
 
 <!-- ============ 5 · INTERACCIONES ============ -->
-<section class="view" data-page="interacciones" hidden>
-  <div class="view-in doc">
-    <article class="card">
-      <header>
-        <span class="eyebrow">5 · Microinteracciones</span>
-        <h1>Movimiento que confirma, no que distrae</h1>
-        <p>Todas duran entre 150 y 600 ms y explican algo: dónde fue el producto, qué quedó elegido o qué cambió. Si la persona activa "reducir movimiento" en su teléfono, quedan sólo los cambios de estado, sin desplazamientos. Podés probarlo con el interruptor "Reducir movimiento" arriba del prototipo.</p>
-      </header>
-      <div class="tbl-wrap"><table class="t">
-        <thead><tr><th>Interacción</th><th>Qué pasa</th><th>Duración</th><th>Para qué sirve</th><th>Con movimiento reducido</th></tr></thead>
-        <tbody>
-          <tr><td>Agregar al carrito</td><td>La foto del producto vuela en arco hasta el carrito, el ícono hace un pequeño rebote y el botón pasa a verde con un ✓ que se dibuja.</td><td>600 ms</td><td>Muestra adónde fue el producto, sin abrir nada.</td><td>Sólo el botón verde y el aviso.</td></tr>
-          <tr><td>Aviso con foto</td><td>Aviso abajo con miniatura, nombre, variante y "Ver carrito". Al quitar un producto ofrece "Deshacer".</td><td>3 s</td><td>Confirma qué se agregó y en qué talle o peso.</td><td>Aparece sin deslizarse.</td></tr>
-          <tr><td>Cambio de categoría</td><td>El indicador rosa de las pestañas se desliza a la nueva categoría y el contenido entra con un fundido corto.</td><td>260–300 ms</td><td>Muestra dónde estás y qué cambió.</td><td>Cambio inmediato.</td></tr>
-          <tr><td>Perros / Gatos en la home</td><td>El selector desliza su fondo y las categorías aparecen en cascada.</td><td>300 ms</td><td>Hace evidente que las categorías dependen de la mascota.</td><td>Cambio inmediato.</td></tr>
-          <tr><td>Selección de talle o peso</td><td>El botón elegido se marca en rosa con un pequeño "pop". Si intentás agregar sin elegir, los talles se sacuden y se resaltan.</td><td>280 / 500 ms</td><td>Evita comprar el talle equivocado y dice qué falta.</td><td>Sólo el resaltado.</td></tr>
-          <tr><td>Filtros</td><td>Las casillas se tildan con un pop, los botones de filtro muestran un ✓ que entra, los chips activos aparecen y la cantidad de resultados pulsa.</td><td>200–300 ms</td><td>Confirma que el filtro se aplicó.</td><td>Sin animación.</td></tr>
-          <tr><td>Tarjetas</td><td>Al pasar el mouse, la foto se acerca apenas y aparece una sombra suave. En celular no hay efecto.</td><td>350 ms</td><td>Indica que la tarjeta se puede tocar.</td><td>Sin zoom.</td></tr>
-          <tr><td>Buscador</td><td>Desplegable que baja 4 px. Muestra búsquedas frecuentes y recientes, categorías y productos con la palabra resaltada.</td><td>160 ms</td><td>Lleva a la categoría o al producto en un toque.</td><td>Aparece sin desplazarse.</td></tr>
-          <tr><td>Menús y paneles</td><td>Menú de escritorio que cae, menú y carrito laterales, hoja de filtros desde abajo.</td><td>180–300 ms</td><td>Muestra de dónde viene cada panel y cómo cerrarlo.</td><td>Aparecen sin desplazarse.</td></tr>
-        </tbody>
-      </table></div>
-      <div class="demos">
-        <button class="demo-btn" type="button" data-demo="home" data-where="escritorio"><svg class="ico"><use href="#i-play"/></svg>Probar en escritorio</button>
-        <button class="demo-btn" type="button" data-demo="home" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Probar en celular</button>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ============ 6 · DIAGNÓSTICO UX ============ -->
-<section class="view" data-page="ux" hidden>
-  <div class="view-in doc">
-    <article class="card">
-      <header>
-        <span class="eyebrow">6 · Diagnóstico UX de la V2</span>
-        <h1>Lo que todavía le costaba a un comprador real</h1>
-        <p>Revisamos la V2 en celular con seis recorridos de compra. Estos son los problemas encontrados, ordenados por impacto, y cómo los resuelve la V3.</p>
-      </header>
-      <ul class="issues">
-        <li class="issue"><p><span class="prio alta">Alta</span><b>Sin nivel de categoría.</b> "Perros" era una lista plana. Con cuchas, juguetes y ropa se vuelve inmanejable.</p><p class="fix">Mascota › Categoría › Tipo › Filtros, con barra de categorías fija.</p></li>
-        <li class="issue"><p><span class="prio alta">Alta</span><b>Mismos filtros para todo.</b> Un panel genérico mostraría "Etapa de vida" junto a una cucha.</p><p class="fix">Filtros definidos por categoría. Si no hay categoría elegida, no hay filtros.</p></li>
-        <li class="issue"><p><span class="prio alta">Alta</span><b>Se perdían los filtros al volver de una ficha</b>, junto con el orden y la posición en la lista.</p><p class="fix">"Volver a Cuchas exteriores · 1 filtro" restaura todo.</p></li>
-        <li class="issue"><p><span class="prio alta">Alta</span><b>Riesgo de comprar el tamaño equivocado.</b> La tarjeta agregaba la presentación por defecto.</p><p class="fix">En ropa, descanso, juguetes y accesorios con tamaños hay que elegir. La ficha muestra medidas, peso recomendado y guía de talles.</p></li>
-        <li class="issue"><p><span class="prio media">Media</span><b>El buscador sólo encontraba productos</b> y no ayudaba antes de escribir.</p><p class="fix">Sugiere categorías, entiende sinónimos, resalta coincidencias y muestra frecuentes y recientes.</p></li>
-        <li class="issue"><p><span class="prio media">Media</span><b>La home mezclaba niveles</b>: los atajos "Cachorros / Adultos" eran filtros presentados como categorías.</p><p class="fix">Bloque "Comprá para Perros / Gatos" con las categorías de cada mascota.</p></li>
-        <li class="issue"><p><span class="prio media">Media</span><b>Filtros largos en celular</b>, con opciones en 0 deshabilitadas que sumaban ruido.</p><p class="fix">Grupos desplegables con resumen, botones grandes y opciones vacías ocultas.</p></li>
-        <li class="issue"><p><span class="prio media">Media</span><b>Foco perdido al navegar.</b> Con teclado o lector de pantalla, el foco quedaba en el botón anterior.</p><p class="fix">Al cambiar de página, el foco va al título nuevo.</p></li>
-        <li class="issue"><p><span class="prio media">Media</span><b>Tipografía pesada</b> (900) que le daba un aire infantil.</p><p class="fix">Comparador con tres familias y pesos 500–700.</p></li>
-        <li class="issue"><p><span class="prio baja">Baja</span><b>"Agregado" fácil de no ver en celular</b>, porque el aviso queda abajo.</p><p class="fix">El producto vuela al carrito y el botón confirma en verde.</p></li>
-      </ul>
-    </article>
-    <article class="card">
-      <header><h2>Recorridos de compra</h2><p>Medidos en celular, desde la home. Se cuentan los toques, sin contar el tipeo ni el scroll. Cada recorrido se puede abrir en el prototipo.</p></header>
-      <div class="journeys">
-        <div class="journey"><header><span class="n">A</span><h3>Comprar rápido un alimento que ya conoce</h3></header>
-          <ol><li>Toca el buscador y escribe "castrado".</li><li>Toca el producto sugerido. La ficha abre con la presentación más vendida.</li><li><b>Agregar al carrito.</b></li></ol>
-          <div class="jmeta"><span class="jpill good">3 toques</span><span class="jpill">V2: 3</span></div>
-          <p class="why">Ahora también aparece como búsqueda reciente la próxima vez. A futuro, con cuentas de cliente: "Volver a comprar".</p>
-          <button class="demo-btn" type="button" data-demo="A" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-        <div class="journey"><header><span class="n">B</span><h3>Una cucha exterior para un perro grande</h3></header>
-          <ol><li>Home: <b>Comprá para Perros › Descanso</b>.</li><li>Tipo: <b>Cuchas exteriores</b>.</li><li>Filtrar › Tamaño <b>XL · Extra grande</b> › Ver resultados.</li><li>La tarjeta ya muestra el XL y "Perros de hasta 45 kg". <b>Agregar.</b></li></ol>
-          <div class="jmeta"><span class="jpill good">6 toques</span><span class="jpill">V2: no existía</span></div>
-          <p class="why">El peso recomendado en cada tamaño evita adivinar qué significa "grande".</p>
-          <button class="demo-btn" type="button" data-demo="B" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-        <div class="journey"><header><span class="n">C</span><h3>Una colchoneta de un tamaño determinado</h3></header>
-          <ol><li>Perros › Descanso › <b>Colchonetas</b>.</li><li>Filtrar › Medidas <b>61 a 90 cm</b>.</li><li>La tarjeta preselecciona la medida que coincide. <b>Agregar.</b></li></ol>
-          <div class="jmeta"><span class="jpill good">6 toques</span><span class="jpill">V2: no existía</span></div>
-          <p class="why">Las medidas se filtran por largo, que es lo que la gente mide en su casa. El ancho y el alto aparecen en cada tamaño.</p>
-          <button class="demo-btn" type="button" data-demo="C" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-        <div class="journey"><header><span class="n">D</span><h3>Una prenda con el talle correcto</h3></header>
-          <ol><li>Perros › <b>Indumentaria</b> › Buzos.</li><li>Toca la tarjeta. Ningún talle viene preseleccionado.</li><li><b>Guía de talles</b>: largo de espalda y pecho de cada talle.</li><li>Elige talle. <b>Agregar.</b></li></ol>
-          <div class="jmeta"><span class="jpill good">7 toques</span><span class="jpill">V2: no existía</span></div>
-          <p class="why">Más toques a propósito: elegir talle es obligatorio porque un talle equivocado termina en un cambio.</p>
-          <button class="demo-btn" type="button" data-demo="D" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-        <div class="journey"><header><span class="n">E</span><h3>Explorar juguetes para gatos sin saber qué quiere</h3></header>
-          <ol><li>Home: selector en <b>Gatos</b> › <b>Juguetes</b>.</li><li>Ve todos los juguetes y la fila de tipos (Cañas, Ratones, Pelotas, Rascadores) para recorrer.</li></ol>
-          <div class="jmeta"><span class="jpill good">2 toques</span><span class="jpill">V2: no existía</span></div>
-          <p class="why">No se le pide filtrar: los tipos funcionan como una vidriera. Los filtros quedan disponibles si los quiere usar.</p>
-          <button class="demo-btn" type="button" data-demo="E" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-        <div class="journey"><header><span class="n">F</span><h3>Buscar una promoción y terminar comprando</h3></header>
-          <ol><li>Banner: <b>Ver ofertas</b>.</li><li>Filtrar por mascota o categoría (opcional).</li><li>La tarjeta muestra la variante en oferta. <b>Agregar</b> › "Ver carrito" en el aviso.</li></ol>
-          <div class="jmeta"><span class="jpill good">3 toques</span><span class="jpill">V2: 3</span></div>
-          <p class="why">Cada oferta muestra el % de descuento y el precio anterior.</p>
-          <button class="demo-btn" type="button" data-demo="F" data-where="celular"><svg class="ico"><use href="#i-play"/></svg>Ver en el prototipo</button></div>
-      </div>
-    </article>
-    <article class="card">
-      <header><h2>Evaluación por criterio</h2></header>
-      <div class="crit">
-        <div><b>Cantidad de toques</b>2 a 7 toques para cualquier producto. Los más largos son los que piden elegir talle.</div>
-        <div><b>Claridad de la navegación</b>Cuatro niveles fijos con una forma visual distinta cada uno. Migas de pan en todas las páginas.</div>
-        <div><b>Búsqueda</b>Categorías, sinónimos, resaltado, frecuentes y recientes.<em>Falta: tolerancia a errores de tipeo ("cuxa").</em></div>
-        <div><b>Descubrimiento</b>Categorías visuales en la home, tipos como vidriera y "Te puede servir" en la ficha.</div>
-        <div><b>Comprensión de filtros</b>Sólo los de la categoría, con cantidades y chips de filtros activos.</div>
-        <div><b>Prevención de errores</b>Talle y tamaño obligatorios, peso recomendado, stock por variante, tope de cantidad y "Deshacer".</div>
-        <div><b>Celular</b>Pestañas deslizables, hoja de filtros, botones de 40–48 px y panel lateral del carrito.</div>
-        <div><b>Consistencia</b>Rosa sólo para comprar y filtros activos, tinta para el tipo seleccionado y verde para el servicio.</div>
-        <div><b>Accesibilidad</b>Foco visible y movido al título, roles en pestañas y filtros, contraste AA y movimiento reducido.<em>Falta: probar con lector de pantalla real.</em></div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ============ AUDITORÍA ============ -->
 <section class="view" data-page="auditoria" hidden>
   <div class="view-in doc">
     <article class="card">
-      <header><span class="eyebrow">Auditoría de elementos interactivos</span><h1>Qué funciona, qué está simulado y qué falta</h1><p>"Funciona" quiere decir que la lógica está resuelta en el prototipo y se reutiliza en la tienda real. "Simulado" quiere decir que el elemento responde con datos de ejemplo. "Pendiente" queda marcado en pantalla.</p></header>
+      <header><span class="eyebrow">5 · Auditoría de interacciones</span><h1>Qué funciona, qué está simulado y qué falta</h1><p>"Funciona" quiere decir que la lógica está resuelta en el prototipo y se reutiliza en la tienda real. "Simulado" quiere decir que responde, pero con datos de ejemplo o sin el servicio real detrás. "Pendiente" queda marcado en pantalla. Con "Marcar estado" ves cada elemento pintado sobre el prototipo.</p></header>
       <div class="st-sum" data-st-sum></div>
-      <div class="tbl-wrap"><table class="t"><thead><tr><th>Elemento</th><th>V2</th><th>V3 · este prototipo</th><th>En la tienda real</th></tr></thead><tbody data-audit></tbody></table></div>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Elemento</th><th>V3</th><th>V4 · este prototipo</th><th>En la tienda real</th></tr></thead><tbody data-audit></tbody></table></div>
     </article>
   </div>
 </section>
@@ -1078,6 +1275,11 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     <span class="alt">Retiro en el local · Mercado Pago, transferencia o efectivo</span>
   </div></div>
   <header class="h-head">
+    <div class="h-wrap co-head">
+      <button class="logo" type="button" data-act="co-exit" aria-label="Pet Company Pilar, volver a la tienda"><span class="logo-mark"><svg fill="currentColor"><use href="#paw"/></svg></span><span class="logo-text"><b>Pet Company</b><small>PILAR</small></span></button>
+      <span class="co-secure"><svg class="ico"><use href="#i-lock"/></svg>Compra segura</span>
+      <button type="button" class="link" data-act="co-exit" data-st="ok"><svg class="ico"><use href="#i-back"/></svg>Volver a la tienda</button>
+    </div>
     <div class="h-wrap">
       <div class="h-head-row">
         <button class="icon-btn h-menu" type="button" aria-label="Abrir menú" data-act="menu-open" data-st="ok"><svg class="ico"><use href="#i-menu"/></svg></button>
@@ -1152,6 +1354,10 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
   <aside class="panel sheet" data-panel="guide" aria-label="Guía de talles" aria-hidden="true">
     <div class="panel-head"><h2>Guía de talles</h2><button class="icon-btn" type="button" data-act="close-all" aria-label="Cerrar guía"><svg class="ico"><use href="#i-x"/></svg></button></div>
     <div class="panel-body" data-guide-body></div>
+  </aside>
+  <aside class="panel sheet" data-panel="terms" aria-label="Condiciones de la promoción" aria-hidden="true">
+    <div class="panel-head"><h2>Condiciones de la promoción</h2><button class="icon-btn" type="button" data-act="close-all" aria-label="Cerrar condiciones"><svg class="ico"><use href="#i-x"/></svg></button></div>
+    <div class="panel-body" data-terms-body></div>
   </aside>
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 </template>
@@ -1243,7 +1449,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     P(31,'perro','accesorios','collares','J','Collar de nylon regulable','collar','pink',{material:'Nylon'},[V('J31-S','S',6990,0,8,{z:'S',w:'Cuello de 25 a 35 cm'}),V('J31-M','M',7990,0,10,{z:'M',w:'Cuello de 35 a 45 cm'}),V('J31-L','L',8990,0,6,{z:'L',w:'Cuello de 45 a 60 cm'})],{added:'2026-06-18'}),
     P(32,'perro','accesorios','correas','J','Correa extensible 5 m','leash','teal',{material:'Nylon'},[V('J32-M','M',18990,0,6,{z:'M',w:'Perros de hasta 25 kg'}),V('J32-L','L',22990,0,4,{z:'L',w:'Perros de hasta 50 kg'})],{added:'2026-08-02'}),
     P(33,'ambos','accesorios','comederos','J','Comedero doble de acero inoxidable','bowl','slate',{material:'Acero inoxidable'},[V('J33-S','S',11990,0,9,{z:'S',w:'2 × 350 ml'}),V('J33-M','M',14990,0,6,{z:'M',w:'2 × 750 ml'})],{added:'2026-09-03'}),
-    P(34,'ambos','accesorios','transportadoras','J','Transportadora plástica con puerta de metal','carrier','green',{material:'Plástico'},[V('J34','Única',39990,0,3,{w:'Hasta 8 kg'})],{added:'2026-07-28'}),
+    P(34,'ambos','accesorios','transportadoras','J','Transportadora plástica con puerta de metal','carrier','green',{material:'Plástico'},[V('J34','Única',39990,0,0,{w:'Hasta 8 kg'})],{added:'2026-07-28'}),
     // Higiene
     P(35,'ambos','higiene','shampoo','L','Shampoo neutro para perros y gatos','bottle','green',{},[V('L35-2','250 ml',5990,6990,12),V('L35-5','500 ml',9990,0,8)],{added:'2026-06-25'}),
     P(36,'gato','higiene','piedras','C','Piedras sanitarias aglomerantes sin perfume','bag','slate',{},[V('C36-4','4 kg',8990,0,3,{kg:4}),V('C36-10','10 kg',19990,0,9,{kg:10})],{added:'2026-08-05'}),
@@ -1255,6 +1461,33 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     P(41,'perro','indumentaria','camperas','N','Campera impermeable con abrigo','shirt','green',{color:'Verde'},[V('N41-S','S',24990,0,4,{z:'S',back:30}),V('N41-M','M',26990,0,5,{z:'M',back:35}),V('N41-L','L',28990,31990,3,{z:'L',back:40}),V('N41-XL','XL',29990,0,2,{z:'XL',back:45})],{f:1,added:'2026-09-25'})
   ];
   const TALLES = [['XS',25,'35 a 40'],['S',30,'40 a 46'],['M',35,'46 a 52'],['L',40,'52 a 60'],['XL',45,'60 a 68']];
+
+  /* Carrusel: lo que en el futuro se carga desde el panel. Fechas, orden y estado deciden qué se muestra. */
+  const THEMES = {
+    pink:{bg:'var(--pink-50)', ink:'var(--ink)', acc:'var(--pink-100)'},
+    ink:{bg:'#211A1E', ink:'#FFFFFF', acc:'#3B2932', btn:'light'},
+    green:{bg:'var(--green-50)', ink:'var(--ink)', acc:'var(--green-100)'},
+    berry:{bg:'#9E1460', ink:'#FFFFFF', acc:'#B92577', btn:'light'},
+    cream:{bg:'var(--bg-soft)', ink:'var(--ink)', acc:'var(--line)'},
+    sand:{bg:'#F4ECE1', ink:'#1F1A1D', acc:'#E8D9C3'}
+  };
+  const BANNERS = [
+    {id:'b-alim', orden:1, activo:true, desde:'2026-11-01', hasta:'2026-11-30', tema:'pink', eyebrow:'Alimentos', titulo:'Tu alimento de siempre, sin cargar bolsas', desc:'Pedilo online y te lo llevamos, o retiralo por el local.', cta:{label:'Ver alimentos para perros', sp:'perro', cat:'alimentos'}, art:{main:{shape:'bag', tint:'pink'}, sec:{shape:'can', tint:'amber'}}, img:{d:'alimentos-1600x640.jpg', m:'alimentos-1080x1080.jpg'}},
+    {id:'b-banco', orden:2, activo:true, desde:'2026-11-01', hasta:'2026-11-30', tema:'ink', eyebrow:'Promoción bancaria · ejemplo', titulo:'[Beneficio] con [Banco]', desc:'[Días] · Tope [monto] · Vigencia [fechas]', cta:{label:'Ver condiciones', act:'terms'}, art:{kind:'card'}, img:{d:'promo-banco-1600x640.jpg', m:'promo-banco-1080x1080.jpg'},
+      terms:{banco:'[Nombre del banco]', beneficio:'[Porcentaje de descuento o reintegro, o cantidad de cuotas]', medios:'[Tarjetas o billeteras alcanzadas]', dias:'[Días de la semana]', tope:'[Tope por cliente y por período]', vigencia:'[Fecha de inicio] al [fecha de fin]', canal:'[Online, en el local o ambos]', restricciones:'[Compra mínima, productos o marcas excluidas]', legales:'[Texto legal provisto por el banco]'}},
+    {id:'b-desc', orden:3, activo:true, desde:'2026-11-01', hasta:'2026-12-31', tema:'green', eyebrow:'Descanso', titulo:'Un lugar propio para descansar', desc:'Cuchas exteriores, colchones y colchonetas en varios tamaños.', cta:{label:'Ver descanso', sp:'perro', cat:'descanso'}, art:{main:{shape:'house', tint:'green'}, sec:{shape:'mat', tint:'teal'}}, img:{d:'descanso-1600x640.jpg', m:'descanso-1080x1080.jpg'}},
+    {id:'b-ropa', orden:4, activo:true, desde:'2026-11-01', hasta:'2026-11-30', tema:'berry', eyebrow:'Nuevo · Indumentaria', titulo:'Buzos y camperas, de XS a XL', desc:'Con guía de talles para elegir sin dudas.', cta:{label:'Ver indumentaria', sp:'perro', cat:'indumentaria'}, art:{main:{shape:'shirt', tint:'pink'}, sec:{shape:'shirt', tint:'green'}}, img:{d:'indumentaria-1600x640.jpg', m:'indumentaria-1080x1080.jpg'}},
+    {id:'b-ofertas', orden:5, activo:true, desde:'2026-11-01', hasta:'2026-11-30', tema:'cream', eyebrow:'Ofertas', titulo:'Precios especiales en alimentos, juguetes y más', desc:'El descuento está marcado en cada producto.', cta:{label:'Ver ofertas', coll:'ofertas'}, art:{main:{shape:'bag', tint:'green'}, sec:{shape:'ball', tint:'berry'}}, img:{d:'ofertas-1600x640.jpg', m:'ofertas-1080x1080.jpg'}},
+    {id:'b-retiro', orden:6, activo:true, desde:'2026-10-01', hasta:'2027-03-31', tema:'sand', eyebrow:'Beneficio del local', titulo:'Comprá online, retirá en Pilar', desc:'Elegí "Retiro en el local" al finalizar tu compra.', cta:null, art:{kind:'store', sec:{shape:'bag', tint:'amber'}}, img:{d:'retiro-1600x640.jpg', m:'retiro-1080x1080.jpg'}},
+    {id:'b-gatos', orden:7, activo:true, desde:'2026-10-01', hasta:'2026-11-03', tema:'pink', eyebrow:'Gatos', titulo:'Juguetes para gatos curiosos', desc:'Cañas, ratones, pelotas y rascadores.', cta:{label:'Ver juguetes para gatos', sp:'gato', cat:'juguetes'}, art:{main:{shape:'wand', tint:'pink'}, sec:{shape:'mouse', tint:'slate'}}, img:{d:'gatos-1600x640.jpg', m:'gatos-1080x1080.jpg'}},
+    {id:'b-verano', orden:8, activo:false, desde:'2026-12-15', hasta:'2027-02-28', tema:'green', eyebrow:'Borrador', titulo:'Campaña de verano', desc:'', cta:null, art:{main:{shape:'bowl', tint:'teal'}}, img:{d:'verano-1600x640.jpg', m:'verano-1080x1080.jpg'}},
+    {id:'b-fiestas', orden:9, activo:true, desde:'2026-12-01', hasta:'2026-12-31', tema:'berry', eyebrow:'Fiestas', titulo:'Regalos para ellos', desc:'', cta:{label:'Ver juguetes', sp:'perro', cat:'juguetes'}, art:{main:{shape:'plush', tint:'pink'}}, img:{d:'fiestas-1600x640.jpg', m:'fiestas-1080x1080.jpg'}}
+  ];
+  /* Checkout: configuración de ejemplo, en el futuro editable desde el panel */
+  const SHIP = {zonas:[{nombre:'Zona 1 (ejemplo)', cps:['1629','1630'], costo:0}, {nombre:'Zona 2 (ejemplo)', cps:['1631','1633','1635','1664','1669'], costo:3500}]};
+  const PAY = {mp:{activo:true}, transferencia:{activo:true}, efectivo:{activo:true, soloRetiro:true}};
+  const DEMO_CODES = {DEMO10:{pct:10}};
+  const DEMO_BUYER = {nombre:'Ana', apellido:'Ejemplo', email:'ana@ejemplo.com', tel:'11 2345 6789', cp:'1629', calle:'Calle de ejemplo', numero:'123', localidad:'Pilar'};
   const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
   const SYN = {comida:'alimento', balanceado:'alimento', alimentos:'alimento', casa:'cucha', casita:'cucha', cama:'colchon', camita:'colchon', manta:'colchoneta', alfombra:'colchoneta', ropa:'indumentaria', abrigo:'indumentaria', saco:'buzo', sweater:'buzo', arena:'piedras', piedritas:'piedras', jugar:'juguete', bano:'higiene', baño:'higiene', plato:'comedero', bowl:'comedero', perrito:'perro', perra:'perro', gatita:'gato', minino:'gato', kitten:'gatito'};
   const STOP = new Set(['para','de','del','con','el','la','los','las','y','en','un','una','mi','x','que','a']);
@@ -1322,6 +1555,115 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
   const FEATURED = PRODUCTS.filter(p => p.featured);
   const OFFERS_HOME = (() => { const pool = PRODUCTS.filter(p => isOffer(p) && !p.featured).sort((a,b) => maxOff(b) - maxOff(a)); const out = [], cats = new Set(); for (const p of pool){ if (!cats.has(p.cat)){ out.push(p); cats.add(p.cat); } if (out.length===4) break; } return out; })();
 
+
+  const soldOut = p => p.v.every(v => v.s === 0);
+  const VOCAB = (() => { const set = new Set(); PRODUCTS.forEach(p => haystack(p).split(/[^a-z0-9ñ]+/).forEach(w => { if (w.length >= 4) set.add(w); })); Object.keys(SYN).forEach(w => set.add(norm(w))); return [...set]; })();
+  function lev(a, b){ if (Math.abs(a.length - b.length) > 2) return 9; let prev = Array.from({length:b.length + 1}, (_, j) => j); for (let i = 1; i <= a.length; i++){ const cur = [i]; for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j-1] + 1, prev[j-1] + (a[i-1] === b[j-1] ? 0 : 1)); prev = cur; } return prev[b.length]; }
+  function didYouMean(q){
+    let changed = false;
+    const fixed = norm(q).split(/[^a-z0-9ñ]+/).filter(Boolean).map(w => {
+      if (STOP.has(w) || w.length < 4 || VOCAB.some(v => v.startsWith(w))) return w;
+      let best = null, bd = 9; VOCAB.forEach(v => { const d = lev(w, v); if (d < bd){ bd = d; best = v; } });
+      if (best && bd <= 2){ changed = true; return best; } return w;
+    }).join(' ');
+    return changed && PRODUCTS.some(p => matchQ(p, fixed)) ? fixed : null;
+  }
+
+  /* ================= CARRUSEL ================= */
+  const TODAY = '2026-11-05';
+  const fmtDate = d => { const [y,m,dd] = d.split('-'); return `${+dd}/${+m}/${y}`; };
+  const bannerState = b => !b.activo ? {cls:'off', label:'Inactivo: no se muestra'} : TODAY < b.desde ? {cls:'pend', label:'Programado'} : TODAY > b.hasta ? {cls:'off', label:'Vencido: no se muestra'} : {cls:'ok', label:'Se muestra hoy'};
+  const LIVE = () => BANNERS.filter(b => bannerState(b).cls === 'ok').sort((a,b) => a.orden - b.orden);
+  const tbdify = t => esc(t).replace(/\[([^\]]+)\]/g, '<span class="tbd">$1</span>');
+  let CAR_MODE = 'b';
+  const artSvg = (a, cls) => `<svg class="${cls}" viewBox="0 0 120 140" style="--c1:${TINT[a.tint][0]};--c2:${TINT[a.tint][1]}" aria-hidden="true"><use href="#s-${a.shape}"/></svg>`;
+  function slideHTML(b, i, n){
+    const t = THEMES[b.tema];
+    const art = b.art.kind === 'card' ? `<span class="art-disc"></span><div class="art-cards"><div class="art-card c2"></div><div class="art-card"><span class="chip"></span><b>[Logo del banco]</b><i>•••• ••••</i></div></div>`
+      : b.art.kind === 'store' ? `<span class="art-disc"></span><svg class="art-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-store"/></svg>${artSvg(b.art.sec, 'art-sec')}`
+      : `<span class="art-disc"></span>${artSvg(b.art.main, 'art-main')}${b.art.sec ? artSvg(b.art.sec, 'art-sec') : ''}`;
+    const c = b.cta;
+    const cta = !c ? '' : `<button type="button" class="btn ${t.btn === 'light' ? 'btn-light' : 'btn-primary'}" ${c.act === 'terms' ? `data-act="terms" data-id="${b.id}"` : `data-act="list"${c.sp ? ` data-sp="${c.sp}"` : ''}${c.cat ? ` data-cat="${c.cat}"` : ''}${c.coll ? ` data-coll="${c.coll}"` : ''}`} data-st="ok">${esc(c.label)}</button>`;
+    return `<div class="car-slide" role="group" aria-roledescription="diapositiva" aria-label="${i+1} de ${n}: ${esc(b.titulo.replace(/[\[\]]/g, ''))}" style="--s-bg:${t.bg};--s-ink:${t.ink};--s-acc:${t.acc}">
+      <div class="slide-art" aria-hidden="true"><div class="art-inner"><div class="art-stage">${art}</div></div><span class="art-cap">Foto de campaña · ${b.img.d} · ${b.img.m}</span></div>
+      <div class="slide-copy"><span class="s-eyebrow">${tbdify(b.eyebrow)}</span><h2>${tbdify(b.titulo)}</h2>${b.desc ? `<p>${tbdify(b.desc)}</p>` : ''}${cta}</div></div>`;
+  }
+  function carouselHTML(mode){
+    const list = LIVE(), n = list.length;
+    return `<section class="carousel" data-carousel data-mode="${mode}" aria-roledescription="carrusel" aria-label="Promociones" data-st="ok">
+      <div class="car-viewport">${list.map((b, i) => slideHTML(b, i, n)).join('')}
+        <button type="button" class="car-arrow prev" data-car-prev aria-label="Banner anterior"><svg class="ico"><use href="#i-back"/></svg></button>
+        <button type="button" class="car-arrow next" data-car-next aria-label="Banner siguiente"><svg class="ico"><use href="#i-chev"/></svg></button></div>
+      <div class="car-ctrl"><div class="car-dots"></div><button type="button" class="car-pause" data-car-pause aria-label="Pausar carrusel"><svg class="ico"><use href="#i-pause"/></svg></button></div>
+      <div class="sr" aria-live="polite" data-car-live></div></section>`;
+  }
+  function createCarousel(root){
+    const vp = root.querySelector('.car-viewport'), slides = [...vp.querySelectorAll('.car-slide')], n = slides.length;
+    const dots = root.querySelector('.car-dots'), live = root.querySelector('[data-car-live]'), pbtn = root.querySelector('[data-car-pause]');
+    const DUR = 6500; root.style.setProperty('--dur', DUR + 'ms');
+    let cur = 0, pos = slides.map(() => null), timer = null, remaining = DUR, t0 = 0;
+    let hover = false, focus = false, userPaused = false, visible = true, drag = null, suppress = false;
+    dots.innerHTML = slides.map((s, i) => `<button type="button" class="car-dot" data-car-go="${i}" aria-label="Ver banner ${i+1} de ${n}"><i></i></button>`).join('');
+    function measure(){ const w = vp.clientWidth, peek = root.clientWidth >= 720 && n > 1 ? 72 : 0; vp.style.setProperty('--sw', (w - peek) + 'px'); vp.style.setProperty('--step', (w - peek + 12) + 'px'); root.style.setProperty('--peek', peek + 'px'); }
+    const canPlay = () => n > 1 && !reduced() && !userPaused && !hover && !focus && !drag && visible && !document.hidden;
+    function update(reset){
+      root.classList.toggle('static', reduced() || n < 2);
+      if (timer){ clearTimeout(timer); timer = null; if (!reset) remaining = Math.max(300, remaining - (performance.now() - t0)); }
+      if (reset) remaining = DUR;
+      if (!canPlay()){ root.classList.add('paused'); return; }
+      root.classList.remove('paused'); t0 = performance.now();
+      timer = setTimeout(() => { timer = null; go(cur + 1); }, remaining);
+    }
+    function layout(instant){
+      slides.forEach((s, i) => {
+        const r = ((i - cur) % n + n) % n, p = (r === n - 1 && n > 2) ? -1 : Math.min(r, 2);
+        if (instant || pos[i] == null || Math.abs(p - pos[i]) > 1) s.classList.add('jump');
+        s.style.setProperty('--p', p); pos[i] = p;
+        s.classList.toggle('is-cur', p === 0); s.classList.toggle('is-next', p === 1);
+        s.setAttribute('aria-hidden', p !== 0); s.inert = p !== 0;
+      });
+      void vp.offsetWidth; slides.forEach(s => s.classList.remove('jump'));
+      dots.querySelectorAll('.car-dot').forEach((d, i) => { const on = i === cur; d.classList.toggle('on', on); on ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'); if (on){ const k = d.querySelector('i'); k.replaceWith(k.cloneNode()); } });
+      update(true);
+    }
+    function go(i, user){ cur = ((i % n) + n) % n; layout(false); if (user) live.textContent = slides[cur].getAttribute('aria-label'); }
+    root.addEventListener('click', e => {
+      if (suppress){ suppress = false; e.preventDefault(); e.stopPropagation(); return; }
+      if (e.target.closest('[data-car-prev]')) return go(cur - 1, true);
+      if (e.target.closest('[data-car-next]')) return go(cur + 1, true);
+      const d = e.target.closest('[data-car-go]'); if (d) return go(+d.dataset.carGo, true);
+      if (e.target.closest('[data-car-pause]')){ userPaused = !userPaused; pbtn.innerHTML = `<svg class="ico"><use href="#i-${userPaused ? 'play' : 'pause'}"/></svg>`; pbtn.setAttribute('aria-label', userPaused ? 'Reanudar carrusel' : 'Pausar carrusel'); update(); return; }
+      if (e.target.closest('.car-viewport') && !e.target.closest('button') && e.clientX > slides[cur].getBoundingClientRect().right) go(cur + 1, true);
+    }, true);
+    root.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse'){ hover = true; update(); } });
+    root.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse'){ hover = false; update(); } });
+    root.addEventListener('focusin', e => { focus = e.target.matches(':focus-visible'); update(); });
+    root.addEventListener('focusout', e => { if (!root.contains(e.relatedTarget)){ focus = false; update(); } });
+    root.addEventListener('keydown', e => { if (e.key === 'ArrowRight'){ e.preventDefault(); go(cur + 1, true); } if (e.key === 'ArrowLeft'){ e.preventDefault(); go(cur - 1, true); } });
+    vp.addEventListener('pointerdown', e => { if (e.button !== 0 || n < 2 || e.target.closest('.car-arrow')) return; drag = {x:e.clientX, y:e.clientY, id:e.pointerId, on:false, dx:0}; });
+    vp.addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.on){
+        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)){ drag.on = true; vp.classList.add('dragging'); try { vp.setPointerCapture(e.pointerId); } catch(_){} update(); }
+        else if (Math.abs(dy) > 10){ drag = null; update(); return; } else return;
+      }
+      drag.dx = dx; vp.style.setProperty('--drag', dx + 'px');
+    });
+    const end = () => {
+      if (!drag) return; const d = drag; drag = null;
+      if (d.on){ vp.classList.remove('dragging'); vp.style.removeProperty('--drag'); suppress = true; setTimeout(() => { suppress = false; }, 60);
+        if (d.dx < -50) go(cur + 1, true); else if (d.dx > 50) go(cur - 1, true); else update(); }
+      else update();
+    };
+    vp.addEventListener('pointerup', end); vp.addEventListener('pointercancel', end);
+    const onVis = () => update(); document.addEventListener('visibilitychange', onVis); document.addEventListener('rmchange', onVis);
+    const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; update(); }, {threshold:.35}); io.observe(root);
+    const ro = new ResizeObserver(() => { measure(); layout(true); }); ro.observe(root);
+    measure(); layout(true);
+    return {destroy(){ clearTimeout(timer); io.disconnect(); ro.disconnect(); document.removeEventListener('visibilitychange', onVis); document.removeEventListener('rmchange', onVis); }};
+  }
+
   /* ================= TIENDA ================= */
   function createShop(frame, layer){
     frame.appendChild(document.getElementById('shop-tpl').content.cloneNode(true));
@@ -1331,6 +1673,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     const S = {view:{name:'home'}, homeSp:'perro', cart:[], pdp:{vi:-1, qty:1}, open:null, stack:[], recent:[], toastT:0, mega:null, undo:null};
     const urlEl = frame.closest('.browser')?.querySelector('[data-url]');
     const isPhone = !!frame.closest('.phone-screen');
+    const homeEl = $('.home');
 
     /* ---------- tarjeta ---------- */
     function priceHTML(v){
@@ -1349,20 +1692,23 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
       return p.v[p.d].s > 0 ? p.d : Math.max(0, p.v.findIndex(v => v.s > 0));
     }
     function card(p, vi){
-      const v = vi >= 0 ? p.v[vi] : null, off = offPct(v);
+      const out = soldOut(p), v = vi >= 0 ? p.v[vi] : null, off = out ? 0 : offPct(v);
+      let idx = p.v.map((_, k) => k);
+      if (p.v.length > 4){ idx = [0, 1, 2]; if (vi >= 3) idx[2] = vi; }
       const sizes = p.v.length > 1
-        ? `<div class="sizes" role="group" aria-label="${p.cat==='indumentaria'?'Talle':'Presentación'}">${p.v.map((x,i) => `<button type="button" class="size${i===vi?' is-on':''}${x.s===0?' is-out':''}" data-act="card-size" data-i="${i}" aria-pressed="${i===vi}" data-st="ok">${x.l}</button>`).join('')}</div>`
+        ? `<div class="sizes" role="group" aria-label="${p.cat === 'indumentaria' ? 'Talle' : 'Presentación'}">${idx.map(k => { const x = p.v[k]; return `<button type="button" class="size${k === vi ? ' is-on' : ''}${x.s === 0 ? ' is-out' : ''}" data-act="card-size" data-i="${k}" aria-pressed="${k === vi}" ${x.s === 0 ? `aria-label="${x.l}, sin stock"` : ''} data-st="ok">${x.l}</button>`; }).join('')}${p.v.length > 4 ? `<button type="button" class="size more" data-act="product" data-id="${p.id}" aria-label="Ver los ${p.v.length} ${p.cat === 'indumentaria' ? 'talles' : 'tamaños'}">+${p.v.length - 3}</button>` : ''}</div>`
         : `<div class="sizes"><span class="size-single">${p.v[0].l}</span></div>`;
-      const note = v ? (v.s===0 ? ['','Sin stock en esta opción'] : v.s <= 3 ? ['',`Últimas ${v.s} unidades`] : ['info', v.w || '']) : ['info', `Elegí un ${sizeWord(p)}`];
-      const btn = !v ? `<button type="button" class="btn btn-secondary btn-sm btn-block" data-act="need-size" data-st="ok">Elegí ${sizeWord(p)==='talle'?'un talle':'un tamaño'}</button>`
-        : `<button type="button" class="btn btn-primary btn-sm btn-block" data-act="add-card" ${v.s===0?'disabled':''} data-st="ok">${v.s===0?'Sin stock':'<svg class="ico"><use href="#i-cart"/></svg><span>Agregar</span>'}</button>`;
-      return `<article class="pcard" data-pid="${p.id}" data-vi="${vi}">
-        <button class="pcard-media" type="button" data-act="product" data-id="${p.id}" aria-label="Ver ${esc(p.name)}" data-st="ok">${svgShape(p)}${off?`<span class="badge badge-sale">−${off}%</span>`:''}</button>
+      const note = out ? ['', 'Sin stock por ahora'] : v ? (v.s === 0 ? ['', 'Sin stock en esta opción'] : v.s <= 3 ? ['', `Últimas ${v.s} unidades`] : ['info', v.w || '']) : ['info', `Elegí un ${sizeWord(p)}`];
+      const btn = out ? `<button type="button" class="btn btn-secondary btn-sm btn-block" data-act="notify" data-st="sim">Avisarme cuando vuelva</button>`
+        : !v ? `<button type="button" class="btn btn-secondary btn-sm btn-block" data-act="need-size" data-st="ok">Elegí ${sizeWord(p) === 'talle' ? 'un talle' : 'un tamaño'}</button>`
+        : `<button type="button" class="btn btn-primary btn-sm btn-block" data-act="add-card" ${v.s === 0 ? 'disabled' : ''} data-st="ok">${v.s === 0 ? 'Sin stock' : '<svg class="ico"><use href="#i-cart"/></svg><span>Agregar</span>'}</button>`;
+      return `<article class="pcard${out ? ' is-soldout' : ''}" data-pid="${p.id}" data-vi="${vi}">
+        <button class="pcard-media" type="button" data-act="product" data-id="${p.id}" aria-label="Ver ${esc(p.name)}" data-st="ok">${svgShape(p)}${out ? '<span class="badge badge-out">Sin stock</span>' : off ? `<span class="badge badge-sale">−${off}%</span>` : ''}</button>
         <div class="pcard-body">
           <p class="pcard-brand">${esc(p.brand)}</p>
           <button class="pcard-name" type="button" data-act="product" data-id="${p.id}">${esc(p.name)}</button>
           ${sizes}
-          <div class="price-box">${v ? priceHTML(v) : `<span class="price-from"><small>Desde</small>${money(minPrice(p))}</span><span class="unit"></span>`}</div>
+          <div class="price-box">${v ? priceHTML(v) : `<span class="price-from"><small>Desde</small>${money(minPrice(p))}</span>`}</div>
           <span class="card-note ${note[0]}">${esc(note[1])}</span>
           ${btn}
         </div></article>`;
@@ -1378,15 +1724,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     function viewHome(){
       const sp = S.homeSp;
       return `<div class="h-wrap">
-        <section class="hero" aria-label="Destacado">
-          <div class="hero-copy">
-            <span class="eyebrow">Pet shop en Pilar</span>
-            <h1>Todo para ellos, cerca tuyo</h1>
-            <p>Alimento, descanso, juguetes y accesorios para perros y gatos. Envío sin cargo en nuestra zona o retiro en el local.</p>
-            <button class="btn btn-primary" type="button" data-act="list" data-coll="ofertas" data-st="ok">Ver ofertas</button>
-          </div>
-          <div class="ph hero-img"><svg fill="currentColor"><use href="#paw"/></svg><span class="ph-cap">Foto real · banner editable desde el panel</span></div>
-        </section>
+        ${carouselHTML(CAR_MODE)}
         <section class="sec" aria-labelledby="t-shop">
           <div class="sec-head"><h2 id="t-shop">Comprá para</h2>
             <div class="seg2" data-on="${sp}" role="group" aria-label="Mascota" data-st="ok"><span class="thumb"></span>
@@ -1397,7 +1735,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
         </section>
         <section class="sec">${secHead('Destacados','data-act="list" data-coll="destacados"')}<div class="p-grid four">${FEATURED.map(p => card(p, preferredVariant(p))).join('')}</div></section>
         ${OFFERS_HOME.length ? `<section class="sec">${secHead('Ofertas','data-act="list" data-coll="ofertas"','Ver todas')}<div class="p-grid four">${OFFERS_HOME.map(p => card(p, offerVariant(p))).join('')}</div></section>` : ''}
-        <section class="sec">${secHead('Marcas','data-act="brands"','Ver todas')}<div class="brands">${BRANDS.slice(0,6).map(b => brandTile(b)).join('')}</div></section>
+        <section class="sec">${secHead('Marcas','data-act="brands"','Ver todas')}<div class="brands strip">${BRANDS.slice(0,6).map(b => brandTile(b)).join('')}</div></section>
         <section class="sec" aria-label="Beneficios"><div class="benefits">
           <div class="benefit"><svg class="ico"><use href="#i-truck"/></svg><b>Envío sin cargo</b><p>En <span class="tbd">zona de cobertura</span></p></div>
           <div class="benefit"><svg class="ico"><use href="#i-store"/></svg><b>Retiro en el local</b><p><span class="tbd">Dirección, Pilar</span></p></div>
@@ -1453,7 +1791,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
       const base = listBase(b), thr = priceThr(base); vw._thr = thr;
       const res = base.filter(p => matchF(p, vw.f, null, thr));
       const sorters = {rel:(a,c) => (c.featured?1:0)-(a.featured?1:0) || a.id-c.id, asc:(a,c) => minPrice(a)-minPrice(c), desc:(a,c) => minPrice(c)-minPrice(a), new:(a,c) => c.added.localeCompare(a.added)};
-      res.sort(sorters[vw.sort]);
+      res.sort((a,c) => (soldOut(a) ? 1 : 0) - (soldOut(c) ? 1 : 0) || sorters[vw.sort](a,c));
       const groups = facets(base, vw.f, b, thr), nf = nFilters(vw.f);
       const active = Object.entries(vw.f).flatMap(([k,set]) => [...set].map(v => `<button type="button" class="achip" data-act="facet-off" data-k="${k}" data-v="${esc(v)}" aria-label="Quitar filtro ${esc(lab(k,v,b.cat,thr))}" data-st="ok">${esc(lab(k,v,b.cat,thr))}<svg class="ico"><use href="#i-x"/></svg></button>`));
       const cr = [{t:'Inicio', attrs:'data-act="home"'}];
@@ -1473,8 +1811,16 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
         <div class="active-f">${active.join('')}${active.length?`<button type="button" class="link" data-act="clear" style="padding-inline:6px">Limpiar filtros</button>`:''}</div>
         <div class="list-layout${groups.length?'':' nofilters'}">
           ${groups.length ? `<aside class="list-side" aria-label="Filtros" data-st="ok"><div class="fgroups">${groups.map(g => groupHTML(g,'side')).join('')}</div></aside>` : ''}
-          <div class="p-grid ${groups.length?'three':'four'}">${res.length ? res.map(p => card(p, offerMode ? offerVariant(p) : preferredVariant(p, vw.f))).join('') : `<div class="empty"><b>No encontramos productos${b.q?` para “${esc(b.q)}”`:' con esos filtros'}</b><span>${b.q?'Probá con otra palabra, por ejemplo "cucha", "buzo" o el nombre de la marca.':'Sacá algún filtro para ver más opciones.'}</span>${nf?'<button class="btn btn-secondary" type="button" data-act="clear">Limpiar filtros</button>':'<button class="btn btn-secondary" type="button" data-act="home">Volver al inicio</button>'}</div>`}</div>
-        </div></div>`;
+          <div class="p-grid ${groups.length?'three':'four'}">${res.length ? res.map(p => card(p, offerMode ? offerVariant(p) : preferredVariant(p, vw.f))).join('') : emptyHTML(b, nf)}</div>
+        </div>${b.q && !res.length ? `<section class="sec">${secHead('Lo más elegido')}<div class="p-grid four">${FEATURED.map(p => card(p, preferredVariant(p))).join('')}</div></section>` : ''}</div>`;
+    }
+    function emptyHTML(b, nf){
+      if (!b.q) return `<div class="empty"><b>No hay productos con esos filtros</b><span>Sacá algún filtro para ver más opciones.</span>${nf ? '<button class="btn btn-secondary" type="button" data-act="clear">Limpiar filtros</button>' : '<button class="btn btn-secondary" type="button" data-act="home">Volver al inicio</button>'}</div>`;
+      const dym = didYouMean(b.q);
+      return `<div class="noresults" data-st="ok"><b>No encontramos productos para “${esc(b.q)}”</b>
+        ${dym ? `<p>¿Quisiste decir <button type="button" class="link" data-act="q" data-q="${esc(dym)}">${esc(dym)}</button>?</p>` : '<p class="hint">Revisá cómo está escrito o probá con una palabra más general.</p>'}
+        <span class="hint">Búsquedas frecuentes</span><div class="s-chips">${POPULAR.map(r => `<button type="button" class="s-chip" data-act="q" data-q="${esc(r)}"><svg class="ico"><use href="#i-trend"/></svg>${esc(r)}</button>`).join('')}</div>
+        <div class="row"><button class="btn btn-secondary btn-sm" type="button" data-act="list" data-sp="perro">Ver todo para perros</button><button class="btn btn-secondary btn-sm" type="button" data-act="list" data-sp="gato">Ver todo para gatos</button></div></div>`;
     }
     function viewHub(){
       const sp = S.view.base.sp, n = countSp(sp), ncat = CATS.filter(c => countSp(sp, c.id)).length;
@@ -1518,7 +1864,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
             ${v ? `<span class="stock${v.s===0?' out':v.s<=3?' low':''}">${v.s===0?'Sin stock en esta opción':v.s<=3?`Últimas ${v.s} unidades`:'En stock'}</span>` : ''}
             <div class="pdp-buy">
               <div class="stepper" data-st="ok"><button type="button" data-act="pdp-qty" data-d="-1" aria-label="Restar uno" ${!v||q<=1||v.s===0?'disabled':''}>−</button><output aria-live="polite">${!v||v.s===0?(v?0:1):q}</output><button type="button" data-act="pdp-qty" data-d="1" aria-label="Sumar uno" ${!v||q>=maxQ||v.s===0?'disabled':''}>+</button></div>
-              ${!v ? `<button class="btn btn-secondary" type="button" data-act="need-size-pdp" data-st="ok">Elegí ${word==='talle'?'un talle':'un tamaño'}</button>` : `<button class="btn btn-primary" type="button" data-act="add-pdp" ${v.s===0?'disabled':''} data-st="ok">${v.s===0?'Sin stock':'<svg class="ico"><use href="#i-cart"/></svg><span>Agregar al carrito</span>'}</button>`}
+              ${soldOut(p) ? `<button class="btn btn-secondary" type="button" data-act="notify" data-st="sim">Avisarme cuando vuelva</button>` : !v ? `<button class="btn btn-secondary" type="button" data-act="need-size-pdp" data-st="ok">Elegí ${word==='talle'?'un talle':'un tamaño'}</button>` : `<button class="btn btn-primary" type="button" data-act="add-pdp" ${v.s===0?'disabled':''} data-st="ok">${v.s===0?'Sin stock':'<svg class="ico"><use href="#i-cart"/></svg><span>Agregar al carrito</span>'}</button>`}
             </div>
             <ul class="svc">
               <li><svg class="ico"><use href="#i-truck"/></svg><span>Envío sin cargo en <span class="tbd">zona de cobertura</span></span></li>
@@ -1538,6 +1884,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     function urlFor(vw){
       if (vw.name==='home') return '/';
       if (vw.name==='brands') return '/marcas';
+      if (vw.name==='checkout') return '/checkout/' + ['carrito','datos','pago','confirmacion'][S.co.step-1];
       if (vw.name==='product') return '/producto/' + slug(byId[vw.id].name);
       const b = vw.base;
       let u = b.q ? '/buscar?q=' + encodeURIComponent(b.q) : b.coll ? '/' + b.coll : b.brand ? '/marcas/' + slug(b.brand) : '/' + slug(SPN[b.sp]) + (b.cat ? '/' + b.cat : '') + (b.sub ? '/' + slug(SUBS[b.cat][b.sub]) : '');
@@ -1554,7 +1901,10 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
       const vw = S.view;
       const ae = document.activeElement, fkey = ae && (frame.contains(ae) || layer.contains(ae)) ? ae.dataset.fkey : null, inLayer = fkey && layer.contains(ae);
       const prevCount = main.querySelector('[data-count]')?.textContent;
-      main.innerHTML = vw.name==='home' ? viewHome() : vw.name==='list' ? viewList() : vw.name==='brands' ? viewBrands() : viewProduct();
+      if (S.car){ S.car.destroy(); S.car = null; }
+      homeEl.classList.toggle('is-checkout', vw.name==='checkout'); if (vw.name==='checkout') homeEl.classList.remove('is-condensed');
+      main.innerHTML = vw.name==='home' ? viewHome() : vw.name==='list' ? viewList() : vw.name==='brands' ? viewBrands() : vw.name==='checkout' ? viewCheckout() : viewProduct();
+      const carEl = main.querySelector('[data-carousel]'); if (carEl) S.car = createCarousel(carEl);
       renderSubnav();
       if (urlEl) urlEl.textContent = 'petcompanypilar · ' + urlFor(vw);
       frame.querySelectorAll('.h-nav [data-nav]').forEach(b => b.toggleAttribute('aria-current', (b.dataset.nav==='ofertas' && vw.name==='list' && vw.base.coll==='ofertas') || (b.dataset.nav==='marcas' && (vw.name==='brands' || (vw.name==='list' && !!vw.base.brand)))));
@@ -1693,15 +2043,243 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
           <button class="remove" type="button" data-act="cart-remove" data-st="ok">Quitar</button></div></div>`; }).join('');
       foot.innerHTML = `<div class="tot"><span>Subtotal</span><b>${money(cartTotal())}</b></div>
         <span class="hint">El envío o retiro se elige en el siguiente paso.</span>
-        <button class="btn btn-primary btn-block" type="button" data-act="checkout" data-st="pend">Iniciar compra</button>
-        <div class="inline-msg" data-checkout-msg hidden>El checkout (entrega, envío o retiro y pago) se construye en la próxima etapa, después de aprobar este diseño.</div>
+        <button class="btn btn-primary btn-block" type="button" data-act="checkout" data-st="ok">Iniciar compra</button>
         <button class="btn btn-secondary btn-block" type="button" data-act="close-all">Seguir comprando</button>`;
+    }
+
+
+    /* ---------- checkout ---------- */
+    const coInit = () => ({step:1, f:{nombre:'', apellido:'', email:'', tel:'', cp:'', calle:'', numero:'', piso:'', localidad:'', indic:'', notas:''}, entrega:'', zone:null, pago:'', code:'', codeMsg:'', disc:null, errors:{}, tried:false, ovr:{}, order:null, payState:'pending'});
+    S.co = coInit();
+    const stockOf = v => S.co.ovr[v.sku] ?? v.s;
+    const lineIssue = l => { const s = stockOf(byId[l.pid].v[l.vi]); return s === 0 ? 'out' : l.qty > s ? 'less' : null; };
+    const checkZone = cp => { const z = SHIP.zonas.find(z => z.cps.includes(cp)); return z ? {ok:true, cp, nombre:z.nombre, costo:z.costo} : {ok:false, cp}; };
+    const LABELS = {nombre:'Nombre', apellido:'Apellido', email:'Email', tel:'Teléfono', cp:'Código postal', calle:'Calle', numero:'Altura', localidad:'Localidad', entrega:'Entrega', pago:'Medio de pago'};
+    const VAL = {
+      nombre: v => v.trim() ? '' : 'Ingresá tu nombre.',
+      apellido: v => v.trim() ? '' : 'Ingresá tu apellido.',
+      email: v => !v.trim() ? 'Ingresá tu email.' : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Revisá el email: tiene que tener la forma nombre@mail.com.',
+      tel: v => !v.trim() ? 'Ingresá un teléfono.' : v.replace(/\D/g, '').length >= 8 ? '' : 'El teléfono tiene que tener al menos 8 números, con código de área.',
+      cp: v => !v.trim() ? 'Ingresá tu código postal.' : /^\d{4}$/.test(v.trim()) ? '' : 'El código postal tiene 4 números, por ejemplo 1629.',
+      calle: v => v.trim() ? '' : 'Ingresá la calle.',
+      numero: v => v.trim() ? '' : 'Ingresá la altura.',
+      localidad: v => v.trim() ? '' : 'Ingresá la localidad.'
+    };
+    const required = () => ['nombre','apellido','email','tel'].concat(S.co.entrega === 'envio' ? ['cp','calle','numero','localidad'] : []);
+    function totals(lines){
+      lines = lines || S.cart; const c = S.co;
+      const sub = lines.reduce((a, l) => a + byId[l.pid].v[l.vi].p * l.qty, 0);
+      const disc = c.disc ? Math.round(sub * c.disc.pct / 100) : 0;
+      const ship = c.entrega === 'retiro' ? 0 : c.entrega === 'envio' && c.zone && c.zone.ok ? c.zone.costo : null;
+      return {sub, disc, ship, total: sub - disc + (ship || 0)};
+    }
+    function payOpts(){
+      const r = S.co.entrega === 'retiro';
+      return [
+        {id:'mp', t:'Mercado Pago', d:'Tarjetas de crédito y débito, dinero en cuenta y otros medios. Te llevamos a Mercado Pago para pagar.', on:PAY.mp.activo, tag:'Sujeto a confirmación'},
+        {id:'transferencia', t:'Transferencia bancaria', d:'Al confirmar te mostramos los datos para transferir.', on:PAY.transferencia.activo},
+        {id:'efectivo', t:'Efectivo', d:'Pagás al retirar en el local.', on:PAY.efectivo.activo && (!PAY.efectivo.soloRetiro || r), why: r ? '' : 'Disponible sólo con retiro en el local.'}
+      ];
+    }
+    const ocard = (k, val, t, d, side, on, dis, why) => `<label class="ocard${dis ? ' is-disabled' : ''}"><input type="radio" name="${frame.id}-${k}" value="${val}" data-act="co-radio" data-k="${k}" ${on ? 'checked' : ''} ${dis ? 'disabled' : ''}><span><b>${t}</b><small>${d}</small>${dis && why ? `<small class="why">${why}</small>` : ''}</span>${side ? `<span>${side}</span>` : ''}</label>`;
+    function fld(name, label, o = {}){
+      const v = S.co.f[name], e = S.co.errors[name], id = `${frame.id}-co-${name}`;
+      const desc = `${id}-err${o.hint ? ' ' + id + '-hint' : ''}`;
+      const ctl = o.ta ? `<textarea class="inp" id="${id}" name="${name}" data-co-f rows="3" ${o.ph ? `placeholder="${o.ph}"` : ''} aria-describedby="${desc}">${esc(v)}</textarea>`
+        : `<input class="inp" id="${id}" name="${name}" data-co-f type="${o.type || 'text'}" ${o.ac ? `autocomplete="${o.ac}"` : ''} ${o.im ? `inputmode="${o.im}"` : ''} ${o.ph ? `placeholder="${o.ph}"` : ''} ${o.opt ? '' : 'aria-required="true"'} value="${esc(v)}" ${e ? 'aria-invalid="true"' : ''} aria-describedby="${desc}">`;
+      return `<div class="fld"><label for="${id}">${label}${o.opt ? ' <span class="opt">(opcional)</span>' : ''}</label>${ctl}${o.hint ? `<span class="hint" id="${id}-hint">${o.hint}</span>` : ''}<span class="err" id="${id}-err">${e ? `<svg class="ico"><use href="#i-alert"/></svg>${esc(e)}` : ''}</span></div>`;
+    }
+    function setErr(name, msg){
+      if (msg) S.co.errors[name] = msg; else delete S.co.errors[name];
+      const id = `${frame.id}-co-${name}`, inp = frame.querySelector('#' + CSS.escape(id)), er = frame.querySelector('#' + CSS.escape(id + '-err'));
+      if (inp){ msg ? inp.setAttribute('aria-invalid', 'true') : inp.removeAttribute('aria-invalid'); }
+      if (er) er.innerHTML = msg ? `<svg class="ico"><use href="#i-alert"/></svg>${esc(msg)}` : '';
+    }
+    function coSteps(){
+      const L4 = ['Carrito','Datos y entrega','Pago','Confirmación'], st = S.co.step;
+      return `<ol class="co-steps" aria-label="Pasos de la compra">${L4.map((l, i) => { const n = i + 1, back = n < st && st < 4, cur = n === st;
+        const inner = `<span class="bar"></span><span class="lbl"><b>${n}</b><span class="t">${l}</span></span>`;
+        return `<li class="co-step${cur ? ' cur' : ''}${n < st ? ' past' : ''}" ${cur ? 'aria-current="step"' : ''}>${back ? `<button type="button" data-act="co-step" data-n="${n}" aria-label="Volver al paso ${n}: ${l}">${inner}</button>` : `<span>${inner}</span>`}</li>`; }).join('')}</ol>`;
+    }
+    function coSummary(src, k){
+      const T = src.T, c = S.co;
+      const shipTxt = src.entrega === 'retiro' ? 'Sin costo (retiro)' : T.ship === 0 ? 'Sin cargo' : T.ship ? money(T.ship) : src.entrega === 'envio' ? (c.zone && !c.zone.ok ? 'Sin cobertura' : 'Según tu código postal') : 'Se elige en el paso 2';
+      const lines = src.lines.map(l => { const p = byId[l.pid], v = p.v[l.vi]; return `<div class="sum-line"><span class="sum-img">${svgShape(p, '')}<em aria-label="Cantidad">${l.qty}</em></span><span class="sum-name">${esc(p.name)}<small>${vName(p, v)}</small></span><span class="sum-price">${money(v.p * l.qty)}</span></div>`; }).join('');
+      const code = c.step < 4 ? `<div class="sum-code">${c.disc ? `<div class="notice ok small"><svg class="ico"><use href="#i-check"/></svg><span>Código <b>${esc(c.disc.code)}</b> aplicado (${c.disc.pct}% de ejemplo). <button type="button" class="link" data-act="co-code-rm">Quitar</button></span></div>`
+        : `<form class="code-form" data-co-code novalidate><label class="sr" for="${frame.id}-code-${k}">Código de descuento</label><input class="inp sm" id="${frame.id}-code-${k}" data-co-code-input placeholder="Código de descuento" value="${esc(c.code)}" autocomplete="off" ${c.codeMsg ? `aria-invalid="true" aria-describedby="${frame.id}-code-${k}-err"` : ''}><button class="btn btn-secondary btn-sm" type="submit">Aplicar</button></form>${c.codeMsg ? `<span class="err" id="${frame.id}-code-${k}-err"><svg class="ico"><use href="#i-alert"/></svg>${esc(c.codeMsg)}</span>` : ''}<span class="hint">Para probar: <b>DEMO10</b> (código de ejemplo)</span>`}</div>` : '';
+      return `<div class="sum-lines">${lines}</div>${code}<div class="sum-rows"><div class="sum-row"><span>Subtotal</span><span>${money(T.sub)}</span></div>${T.disc ? `<div class="sum-row disc"><span>Descuento</span><span>−${money(T.disc)}</span></div>` : ''}<div class="sum-row"><span>Envío</span><span>${shipTxt}</span></div><div class="sum-row total"><span>Total</span><span>${money(T.total)}</span></div></div>`;
+    }
+    function coLine(l){
+      const p = byId[l.pid], v = p.v[l.vi], s = stockOf(v), iss = lineIssue(l);
+      const alts = p.v.map((x, i) => ({x, i})).filter(o => o.i !== l.vi && stockOf(o.x) > 0 && !S.cart.some(c => c.sku === o.x.sku));
+      return `<div class="co-line${iss ? ' is-bad' : ''}" data-sku="${v.sku}">
+        <span class="co-img">${svgShape(p, '')}</span>
+        <div class="co-info"><b>${esc(p.name)}</b><span class="v">${vName(p, v)} · ${money(v.p)} c/u</span>
+          ${iss === 'out' ? `<div class="notice bad small" role="alert"><svg class="ico"><use href="#i-alert"/></svg><span>Esta opción se quedó sin stock.${alts.length ? ` Podés cambiarla por ${alts.map(o => `<button type="button" class="link" data-act="co-swap" data-i="${o.i}">${vName(p, o.x)} (${money(o.x.p)})</button>`).join(' o ')}, o quitarla.` : ' Quitala para continuar.'}</span></div>`
+            : iss === 'less' ? `<div class="notice warn small"><svg class="ico"><use href="#i-alert"/></svg><span>Quedan ${s} unidades. <button type="button" class="link" data-act="co-fix">Dejar ${s}</button></span></div>` : ''}
+          <div class="cart-row">${iss === 'out' ? '<span></span>' : `<div class="stepper sm" data-st="ok"><button type="button" data-act="co-qty" data-d="-1" aria-label="Restar uno" ${l.qty <= 1 ? 'disabled' : ''}>−</button><output aria-live="polite">${l.qty}</output><button type="button" data-act="co-qty" data-d="1" aria-label="Sumar uno" ${l.qty >= s ? 'disabled' : ''}>+</button></div>`}<span class="price">${iss === 'out' ? '—' : money(v.p * l.qty)}</span></div>
+          <button class="remove" type="button" data-act="co-remove" data-st="ok">Quitar</button></div></div>`;
+    }
+    function coCart(){
+      if (!S.cart.length) return `<div class="co-empty"><h1 tabindex="-1">Tu carrito está vacío</h1><p class="hint">Agregá productos para empezar la compra.</p><div class="row"><button class="btn btn-primary" type="button" data-act="co-exit">Ir a la tienda</button><button class="sim-btn" type="button" data-act="co-demo-cart" data-st="sim">Simulación: cargar un carrito de ejemplo</button></div></div>`;
+      const issues = S.cart.filter(lineIssue).length;
+      return `<h1 tabindex="-1">Revisá tu carrito</h1>
+        ${issues ? `<div class="notice bad" role="alert"><svg class="ico"><use href="#i-alert"/></svg><span>${issues === 1 ? 'Un producto cambió su disponibilidad.' : 'Algunos productos cambiaron su disponibilidad.'} Resolvelo para continuar.</span></div>` : ''}
+        <div class="co-lines">${S.cart.map(coLine).join('')}</div>
+        <div><button class="sim-btn" type="button" data-act="co-sim-stock" data-st="sim">Simulación: un producto se queda sin stock</button></div>
+        <div class="co-actions"><button class="btn btn-secondary" type="button" data-act="co-exit">Seguir comprando</button><button class="btn btn-primary" type="button" data-act="co-next" ${issues ? 'disabled' : ''} data-st="ok">Continuar</button></div>`;
+    }
+    function zoneMsg(z){
+      if (!z) return `<p class="hint">Ingresá tu código postal para saber si llegamos y cuánto cuesta el envío.</p>`;
+      if (!z.ok) return `<div class="notice bad"><svg class="ico"><use href="#i-alert"/></svg><span>Por ahora no hacemos envíos al ${esc(z.cp)}. <button type="button" class="link" data-act="co-retiro">Elegir retiro en el local</button></span></div>`;
+      return `<div class="notice ok"><svg class="ico"><use href="#i-truck"/></svg><span>Llegamos a tu zona (${esc(z.nombre)}). ${z.costo === 0 ? '<b>Envío sin cargo.</b>' : `Costo de envío: <b>${money(z.costo)}</b>.`} <span class="tbd">Zonas y costos de ejemplo</span></span></div>`;
+    }
+    function coData(){
+      const c = S.co, errs = c.errors, keys = Object.keys(errs);
+      const z = c.zone && c.zone.cp === c.f.cp.trim() ? c.zone : null;
+      return `<h1 tabindex="-1">Datos y entrega</h1>
+        <p class="hint" style="margin-top:-10px">Comprás como invitado, sin crear una cuenta.</p>
+        ${keys.length ? `<div class="err-sum" role="alert" tabindex="-1" data-err-sum><b>${keys.length === 1 ? 'Falta revisar un dato:' : `Faltan revisar ${keys.length} datos:`}</b><ul>${keys.map(k => `<li><button type="button" class="link" data-act="co-focus" data-f="${k}">${LABELS[k] || k}: ${esc(errs[k])}</button></li>`).join('')}</ul></div>` : ''}
+        <form data-co-form novalidate>
+          <fieldset class="co-sec"><legend>Tus datos</legend>
+            <div class="frow two">${fld('nombre', 'Nombre', {ac:'given-name'})}${fld('apellido', 'Apellido', {ac:'family-name'})}</div>
+            <div class="frow two">${fld('email', 'Email', {type:'email', ac:'email', im:'email', hint:'Te enviamos la confirmación del pedido.'})}${fld('tel', 'Teléfono', {type:'tel', ac:'tel', im:'tel', ph:'Ej.: 11 2345 6789', hint:'Por si necesitamos coordinar la entrega.'})}</div>
+          </fieldset>
+          <fieldset class="co-sec" id="${frame.id}-co-entrega" tabindex="-1" style="margin-top:28px"><legend>Entrega</legend>
+            <div class="opt-cards">${ocard('entrega', 'envio', 'Envío a domicilio', 'El costo depende de tu código postal.', '', c.entrega === 'envio')}${ocard('entrega', 'retiro', 'Retiro en el local', 'Sin costo de envío · <span class="tbd">dirección y horarios</span>', '', c.entrega === 'retiro')}</div>
+            ${errs.entrega ? `<span class="err"><svg class="ico"><use href="#i-alert"/></svg>${errs.entrega}</span>` : ''}
+            ${c.entrega === 'envio' ? `<div class="co-addr"><div class="cp-row">${fld('cp', 'Código postal', {im:'numeric', ac:'postal-code', ph:'Ej.: 1629'})}<button type="button" class="btn btn-secondary" data-act="co-cp" data-st="sim">Verificar</button></div><div data-zone>${zoneMsg(z)}</div>
+              ${z && z.ok ? `<div class="frow addr">${fld('calle', 'Calle', {ac:'address-line1'})}${fld('numero', 'Altura', {im:'numeric'})}${fld('piso', 'Piso / depto', {opt:true})}</div><div class="frow two">${fld('localidad', 'Localidad', {ac:'address-level2'})}${fld('indic', 'Entre calles o indicaciones', {opt:true})}</div>` : ''}</div>`
+              : c.entrega === 'retiro' ? `<div class="notice ok"><svg class="ico"><use href="#i-store"/></svg><span>Te avisamos por email cuando el pedido esté listo para retirar en <span class="tbd">dirección del local</span>, <span class="tbd">días y horarios</span>.</span></div>` : ''}
+          </fieldset>
+          <fieldset class="co-sec" style="margin-top:28px"><legend>Observaciones <span class="opt">(opcional)</span></legend>${fld('notas', 'Algo que debamos saber del pedido', {ta:true, opt:true, ph:'Ej.: el timbre no funciona, horario preferido…'})}</fieldset>
+          <div class="co-actions" style="margin-top:28px"><button type="button" class="btn btn-secondary" data-act="co-step" data-n="1"><svg class="ico"><use href="#i-back"/></svg>Volver al carrito</button><button type="submit" class="btn btn-primary" data-st="ok">Continuar al pago</button></div>
+        </form>`;
+    }
+    function coPay(){
+      const c = S.co, f = c.f;
+      return `<h1 tabindex="-1">Pago</h1>
+        <div class="co-review"><div><span class="hint">Entrega</span><b>${c.entrega === 'retiro' ? 'Retiro en el local' : 'Envío a domicilio'}</b><span>${c.entrega === 'retiro' ? '<span class="tbd">Dirección del local</span>' : `${esc(f.calle)} ${esc(f.numero)}${f.piso ? ', ' + esc(f.piso) : ''}, ${esc(f.localidad)} (${esc(f.cp)})`}</span></div><button type="button" class="link" data-act="co-step" data-n="2">Cambiar</button>
+          <div><span class="hint">Contacto</span><b>${esc(f.nombre)} ${esc(f.apellido)}</b><span>${esc(f.email)} · ${esc(f.tel)}</span></div></div>
+        ${c.errors.pago ? `<div class="err-sum" role="alert"><b>${esc(c.errors.pago)}</b></div>` : ''}
+        <fieldset class="co-sec" id="${frame.id}-co-pago" tabindex="-1"><legend>¿Cómo querés pagar?</legend><div class="opt-cards">${payOpts().map(o => ocard('pago', o.id, o.t, o.d, o.tag ? `<span class="tag-sub">${o.tag}</span>` : '', c.pago === o.id, !o.on, o.why)).join('')}</div></fieldset>
+        <div class="notice info"><svg class="ico"><use href="#i-card"/></svg><span><b>Promociones bancarias y cuotas:</b> se muestran sólo cuando tengamos las condiciones confirmadas. <button type="button" class="link" data-act="terms" data-id="b-banco">Ver la promoción de ejemplo</button></span></div>
+        <p class="hint">No pedimos datos de tarjeta en esta página: los pagos con tarjeta se hacen dentro de Mercado Pago.</p>
+        <div class="co-actions"><button type="button" class="btn btn-secondary" data-act="co-step" data-n="2"><svg class="ico"><use href="#i-back"/></svg>Volver</button><button type="button" class="btn btn-primary" data-act="co-confirm" data-st="sim">Confirmar pedido · ${money(totals().total)}</button></div>
+        <p class="hint">Al confirmar registramos tu pedido.${c.pago === 'mp' ? ' Después te llevamos a Mercado Pago para pagar.' : c.pago === 'transferencia' ? ' Después te mostramos los datos para transferir.' : c.pago === 'efectivo' ? ' Pagás al retirar.' : ''}</p>`;
+    }
+    function coDone(){
+      const o = S.co.order, ps = S.co.payState, T = o.T;
+      const pill = ps === 'approved' ? '<span class="spill ok">Pago aprobado</span>' : ps === 'rejected' ? '<span class="spill bad">Pago rechazado</span>' : o.pago === 'efectivo' ? '<span class="spill wait">Pago al retirar</span>' : '<span class="spill wait">Pago pendiente</span>';
+      let pay = '';
+      if (o.pago === 'mp'){
+        pay = ps === 'approved' ? `<div class="notice ok"><svg class="ico"><use href="#i-check"/></svg><span>Mercado Pago confirmó el pago. Te enviamos el comprobante a ${esc(o.f.email)}.</span></div>`
+          : ps === 'mp-open' ? `<div class="notice info"><svg class="ico"><use href="#i-card"/></svg><span>En la tienda real, acá se abre Mercado Pago para que pagues ${money(T.total)}. Elegí cómo termina:</span></div><div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn" type="button" data-act="co-pay" data-r="approved" data-st="sim">Simulación: pago aprobado</button><button class="sim-btn" type="button" data-act="co-pay" data-r="rejected" data-st="sim">Simulación: pago rechazado</button></div>`
+          : ps === 'rejected' ? `<div class="notice bad"><svg class="ico"><use href="#i-alert"/></svg><span>El pago no se completó. Tu pedido sigue registrado: podés volver a intentarlo.</span></div><button class="btn btn-primary" type="button" data-act="co-mp" data-st="sim">Reintentar el pago con Mercado Pago</button>`
+          : `<p>Tu pedido está registrado, pero <b>todavía no está pago</b>. Para completarlo, pagá ${money(T.total)} con Mercado Pago.</p><button class="btn btn-primary" type="button" data-act="co-mp" data-st="sim">Pagar con Mercado Pago</button>`;
+      } else if (o.pago === 'transferencia'){
+        pay = ps === 'approved' ? `<div class="notice ok"><svg class="ico"><use href="#i-check"/></svg><span>Verificamos tu transferencia. ¡Gracias!</span></div>`
+          : `<p>Transferí <b>${money(T.total)}</b> a:</p><dl class="tdl"><dt>Alias</dt><dd><span class="tbd">a definir</span></dd><dt>CBU</dt><dd><span class="tbd">a definir</span></dd><dt>Titular</dt><dd><span class="tbd">a definir</span></dd></dl><p class="hint">Enviá el comprobante por <span class="tbd">WhatsApp o email</span>. Reservamos tus productos durante <span class="tbd">plazo a definir</span>.</p><button class="sim-btn" type="button" data-act="co-pay" data-r="approved" data-st="sim">Simulación: el local confirma la transferencia</button>`;
+      } else {
+        pay = `<p>Pagás <b>${money(T.total)}</b> en efectivo al retirar. Te avisamos por email cuando el pedido esté listo.</p>`;
+      }
+      const paid = ps === 'approved';
+      return `<div class="co-done">
+        <span class="done-ic"><svg class="ico"><use href="#i-check"/></svg></span>
+        <h1 tabindex="-1">¡Recibimos tu pedido!</h1>
+        <p>Pedido <b>N.º ${o.num}</b> <span class="sim-tag">Demostración</span> · Te enviaremos la confirmación a ${esc(o.f.email)}.</p>
+        <div class="status-row"><span class="spill ok">Pedido recibido</span>${pill}</div>
+        <div class="co-card" style="width:100%"><h2>${o.pago === 'mp' ? 'Pago con Mercado Pago' : o.pago === 'transferencia' ? 'Pago por transferencia' : 'Pago en efectivo'}</h2>${pay}</div>
+        <div class="co-card" style="width:100%"><h2>Qué sigue</h2><ol class="timeline">
+          <li class="done"><span><b>Pedido recibido</b>Ya lo registramos.</span></li>
+          <li class="${paid ? 'done' : ''}"><span><b>${o.pago === 'efectivo' ? 'Pago al retirar' : 'Pago confirmado'}</b>${o.pago === 'efectivo' ? 'Lo abonás en el local.' : paid ? 'Listo.' : 'Cuando se confirme, te avisamos.'}</span></li>
+          <li><span><b>Preparamos tu pedido</b>Revisamos cada producto.</span></li>
+          <li><span><b>${o.entrega === 'retiro' ? 'Listo para retirar' : 'En camino'}</b>${o.entrega === 'retiro' ? 'Te avisamos por email.' : `A ${esc(o.f.calle)} ${esc(o.f.numero)}, ${esc(o.f.localidad)}.`}</span></li>
+        </ol></div>
+        <button class="btn btn-primary" type="button" data-act="co-finish" data-st="ok">Volver a la tienda</button>
+      </div>`;
+    }
+    function viewCheckout(){
+      const c = S.co, st = c.step;
+      const src = st === 4 ? {lines:c.order.lines, T:c.order.T, entrega:c.order.entrega} : {lines:S.cart, T:totals(), entrega:c.entrega};
+      const count = src.lines.reduce((a, l) => a + l.qty, 0), has = src.lines.length > 0;
+      const body = st === 1 ? coCart() : st === 2 ? coData() : st === 3 ? coPay() : coDone();
+      return `<div class="h-wrap">${coSteps()}<div class="co-layout"><div class="co-main">
+        ${has ? `<details class="co-mob-sum" ${c.sumOpen ? 'open' : ''} data-sum-toggle><summary><span>${st === 4 ? 'Resumen del pedido' : 'Ver resumen'} <small>(${count} ${count === 1 ? 'producto' : 'productos'})</small></span><b>${money(src.T.total)}</b><svg class="ico"><use href="#i-down"/></svg></summary><div class="co-sum">${coSummary(src, 'm')}</div></details>` : ''}
+        ${body}</div>
+        ${has ? `<aside class="co-side" aria-label="Resumen del pedido"><div class="co-card"><h2>Resumen del pedido</h2><div class="co-sum">${coSummary(src, 'd')}</div></div></aside>` : ''}</div></div>`;
+    }
+    function coGo(step, focusSel){ S.co.step = step; S.view = {name:'checkout'}; render({anim:true, focus:!focusSel}); if (focusSel){ const el = main.querySelector(focusSel); el && el.focus(); } }
+    function loadDemoCart(){ S.cart = [[10,1,1],[16,2,1],[39,2,1]].map(([pid, vi, qty]) => ({sku:byId[pid].v[vi].sku, pid, vi, qty})); updateCount(false); }
+    function validateStep2(){
+      const c = S.co, errs = {};
+      if (!c.entrega) errs.entrega = 'Elegí cómo querés recibir el pedido.';
+      required().forEach(k => { const m = VAL[k](c.f[k]); if (m) errs[k] = m; });
+      if (c.entrega === 'envio' && !errs.cp){ if (!c.zone || c.zone.cp !== c.f.cp.trim()) c.zone = checkZone(c.f.cp.trim()); if (!c.zone.ok){ errs.cp = 'No hacemos envíos a este código postal. Podés elegir retiro en el local.'; ['calle','numero','localidad'].forEach(k => delete errs[k]); } }
+      if (c.entrega === 'envio' && errs.cp) ['calle','numero','localidad'].forEach(k => delete errs[k]);
+      return errs;
+    }
+    function coAct(a, d, el){
+      const c = S.co;
+      switch(a){
+        case 'co-next': if (S.cart.length && !S.cart.some(lineIssue)) coGo(2); break;
+        case 'co-step': coGo(+d.n); break;
+        case 'co-exit': go({name:'home'}); break;
+        case 'co-finish': S.co = coInit(); go({name:'home'}); break;
+        case 'co-demo-cart': loadDemoCart(); render({}); break;
+        case 'co-sim-stock': { const l = S.cart.find(x => !lineIssue(x)) || S.cart[0]; if (l) c.ovr[l.sku] = 0; render({}); main.querySelector('[role="alert"]')?.focus?.(); break; }
+        case 'co-qty': { const l = S.cart.find(x => x.sku === el.closest('.co-line').dataset.sku), mx = stockOf(byId[l.pid].v[l.vi]); l.qty = Math.min(mx, Math.max(1, l.qty + +d.d)); updateCount(false); render({}); main.querySelector(`.co-line[data-sku="${l.sku}"] [data-act="co-qty"][data-d="${d.d}"]`)?.focus(); break; }
+        case 'co-remove': { const sku = el.closest('.co-line').dataset.sku; S.cart = S.cart.filter(x => x.sku !== sku); updateCount(false); render({}); toast({title:'Producto quitado'}); break; }
+        case 'co-swap': { const l = S.cart.find(x => x.sku === el.closest('.co-line').dataset.sku), v = byId[l.pid].v[+d.i]; l.vi = +d.i; l.sku = v.sku; l.qty = Math.min(l.qty, stockOf(v)); updateCount(false); render({}); toast({title:'Opción cambiada', text:vName(byId[l.pid], v)}); break; }
+        case 'co-fix': { const l = S.cart.find(x => x.sku === el.closest('.co-line').dataset.sku); l.qty = stockOf(byId[l.pid].v[l.vi]); updateCount(false); render({}); break; }
+        case 'co-radio':
+          if (d.k === 'entrega'){ c.entrega = el.value; delete c.errors.entrega; if (c.entrega === 'retiro'){ ['cp','calle','numero','localidad'].forEach(k => delete c.errors[k]); if (c.pago === 'efectivo') {} } else if (c.pago === 'efectivo') c.pago = ''; }
+          else { c.pago = el.value; delete c.errors.pago; }
+          render({}); main.querySelector(`input[name="${frame.id}-${d.k}"][value="${el.value}"]`)?.focus({preventScroll:true}); break;
+        case 'co-retiro': c.entrega = 'retiro'; delete c.errors.cp; render({}); main.querySelector(`input[name="${frame.id}-entrega"][value="retiro"]`)?.focus(); break;
+        case 'co-cp': { const m = VAL.cp(c.f.cp); if (m){ setErr('cp', m); frame.querySelector('#' + CSS.escape(`${frame.id}-co-cp`))?.focus(); break; } c.zone = checkZone(c.f.cp.trim()); delete c.errors.cp; render({}); (main.querySelector(`#${CSS.escape(frame.id + '-co-calle')}`) || main.querySelector('[data-zone] .notice'))?.focus?.(); if (!c.zone.ok) main.querySelector('[data-zone] .link')?.focus(); break; }
+        case 'co-focus': { const t = d.f === 'entrega' || d.f === 'pago' ? main.querySelector(`#${CSS.escape(frame.id + '-co-' + d.f)}`) : main.querySelector(`#${CSS.escape(frame.id + '-co-' + d.f)}`); t?.focus(); break; }
+        case 'co-confirm':
+          if (!c.pago || !payOpts().find(o => o.id === c.pago && o.on)){ c.errors.pago = 'Elegí un medio de pago para continuar.'; render({}); main.querySelector(`#${CSS.escape(frame.id + '-co-pago')}`)?.focus(); break; }
+          c.order = {num:'DEMO-' + String(Math.floor(10000 + Math.random() * 89999)), lines:S.cart.map(l => ({...l})), T:totals(), entrega:c.entrega, pago:c.pago, f:{...c.f}};
+          c.payState = 'pending'; S.cart = []; updateCount(false); coGo(4); break;
+        case 'co-mp': c.payState = 'mp-open'; render({}); main.querySelector('.co-card .notice')?.scrollIntoView?.({block:'nearest'}); break;
+        case 'co-pay': c.payState = d.r; render({}); break;
+        case 'co-code-rm': c.disc = null; c.code = ''; render({}); break;
+        default: return false;
+      }
+      return true;
+    }
+    frame.addEventListener('input', e => {
+      const t = e.target;
+      if (t.matches('[data-co-f]')){ S.co.f[t.name] = t.value; if (S.co.errors[t.name] && VAL[t.name] && !VAL[t.name](t.value)) setErr(t.name, '');
+        if (t.name === 'cp' && S.co.zone && S.co.zone.cp !== t.value.trim()){ const zEl = main.querySelector('[data-zone]'); if (zEl) zEl.innerHTML = zoneMsg(null); } }
+      if (t.matches('[data-co-code-input]')) S.co.code = t.value;
+    });
+    frame.addEventListener('focusout', e => { const t = e.target; if (t.matches('[data-co-f]') && S.co.tried && required().includes(t.name)) setErr(t.name, VAL[t.name](t.value)); });
+    frame.addEventListener('toggle', e => { if (e.target.matches('[data-sum-toggle]')) S.co.sumOpen = e.target.open; }, true);
+    frame.addEventListener('submit', e => {
+      const fm = e.target;
+      if (fm.matches('[data-co-code]')){ e.preventDefault(); const code = (S.co.code || '').trim().toUpperCase(); if (!code){ S.co.codeMsg = 'Escribí un código.'; } else if (DEMO_CODES[code]){ S.co.disc = {code, pct:DEMO_CODES[code].pct}; S.co.codeMsg = ''; } else S.co.codeMsg = 'Ese código no es válido o ya venció.'; render({}); return; }
+      if (fm.matches('[data-co-form]')){ e.preventDefault(); S.co.tried = true; const errs = validateStep2(); S.co.errors = errs;
+        if (Object.keys(errs).length){ render({}); main.querySelector('[data-err-sum]')?.focus(); } else coGo(3); }
+    });
+    /* Encabezado compacto en celular */
+    if (isPhone){
+      const sc = frame.closest('.phone-screen');
+      sc.addEventListener('scroll', () => { if (S.view.name === 'checkout') return; const y = sc.scrollTop, on = homeEl.classList.contains('is-condensed'); if (!on && y > 140) homeEl.classList.add('is-condensed'); else if (on && y < 40) homeEl.classList.remove('is-condensed'); }, {passive:true});
+    }
+    function renderTerms(){
+      const b = BANNERS.find(x => x.id === S.termsId && x.terms) || BANNERS.find(x => x.terms), T = b.terms;
+      layer.querySelector('[data-terms-body]').innerHTML = `<p class="hint" style="margin-bottom:14px">Una promoción bancaria se publica sólo con todas sus condiciones. Lo que está en amarillo se completa desde el panel con la información oficial del banco.</p>
+        <dl class="tdl">${[['Banco', T.banco], ['Beneficio', T.beneficio], ['Medios alcanzados', T.medios], ['Días', T.dias], ['Tope', T.tope], ['Vigencia', T.vigencia], ['Dónde aplica', T.canal], ['Restricciones', T.restricciones]].map(([k, v]) => `<dt>${k}</dt><dd>${tbdify(v)}</dd>`).join('')}</dl>
+        <p class="hint" style="margin-top:14px">${tbdify(T.legales)}</p>`;
     }
 
     /* ---------- paneles ---------- */
     function openPanel(name){
       closeMega(); S.open = name;
-      if (name==='cart') renderCart(); if (name==='menu') renderMenu(); if (name==='filters') renderSheet(); if (name==='guide') renderGuide();
+      if (name==='cart') renderCart(); if (name==='menu') renderMenu(); if (name==='filters') renderSheet(); if (name==='guide') renderGuide(); if (name==='terms') renderTerms();
       layer.classList.add('has-open');
       layer.querySelectorAll('[data-panel]').forEach(p => { const on = p.dataset.panel===name; p.classList.toggle('open', on); p.setAttribute('aria-hidden', !on); });
       const first = layer.querySelector(`[data-panel="${name}"] .panel-head button`); first && setTimeout(() => first.focus({preventScroll:true}), 40);
@@ -1754,7 +2332,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
         sug.hidden = false; return;
       }
       const cats = catSuggest(q), res = PRODUCTS.filter(p => matchQ(p, q));
-      if (!cats.length && !res.length){ sug.innerHTML = `<div class="s-empty">No encontramos "${esc(q)}". Probá con "cucha", "buzo", "castrado" o el nombre de la marca.</div>`; sug.hidden = false; return; }
+      if (!cats.length && !res.length){ const dym = didYouMean(q); sug.innerHTML = `<div class="s-empty">No encontramos "${esc(q)}".${dym ? ` ¿Quisiste decir <button type="button" class="link" data-act="q" data-q="${esc(dym)}">${esc(dym)}</button>?` : ' Probá con "cucha", "buzo", "castrado" o el nombre de la marca.'}</div>`; sug.hidden = false; return; }
       sug.innerHTML = (cats.length ? `<div class="s-h">Categorías</div>` + cats.map(c => `<button type="button" class="s-row" data-act="list" data-sp="${c.sp}" data-cat="${c.cat}" data-sub="${c.sub}" data-from-q="${esc(q)}"><span class="s-img"><svg class="ico"><use href="#${c.icon}"/></svg></span><span class="s-name">${hi(c.label, q)}<small>en ${c.ctx}</small></span><span class="hint">${c.n}</span></button>`).join('') : '')
         + (res.length ? `<div class="s-h">Productos</div>` + res.slice(0,4).map(p => `<button type="button" class="s-row" data-act="product" data-id="${p.id}" data-from-q="${esc(q)}"><span class="s-img">${svgShape(p,'')}</span><span class="s-name">${hi(p.name, q)}<small>${esc(p.brand)} · ${CAT[p.cat].label}</small></span><span class="s-price">${money(minPrice(p))}</span></button>`).join('') + `<button type="button" class="s-all" data-act="search-all">Ver los ${res.length} productos</button>` : '');
       sug.hidden = false;
@@ -1779,8 +2357,9 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     function onAct(e){
       const el = e.target.closest('[data-act]'); if (!el) return;
       const a = el.dataset.act, d = el.dataset;
-      if (e.type==='change' && !['facet','sort'].includes(a)) return;
-      if (e.type==='click' && ['facet','sort'].includes(a)) return;
+      if (e.type==='change' && !['facet','sort','co-radio'].includes(a)) return;
+      if (e.type==='click' && ['facet','sort','co-radio'].includes(a)) return;
+      if (a.startsWith('co-') && coAct(a, d, el)) return;
       switch(a){
         case 'home': go({name:'home'}); input.value=''; break;
         case 'list': if (d.fromQ) remember(d.fromQ); sug.hidden = true; goList(d); if (!d.q) input.value = ''; break;
@@ -1818,7 +2397,9 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
         case 'cart-qty': { const l = S.cart.find(x => x.sku===el.closest('.cart-line').dataset.sku); const max = byId[l.pid].v[l.vi].s; l.qty = Math.min(max, Math.max(1, l.qty + +d.d)); updateCount(false); renderCart(); break; }
         case 'cart-remove': { const sku = el.closest('.cart-line').dataset.sku, l = S.cart.find(x => x.sku===sku); S.cart = S.cart.filter(x => x.sku!==sku); S.undo = l; updateCount(false); renderCart(); toast({title:'Producto quitado', action:'Deshacer', act:'cart-undo'}); break; }
         case 'cart-undo': if (S.undo){ S.cart.push(S.undo); S.undo = null; updateCount(true); renderCart(); layer.querySelector('[data-toast]').classList.remove('show'); } break;
-        case 'checkout': layer.querySelector('[data-checkout-msg]').hidden = false; break;
+        case 'checkout': closeAll(); if (S.co.step === 4) S.co = coInit(); S.co.step = 1; go({name:'checkout'}); break;
+        case 'terms': S.termsId = d.id; openPanel('terms'); break;
+        case 'notify': toast({title:'Simulación: aviso de stock', text:'En la tienda real te pedimos el email y te avisamos cuando vuelva.'}); break;
         case 'facet': toggleFacet(d.k, d.v, el.checked); break;
         case 'facet-chip': toggleFacet(d.k, d.v, el.getAttribute('aria-checked')!=='true'); break;
         case 'facet-off': toggleFacet(d.k, d.v, false); break;
@@ -1834,6 +2415,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     return {
       card, preferredVariant,
       refresh(){ renderSubnav(true); },
+      runAct(d){ if (d.act === 'terms'){ S.termsId = d.id; openPanel('terms'); } else goList(d); },
       demo(key){
         closeAll(); S.stack = [];
         const L2 = (base, f) => { S.view = {name:'list', base, f:Object.fromEntries(Object.entries(f||{}).map(([k,a]) => [k, new Set(a)])), sort:'rel'}; render({anim:true}); };
@@ -1848,78 +2430,56 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
           case 'F': L2({coll:'ofertas'}); break;
           case 'filtros-celular': L2({sp:'perro', cat:'alimentos'}, {stage:['adulto']}); setTimeout(() => openPanel('filters'), 350); break;
           case 'filtros-escritorio': L2({sp:'perro', cat:'descanso'}, {size:['L']}); break;
+          case 'checkout': loadDemoCart(); S.co = coInit(); coGo(1); break;
+          case 'checkout-pago': loadDemoCart(); S.co = coInit(); Object.assign(S.co.f, DEMO_BUYER); S.co.entrega = 'envio'; S.co.zone = checkZone('1629'); coGo(3); break;
+          case 'noresults': input.value = 'cuxa'; L2({q:'cuxa'}); break;
+          case 'soldout': L2({sp:'gato', cat:'accesorios'}); break;
+          case 'terms': S.view = {name:'home'}; render({}); S.termsId = 'b-banco'; setTimeout(() => openPanel('terms'), 200); break;
+          case 'condensed': S.view = {name:'home'}; render({}); if (isPhone){ const sc = frame.closest('.phone-screen'); setTimeout(() => sc.scrollTo({top:620, behavior: reduced() ? 'auto' : 'smooth'}), 150); } break;
         }
       }
     };
   }
 
-  /* ================= DOCUMENTACIÓN GENERADA DESDE LOS DATOS ================= */
-  function renderTree(){
-    document.querySelector('[data-tree]').innerHTML = ['perro','gato'].map(sp => `<div class="tnode ${sp}"><h3>${SPN[sp]} <code>/${slug(SPN[sp])}</code></h3>
-      ${CATS.map(c => { const n = countSp(sp, c.id), subs = n ? subsFor(sp, c.id) : [];
-        return `<div class="trow${n?'':' missing'}"><span class="mrow-ic sp-${sp}" style="${sp==='gato'?'--tile-bg:var(--green-50);--tile-ink:var(--green-text)':''}"><svg class="ico"><use href="#${c.icon}"/></svg></span><div><b>${c.label}</b><p>${n ? (subs.length > 1 ? subs.map(s => SUBS[c.id][s]).join(' · ') : 'Sin tipos: se filtra directamente') : 'No aplica: no se muestra'}</p></div><small>${n ? n + ' productos' : '—'}</small></div>`; }).join('')}</div>`).join('');
+  /* ================= DOCUMENTACIÓN ================= */
+  function renderBannerTable(){
+    const dest = b => !b.cta ? 'Sin botón (informativo)' : b.cta.act === 'terms' ? 'Abre las condiciones' : b.cta.coll ? 'Ofertas' : `${SPN[b.cta.sp]} › ${CAT[b.cta.cat].label}`;
+    document.querySelector('[data-banner-table]').innerHTML = `<thead><tr><th>Orden</th><th>Banner</th><th>Vigencia</th><th>Estado</th><th>Hoy</th><th>Destino del botón</th></tr></thead><tbody>${[...BANNERS].sort((a,b) => a.orden - b.orden).map(b => { const st = bannerState(b); return `<tr><td>${b.orden}</td><td>${tbdify(b.titulo)}<br><span class="hint">${tbdify(b.eyebrow)}</span></td><td>${fmtDate(b.desde)} al ${fmtDate(b.hasta)}</td><td>${b.activo ? 'Activo' : 'Inactivo'}</td><td><span class="st ${st.cls}">${st.label}</span></td><td>${dest(b)}</td></tr>`; }).join('')}</tbody>`;
   }
-  function renderMatrix(){
-    const keys = [['brand','Marca'],['stage','Etapa'],['breed','Tamaño de raza'],['need','Necesidades'],['pres','Presentación'],['size','Tamaño / Talle'],['dims','Medidas'],['material','Material'],['color','Color'],['price','Precio']];
-    const why = {alimentos:'Quien compra alimento suele saber la marca, la edad y el tamaño de su perro.', descanso:'Lo que define la compra es el tamaño del perro y el lugar donde va.', juguetes:'El tamaño evita juguetes peligrosos para perros grandes.', accesorios:'El tamaño (cuello, peso) es lo que hace que sirva.', higiene:'Pocos productos: alcanza con marca y precio.', indumentaria:'El talle es lo crítico. El color es la elección personal.'};
-    document.querySelector('[data-matrix]').innerHTML = `<thead><tr><th>Categoría</th>${keys.map(([,t]) => `<th>${t}</th>`).join('')}<th style="text-align:left">Por qué</th></tr></thead><tbody>${CATS.map(c => `<tr><td>${c.label}</td>${keys.map(([k]) => FCFG[c.id].some(([x]) => x===k) ? `<td class="yes">${k==='breed'?'Perros':'✓'}</td>` : '<td class="no">—</td>').join('')}<td style="text-align:left;min-width:220px">${why[c.id]}</td></tr>`).join('')}
-      <tr><td>Ofertas, marcas, búsqueda</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td style="text-align:left">Mezclan categorías: se filtra por mascota, categoría y precio.</td></tr></tbody>`;
-  }
-  function renderFonts(sample){
-    const F = [
-      {id:'dmsans', name:'DM Sans', rec:true, pro:'Geométrica y abierta, sin terminaciones redondeadas. Se siente amable pero ordenada. Muy buena en botones y títulos.', con:'Los números son algo más anchos: en precios largos ocupa un poco más.'},
-      {id:'manrope', name:'Manrope', pro:'La más moderna y compacta. Sus números son muy claros, ideales para precios.', con:'En títulos grandes se siente algo técnica, más cerca de una app financiera que de un pet shop.'},
-      {id:'inter', name:'Inter', pro:'La más legible en tamaños chicos y la más neutra. Excelente en filtros y textos largos.', con:'Muy usada: le aporta poca personalidad a la marca.'}
-    ];
-    document.querySelector('[data-fonts]').innerHTML = F.map(f => `<div class="fcard${f.rec?' rec':''}" data-font="${f.id}">
-      <div class="fcard-head"><b>${f.name}</b>${f.rec?'<span class="badge">Recomendada</span>':''}</div>
-      <div class="fcard-body">
-        <div><p class="fs-label">Banner</p><div class="fs-hero"><span class="eyebrow">Pet shop en Pilar</span><h3>Todo para ellos, cerca tuyo</h3><p>Alimento, descanso y juguetes para perros y gatos.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary btn-sm" type="button">Ver ofertas</button><button class="btn btn-secondary btn-sm" type="button">Perros</button></div></div></div>
-        <div><p class="fs-label">Menú</p><div class="fs-menu"><span class="on">Perros</span><span>Gatos</span><span>Ofertas</span><span>Marcas</span></div></div>
-        <div class="fs-heads"><p class="fs-label">Encabezados</p><h4>Cuchas exteriores</h4><p>Pedí online y recibilo en tu casa, o retiralo por el local.</p></div>
-        <div class="fs-row"><div><p class="fs-label">Tarjeta</p>${sample}</div>
-          <div><p class="fs-label">Precio</p><div class="fs-num">$ 149.990</div><p class="hint" style="margin-bottom:14px">$ 7.999 por kg</p>
-            <p class="fs-label">Filtros</p><div class="fgroup"><h4>Tamaño</h4><div class="fopts chips"><button class="fchip" role="checkbox" aria-checked="false" type="button"><svg class="ico"><use href="#i-check"/></svg>L <small>3</small></button><button class="fchip" role="checkbox" aria-checked="true" type="button"><svg class="ico"><use href="#i-check"/></svg>XL <small>2</small></button></div></div>
-            <div class="fgroup" style="margin-top:12px"><h4>Material</h4><div class="fopts"><label class="check"><input type="checkbox" checked tabindex="-1"><span>Plástico</span><small>1</small></label><label class="check"><input type="checkbox" tabindex="-1"><span>Madera</span><small>1</small></label></div></div></div></div>
-        <div class="fverdict"><span><b>A favor:</b> ${f.pro}</span><span><b>En contra:</b> ${f.con}</span></div>
-      </div></div>`).join('');
-  }
-
-  /* ================= AUDITORÍA ================= */
   const AUDIT = [
-    ['g','Navegación'],
-    ['Logo, migas de pan y Volver','ok','Logo y migas','ok','"Volver a …" restaura filtros, orden y posición.','Igual.'],
-    ['Menú de escritorio','ok','Etapas de alimento','ok','Una columna por categoría con sus tipos, generada desde los datos.','Igual.'],
-    ['Menú de celular','ok','Sólo alimentos','ok','Perros y Gatos desplegables, con una fila por categoría.','Igual.'],
-    ['Barra de categorías (pestañas)','off','No existía','ok','Fija bajo el encabezado, con indicador deslizante.','Igual.'],
-    ['Fila de tipos','off','No existía','ok','Sólo cuando la categoría tiene más de un tipo.','Igual.'],
-    ['Comprá para Perros / Gatos (home)','off','Atajos por etapa','ok','Selector y categorías visuales.','Igual. Íconos definitivos a diseñar.'],
-    ['g','Encontrar'],
-    ['Buscador','ok','Sólo productos','ok','Categorías, sinónimos, resaltado y recientes.','Con tolerancia a errores de tipeo.'],
-    ['Lo más buscado','off','No existía','sim','Lista fija de ejemplo.','Calculado con las búsquedas reales.'],
-    ['Filtros por categoría','ok','Mismos para todo','ok','Configurados por categoría, con conteo y sin opciones vacías.','Igual, configurables desde el panel.'],
-    ['Filtros en celular','ok','Lista larga','ok','Hoja inferior con grupos desplegables y botón con cantidad.','Igual.'],
-    ['Ordenar','ok','4 criterios','ok','Igual.','Igual.'],
-    ['g','Producto'],
-    ['Talle o tamaño obligatorio','off','Se agregaba el default','ok','En ropa, descanso y accesorios hay que elegir. Si falta, se avisa con una animación.','Igual.'],
-    ['Guía de talles','off','No existía','sim','Tabla de ejemplo común a todas las prendas.','Una tabla por prenda, cargada desde el panel.'],
-    ['Medidas y peso recomendado','off','No existía','sim','En cada tamaño, con datos de ejemplo.','Datos reales por producto.'],
-    ['Precio, descuento y precio por kilo','ok','Calculados','ok','El precio por kilo aparece sólo en alimentos y piedras.','Igual.'],
-    ['g','Carrito'],
-    ['Agregar con confirmación visual','ok','Aviso','ok','Vuelo al carrito, botón verde y aviso con foto.','Igual.'],
-    ['Cantidades, quitar y deshacer','ok','Sin deshacer','ok','Con tope de stock y "Deshacer".','Guardado entre visitas.'],
-    ['Iniciar compra','pend','Pendiente','pend','Marcado: es la próxima etapa.','Entrega, envío o retiro y pago.'],
-    ['g','Contacto y datos'],
+    ['g','Carrusel'],
+    ['Avance automático y pausa','off','Banner fijo','ok','Cada 6,5 s, con pausa al pasar el mouse, al navegar con teclado, al arrastrar, con la pestaña oculta y fuera de pantalla.','Igual.'],
+    ['Flechas, indicadores, teclado y arrastre','off','No existía','ok','Responden en escritorio y en celular.','Igual.'],
+    ['Transición A / B','off','No existía','ok','Se cambia desde el selector, arriba del prototipo.','Se elige una.'],
+    ['Botones de cada banner','sim','"Ver ofertas"','ok','Llevan al destino configurado o abren las condiciones.','Igual, configurables.'],
+    ['Imágenes de campaña','off','No existía','sim','Ilustraciones de ejemplo con el tamaño de foto indicado.','Fotos reales cargadas desde el panel.'],
+    ['Fechas, orden y estado de banners','off','No existía','sim','Datos de ejemplo en el código que se aplican al cargar.','Panel administrativo.'],
+    ['Condiciones de promoción bancaria','off','No existía','sim','Panel con todos los campos, a completar.','Datos oficiales del banco.'],
+    ['g','Home y catálogo'],
+    ['Encabezado compacto en celular','off','No existía','ok','Se activa al bajar y se desactiva al volver arriba.','Igual.'],
+    ['Búsqueda sin resultados','ok','Mensaje simple','ok','Corrige errores de tipeo y sugiere búsquedas, categorías y productos.','Igual, con búsquedas reales.'],
+    ['Producto sin stock','ok','Sólo por opción','ok','Etiqueta, foto atenuada y al final de la lista.','Igual.'],
+    ['Avisarme cuando vuelva','off','No existía','sim','Muestra un aviso de simulación.','Pide el email y envía el aviso.'],
+    ['Categorías, filtros y orden','ok','Funcionaban','ok','Sin cambios.','Igual.'],
+    ['g','Checkout'],
+    ['Paso 1 · Carrito','pend','"Iniciar compra" sin destino','ok','Cantidades con tope de stock, quitar, opciones agotadas con alternativas.','Igual, con stock en tiempo real.'],
+    ['Paso 2 · Datos y entrega','off','No existía','ok','Validaciones, resumen de errores y datos conservados al volver.','Igual.'],
+    ['Cobertura y costo de envío','off','No existía','sim','Zonas y costos de ejemplo.','Configurables desde el panel.'],
+    ['Código de descuento','off','No existía','sim','Sólo DEMO10, de ejemplo.','Cupones desde el panel.'],
+    ['Paso 3 · Medios de pago','off','No existía','ok','Se muestran según la entrega: efectivo sólo con retiro.','Igual, configurables.'],
+    ['Confirmar pedido','off','No existía','sim','Genera un número de demostración. No se guarda en ningún lado.','Guarda el pedido y avisa al local.'],
+    ['Pagar con Mercado Pago','off','No existía','sim','Permite simular pago aprobado o rechazado.','Integración real con Mercado Pago.'],
+    ['Datos de transferencia','off','No existía','pend','Alias, CBU y titular a definir.','Datos reales del negocio.'],
+    ['Email de confirmación','off','No existía','pend','Sólo se menciona.','Envío real de emails.'],
+    ['g','Contacto'],
     ['WhatsApp','sim','Falta número','sim','Avisa que falta el número.','Abre el chat con un mensaje listo.'],
-    ['Productos de ejemplo','sim','15','sim','41 productos en 6 categorías.','Panel para cargarlos.'],
-    ['Páginas de ayuda y redes','pend','Pendiente','pend','Marcadas. Se suma "Cambios de talle".','Contenido a definir.'],
-    ['Panel administrativo','pend','Pendiente','pend','Fuera de esta etapa.','Productos, variantes, filtros, banners y pedidos.']
+    ['Páginas de ayuda y redes','pend','Pendiente','pend','Marcadas como pendientes.','Contenido a definir.']
   ];
   const STL = {ok:'Funciona', sim:'Simulado', pend:'Pendiente', off:'No existía'};
   function renderAudit(){
-    document.querySelector('[data-audit]').innerHTML = AUDIT.map(r => r[0]==='g' ? `<tr class="group"><td colspan="4">${r[1]}</td></tr>` : `<tr><td>${r[0]}</td><td><span class="st ${r[1]}">${STL[r[1]]}</span><br>${r[2]}</td><td><span class="st ${r[3]}">${STL[r[3]]}</span><br>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
-    const rows = AUDIT.filter(r => r[0]!=='g'), c = k => rows.filter(r => r[3]===k).length;
-    document.querySelector('[data-st-sum]').innerHTML = `<div class="stat"><span class="st ok">Funciona</span><b>${c('ok')}</b><span>lógica reutilizable</span></div><div class="stat"><span class="st sim">Simulado</span><b>${c('sim')}</b><span>datos de ejemplo</span></div><div class="stat"><span class="st pend">Pendiente</span><b>${c('pend')}</b><span>marcado en pantalla</span></div><div class="stat"><span class="st off">Nuevo en V3</span><b>${rows.filter(r => r[1]==='off').length}</b><span>elementos que no existían</span></div>`;
+    document.querySelector('[data-audit]').innerHTML = AUDIT.map(r => r[0] === 'g' ? `<tr class="group"><td colspan="4">${r[1]}</td></tr>` : `<tr><td>${r[0]}</td><td><span class="st ${r[1]}">${STL[r[1]]}</span><br>${r[2]}</td><td><span class="st ${r[3]}">${STL[r[3]]}</span><br>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+    const rows = AUDIT.filter(r => r[0] !== 'g'), c = k => rows.filter(r => r[3] === k).length;
+    document.querySelector('[data-st-sum]').innerHTML = `<div class="stat"><span class="st ok">Funciona</span><b>${c('ok')}</b><span>lógica reutilizable</span></div><div class="stat"><span class="st sim">Simulado</span><b>${c('sim')}</b><span>datos o servicio de ejemplo</span></div><div class="stat"><span class="st pend">Pendiente</span><b>${c('pend')}</b><span>marcado en pantalla</span></div><div class="stat"><span class="st off">Nuevo en V4</span><b>${rows.filter(r => r[1] === 'off').length}</b><span>elementos que no existían</span></div>`;
   }
 
   /* ================= ARRANQUE ================= */
@@ -1929,19 +2489,26 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms !important
     escritorio: createShop(document.getElementById('frame-desktop'), document.getElementById('layer-desktop')),
     celular: createShop(document.getElementById('frame-mobile'), document.getElementById('layer-mobile'))
   };
-  renderTree(); renderMatrix(); renderAudit();
-  renderFonts(SHOPS.escritorio.card(byId[16], 2));
-
-  const sync = (sel, fn) => document.querySelectorAll(sel).forEach(t => t.addEventListener('change', () => { document.querySelectorAll(sel).forEach(o => { if (o!==t) o[t.type==='checkbox'?'checked':'value'] = t[t.type==='checkbox'?'checked':'value']; }); fn(t); }));
+  renderBannerTable(); renderAudit();
+  document.querySelectorAll('[data-cmp]').forEach(el => { el.innerHTML = carouselHTML(el.dataset.cmp); createCarousel(el.querySelector('[data-carousel]')); });
+  const sync = (sel, fn) => document.querySelectorAll(sel).forEach(t => t.addEventListener('change', () => { document.querySelectorAll(sel).forEach(o => { if (o !== t) o[t.type === 'checkbox' ? 'checked' : 'value'] = t[t.type === 'checkbox' ? 'checked' : 'value']; }); fn(t); }));
   sync('[data-st-toggle]', t => document.body.classList.toggle('st-on', t.checked));
-  sync('[data-rm-toggle]', t => document.body.classList.toggle('rm', t.checked));
-  sync('[data-font-select]', t => { document.body.dataset.font = t.value; requestAnimationFrame(() => Object.values(SHOPS).forEach(s => s.refresh())); });
+  sync('[data-rm-toggle]', t => { document.body.classList.toggle('rm', t.checked); document.dispatchEvent(new Event('rmchange')); });
+  sync('[data-car-mode]', t => { CAR_MODE = t.value; document.querySelectorAll('.home [data-carousel]').forEach(c => c.dataset.mode = t.value); });
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', () => document.dispatchEvent(new Event('rmchange')));
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.cmp [data-act]'); if (!t) return;
+    e.preventDefault(); e.stopPropagation();
+    if (location.hash.slice(1) !== 'escritorio') location.hash = 'escritorio'; else route();
+    window.scrollTo({top:0});
+    setTimeout(() => SHOPS.escritorio.runAct({...t.dataset}), 80);
+  }, true);
 
   const bar = document.getElementById('bar');
   const setBarH = () => document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
   setBarH(); window.addEventListener('resize', setBarH);
 
-  const views = ['escritorio','celular','arquitectura','mascotas','filtros','tipografia','interacciones','ux','auditoria'];
+  const views = ['escritorio','celular','carrusel','home','ux','checkout','auditoria'];
   function route(){
     const h = location.hash.slice(1), v = views.includes(h) ? h : 'escritorio';
     document.querySelectorAll('section[data-page]').forEach(s => s.hidden = s.dataset.page !== v);
