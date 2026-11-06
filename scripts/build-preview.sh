@@ -2,6 +2,7 @@
 # Genera las páginas públicas de GitHub Pages a partir de las propuestas de diseño.
 #   docs/index.html     → versión vigente (V4)
 #   docs/v3/index.html  → versión anterior, para comparar
+#   docs/v5/index.html  → vista previa de la V5 (sin aprobar)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 wrap() {
@@ -24,5 +25,7 @@ wrap() {
   echo "Generado $out"
 }
 wrap design/propuesta-visual-v4.html docs/index.html
+# Vista previa sin aprobar: no reemplaza la dirección principal
+[ -f design/propuesta-visual-v5.html ] && wrap design/propuesta-visual-v5.html docs/v5/index.html
 wrap design/propuesta-visual-v3.html docs/v3/index.html
 touch docs/.nojekyll
